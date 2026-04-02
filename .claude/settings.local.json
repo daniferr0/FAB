@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc /Users/daniloferrante/Downloads/rimessa_fab_website_brief_v2.docx -o /tmp/rimessa_fab_brief.md)",
+      "Read(//tmp/**)",
+      "Bash(python3 -c \":*)",
+      "Bash(pip3 install:*)"
+    ]
+  }
+}

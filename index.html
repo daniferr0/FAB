@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rimessa FAB — Food, Arts & Books · Roma</title>
+  <meta name="description" content="Uno spazio culturale e gastronomico a Roma. Nato da Rimessa Roscioli, con una sua identità editoriale e di eventi.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            beige:    '#E8D1BF',
+            offwhite: '#F8F2EC',
+            green:    '#1D7C4A',
+            red:      '#B33A2B',
+            ochre:    '#D89A22',
+            ink:      '#111111',
+          },
+          fontFamily: {
+            display: ['"Barlow Condensed"', 'sans-serif'],
+            body:    ['"Hanken Grotesk"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --beige:    #E8D1BF;
+      --offwhite: #F8F2EC;
+      --green:    #1D7C4A;
+      --red:      #B33A2B;
+      --ochre:    #D89A22;
+      --ink:      #111111;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--offwhite);
+      color: var(--ink);
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 128px;
+      mix-blend-mode: overlay;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .font-display { font-family: 'Barlow Condensed', sans-serif; }
+
+    h1, h2, h3, .display {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── NAVIGATION ── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      background: var(--offwhite);
+      border-bottom: 1.5px solid var(--ink);
+      transition: all 0.3s ease;
+    }
+
+    #nav.scrolled {
+      background: rgba(248, 242, 236, 0.96);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--green); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+
+    .nav-links a {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+    .nav-links a.active { color: var(--green); }
+
+    .btn-prenota {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.4rem;
+      background: var(--ink);
+      color: var(--offwhite);
+      border: 1.5px solid var(--ink);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-prenota:hover {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    /* ── SECTIONS ── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 60px;
+      background-color: var(--beige);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Radial depth blobs */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,124,74,0.12) 0%, transparent 70%);
+      top: -150px; right: -100px;
+      pointer-events: none;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(179,58,43,0.09) 0%, transparent 70%);
+      bottom: 0; left: -100px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(5rem, 12vw, 11rem);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .hero-headline .line-green { color: var(--green); display: block; }
+    .hero-headline .line-red   { color: var(--red);   font-style: italic; display: block; }
+
+    .hero-side {
+      padding-bottom: 0.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--ink);
+      opacity: 0.8;
+      margin-bottom: 2.5rem;
+      border-left: 3px solid var(--green);
+      padding-left: 1.2rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      background: var(--ink);
+      color: var(--offwhite);
+      border: 1.5px solid var(--ink);
+      cursor: pointer;
+      transition: all 0.25s;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      cursor: pointer;
+      transition: all 0.25s;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      background: var(--ink);
+      color: var(--offwhite);
+    }
+
+    /* ── TICKER ── */
+    .hero-ticker {
+      background: var(--ink);
+      color: var(--offwhite);
+      padding: 0.7rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: auto;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      animation: ticker 30s linear infinite;
+    }
+
+    .ticker-track span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-right: 4rem;
+    }
+
+    .ticker-track span.sep {
+      color: var(--ochre);
+      margin-right: 4rem;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--green);
+    }
+
+    /* ── CALENDAR SPOTLIGHT ── */
+    #calendar-spot {
+      padding: 5rem 0 4rem;
+      background: var(--offwhite);
+    }
+
+    .cal-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .cal-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      text-transform: uppercase;
+      line-height: 0.9;
+    }
+
+    .cal-range {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.4;
+    }
+
+    /* Category pills */
+    .cat-legend {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .cat-pill {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border: 1.5px solid;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cat-pill.food    { border-color: var(--ochre); color: var(--ochre); }
+    .cat-pill.arts    { border-color: var(--red);   color: var(--red);   }
+    .cat-pill.books   { border-color: var(--green); color: var(--green); }
+    .cat-pill.all     { border-color: var(--ink);   color: var(--ink);   }
+
+    .cat-pill.active.food  { background: var(--ochre); color: #fff; }
+    .cat-pill.active.arts  { background: var(--red);   color: #fff; }
+    .cat-pill.active.books { background: var(--green); color: #fff; }
+    .cat-pill.active.all   { background: var(--ink);   color: #fff; }
+
+    /* Event grid */
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--ink);
+      border: 1.5px solid var(--ink);
+    }
+
+    .event-card {
+      background: var(--offwhite);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: background 0.2s;
+      cursor: pointer;
+      min-height: 180px;
+    }
+
+    .event-card:hover { background: var(--beige); }
+
+    .event-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .event-date {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .event-time {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      opacity: 0.5;
+      margin-top: 0.25rem;
+    }
+
+    .event-cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      justify-content: flex-end;
+    }
+
+    .event-cat {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0;
+    }
+
+    .event-cat.food  { background: var(--ochre); color: #fff; }
+    .event-cat.arts  { background: var(--red);   color: #fff; }
+    .event-cat.books { background: var(--green); color: #fff; }
+    .event-cat.wine  { background: var(--ochre); color: #fff; opacity: 0.8; }
+    .event-cat.talk  { background: #555; color: #fff; }
+    .event-cat.performance { background: var(--ink); color: #fff; }
+    .event-cat.music { background: var(--red); color: #fff; }
+
+    .event-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      line-height: 1.1;
+      text-transform: uppercase;
+      flex: 1;
+    }
+
+    .event-subtitle {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.78rem;
+      color: var(--ink);
+      opacity: 0.65;
+      line-height: 1.4;
+    }
+
+    .event-card-cta {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: auto;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .event-card:hover .event-card-cta { opacity: 1; }
+
+    /* featured card */
+    .event-card.featured {
+      background: var(--ink);
+      color: var(--offwhite);
+    }
+
+    .event-card.featured .event-date { color: var(--offwhite); }
+    .event-card.featured .event-title { color: var(--offwhite); }
+    .event-card.featured:hover { background: #222; }
+    .event-card.featured .event-card-cta { color: var(--ochre); }
+    .event-card.featured .event-time { color: var(--offwhite); }
+
+    /* ── RESTAURANT TEASER ── */
+    #resto-teaser {
+      padding: 5rem 0;
+      background: var(--beige);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #resto-teaser::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,154,34,0.12) 0%, transparent 70%);
+      right: -200px; top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .resto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .resto-intro h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      text-transform: uppercase;
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .resto-intro h2 em {
+      color: var(--red);
+      font-style: italic;
+    }
+
+    .resto-intro p {
+      font-size: 1rem;
+      line-height: 1.65;
+      opacity: 0.8;
+      margin-bottom: 2rem;
+      max-width: 460px;
+    }
+
+    .resto-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--ink);
+      border: 1.5px solid var(--ink);
+    }
+
+    .resto-card {
+      background: var(--offwhite);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+
+    .resto-card:hover { background: var(--beige); }
+
+    .resto-card-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    .resto-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .resto-card p {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      opacity: 0.75;
+      margin-bottom: 1rem;
+    }
+
+    .resto-detail {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 0.1rem;
+    }
+
+    .detail-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+    }
+
+    /* ── MANIFESTO ── */
+    #manifesto {
+      padding: 5rem 0;
+      background: var(--ink);
+      color: var(--offwhite);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #manifesto::before {
+      content: '';
+      position: absolute;
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,124,74,0.15) 0%, transparent 70%);
+      left: -200px; top: -200px;
+      pointer-events: none;
+    }
+
+    .manifesto-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .manifesto-kicker {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2rem;
+    }
+
+    .manifesto-body {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.2;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    .manifesto-body em {
+      color: var(--ochre);
+      font-style: italic;
+    }
+
+    .manifesto-sub {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      opacity: 0.65;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── CATEGORY NAV ── */
+    #cat-nav {
+      padding: 5rem 0;
+      background: var(--offwhite);
+    }
+
+    .cat-blocks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--ink);
+      border: 1.5px solid var(--ink);
+      margin-top: 2rem;
+    }
+
+    .cat-block {
+      padding: 3rem 2rem;
+      background: var(--offwhite);
+      transition: all 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .cat-block:hover { transform: translateY(-4px); }
+
+    .cat-block.food:hover  { background: color-mix(in srgb, var(--ochre) 12%, var(--offwhite)); }
+    .cat-block.arts:hover  { background: color-mix(in srgb, var(--red)   12%, var(--offwhite)); }
+    .cat-block.books:hover { background: color-mix(in srgb, var(--green) 12%, var(--offwhite)); }
+
+    .cat-block-icon {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .cat-block.food  .cat-block-icon { color: var(--ochre); }
+    .cat-block.arts  .cat-block-icon { color: var(--red);   }
+    .cat-block.books .cat-block-icon { color: var(--green); }
+
+    .cat-block h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.9rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .cat-block p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      opacity: 0.65;
+    }
+
+    /* ── NEWSLETTER ── */
+    #newsletter {
+      padding: 4rem 0;
+      background: var(--beige);
+      border-top: 1.5px solid var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .nl-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .nl-text h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .nl-text p {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .nl-form {
+      display: flex;
+      gap: 0;
+      flex: 1;
+      max-width: 480px;
+    }
+
+    .nl-form input {
+      flex: 1;
+      border: 1.5px solid var(--ink);
+      padding: 0.9rem 1.2rem;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.88rem;
+      background: var(--offwhite);
+      outline: none;
+      color: var(--ink);
+    }
+
+    .nl-form input::placeholder { opacity: 0.4; }
+
+    .nl-form button {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 1.5rem;
+      background: var(--ink);
+      color: var(--offwhite);
+      border: 1.5px solid var(--ink);
+      border-left: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nl-form button:hover { background: var(--green); border-color: var(--green); }
+
+    .nl-whatsapp {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.82rem;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1.5px solid var(--ink);
+      padding: 0.9rem 1.4rem;
+      transition: all 0.2s;
+    }
+
+    .nl-whatsapp:hover { background: var(--ink); color: var(--offwhite); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--offwhite);
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .footer-brand .logo span { color: var(--green); }
+
+    .footer-brand p {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      opacity: 0.55;
+      max-width: 240px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-col a {
+      font-size: 0.85rem;
+      color: var(--offwhite);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .footer-col a:hover { opacity: 1; }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.72rem;
+      opacity: 0.35;
+    }
+
+    .roscioli-bridge {
+      font-size: 0.72rem;
+      opacity: 0.4;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .roscioli-bridge a {
+      color: var(--offwhite);
+      text-decoration: none;
+      opacity: 1;
+      font-weight: 500;
+    }
+
+    /* ──────────────────────── */
+    /* ── RESTAURANT PAGE ──── */
+    /* ──────────────────────── */
+
+    #page-restaurant {
+      padding-top: 60px;
+    }
+
+    .page-hero {
+      padding: 5rem 2rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .page-hero h1 {
+      font-size: clamp(4rem, 9vw, 8rem);
+      text-transform: uppercase;
+      line-height: 0.88;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-hero h1 em { color: var(--red); font-style: italic; }
+
+    .page-hero-sub {
+      font-size: 1rem;
+      line-height: 1.65;
+      max-width: 560px;
+      opacity: 0.75;
+    }
+
+    .restaurant-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .dining-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--ink);
+      border: 1.5px solid var(--ink);
+      margin: 4rem 0;
+    }
+
+    .dining-card {
+      padding: 3rem;
+      background: var(--offwhite);
+    }
+
+    .dining-card.dark {
+      background: var(--ink);
+      color: var(--offwhite);
+    }
+
+    .dining-card-type {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .dining-card-type.green-label { color: var(--green); }
+    .dining-card-type.ochre-label { color: var(--ochre); }
+
+    .dining-card h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      line-height: 1;
+    }
+
+    .dining-card p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      opacity: 0.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .dining-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(0,0,0,0.04);
+    }
+
+    .dining-card.dark .dining-stats {
+      background: rgba(255,255,255,0.06);
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+    }
+
+    /* ─── EVENTS PAGE ─── */
+    #page-events {
+      padding-top: 60px;
+    }
+
+    .events-hero {
+      background: var(--ink);
+      color: var(--offwhite);
+      padding: 4rem 2rem;
+    }
+
+    .events-hero-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .events-hero h1 {
+      font-size: clamp(4rem, 8vw, 7rem);
+      text-transform: uppercase;
+      line-height: 0.88;
+      color: var(--offwhite);
+    }
+
+    .events-hero h1 em { color: var(--ochre); font-style: italic; }
+
+    .events-hero-sub {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      max-width: 300px;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    .events-controls {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      border-bottom: 1.5px solid var(--ink);
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+    .events-list {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .event-row {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(17,17,17,0.12);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .event-row:hover { background: var(--beige); padding-left: 1rem; padding-right: 1rem; margin: 0 -1rem; }
+
+    .event-row-date {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .event-row-date .day { font-size: 2.2rem; display: block; line-height: 0.9; }
+
+    .event-row-info { }
+
+    .event-row-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+
+    .event-row-sub {
+      font-size: 0.82rem;
+      opacity: 0.6;
+    }
+
+    .event-row-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .event-row-time {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      opacity: 0.6;
+    }
+
+    /* ─── CONTACTS PAGE ─── */
+    #page-contacts {
+      padding-top: 60px;
+    }
+
+    .contacts-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+
+    .contacts-left h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      text-transform: uppercase;
+      line-height: 0.88;
+      margin-bottom: 2.5rem;
+    }
+
+    .contacts-left h1 em { color: var(--green); font-style: italic; }
+
+    .contact-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-block-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-block-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .contact-block-value a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .contact-block-value a:hover { color: var(--green); }
+
+    .map-placeholder {
+      background: var(--beige);
+      border: 1.5px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(17,17,17,0.04) 20px,
+        rgba(17,17,17,0.04) 21px
+      );
+    }
+
+    .map-pin {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      position: relative;
+    }
+
+    .map-pin::before {
+      content: '◉';
+      font-size: 2rem;
+      display: block;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── MOBILE ── */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      transition: all 0.3s;
+    }
+
+    @media (max-width: 1024px) {
+      .event-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 60px; left: 0; right: 0;
+        background: var(--offwhite);
+        border-bottom: 1.5px solid var(--ink);
+        padding: 1.5rem 2rem;
+        gap: 1.5rem;
+        align-items: flex-start;
+        z-index: 800;
+      }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem 2rem; }
+      .hero-headline { font-size: clamp(4rem, 18vw, 7rem); }
+      .hero-side { padding-bottom: 0; }
+
+      .event-grid { grid-template-columns: 1fr; }
+      .cat-blocks { grid-template-columns: 1fr; }
+      .resto-grid { grid-template-columns: 1fr; }
+      .dining-section { grid-template-columns: 1fr; }
+      .nl-inner { flex-direction: column; align-items: flex-start; }
+      .nl-form { max-width: 100%; width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contacts-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .events-hero-inner { flex-direction: column; }
+      .events-hero-sub { text-align: left; }
+      .event-row { grid-template-columns: 80px 1fr; }
+      .event-row-right { display: none; }
+
+      .page-hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
+      .events-hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
+    }
+
+    /* ── ANIMATIONS ── */
+    .gsap-fade { opacity: 0; transform: translateY(30px); }
+    .gsap-fade-left { opacity: 0; transform: translateX(-30px); }
+    .gsap-scale { opacity: 0; transform: scale(0.95); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" onclick="showPage('home'); return false;">
+        RIMESSA <span>FAB</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" onclick="showPage('restaurant'); return false;" data-page="restaurant">Ristorante</a></li>
+        <li><a href="#" onclick="showPage('events'); return false;" data-page="events">Calendario</a></li>
+        <li><a href="#" onclick="showPage('contacts'); return false;" data-page="contacts">Dove siamo</a></li>
+      </ul>
+      <a href="mailto:info@rimessa-fab.com" class="btn-prenota">Prenota</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════ -->
+  <!--              HOME PAGE                -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="page-home" class="page-section active">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-inner">
+        <div class="hero-headline">
+          <span class="line-1">Rimessa</span>
+          <span class="line-green">F·A·B</span>
+          <span class="line-red">Roma</span>
+        </div>
+        <div class="hero-side">
+          <p class="hero-tagline">
+            Uno spazio culturale e gastronomico nato da Rimessa Roscioli.<br>
+            Vieni per cena, un concerto, una presentazione,<br>o un bicchiere di vino.
+          </p>
+          <div class="hero-ctas">
+            <a href="#" class="btn-primary" onclick="showPage('events'); return false;">Calendario Aprile–Maggio</a>
+            <a href="#" class="btn-secondary" onclick="showPage('restaurant'); return false;">Il Ristorante</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-ticker">
+        <div class="ticker-track" id="tickerTrack">
+          <span>Food</span><span class="sep">×</span>
+          <span>Arts</span><span class="sep">×</span>
+          <span>Books</span><span class="sep">×</span>
+          <span>Via delle Zoccolette 28, Roma</span><span class="sep">·</span>
+          <span>Chef's Dinner — €95</span><span class="sep">·</span>
+          <span>À la Carte dal 2026</span><span class="sep">·</span>
+          <span>Concerti</span><span class="sep">×</span>
+          <span>Talk</span><span class="sep">×</span>
+          <span>Degustazioni</span><span class="sep">·</span>
+          <span>Food</span><span class="sep">×</span>
+          <span>Arts</span><span class="sep">×</span>
+          <span>Books</span><span class="sep">×</span>
+          <span>Via delle Zoccolette 28, Roma</span><span class="sep">·</span>
+          <span>Chef's Dinner — €95</span><span class="sep">·</span>
+          <span>Concerti</span><span class="sep">×</span>
+          <span>Talk</span><span class="sep">×</span>
+          <span>Degustazioni</span><span class="sep">·</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDAR SPOTLIGHT -->
+    <section id="calendar-spot">
+      <div class="section-wrap">
+        <div class="cal-header">
+          <div>
+            <div class="section-label">Prossimi eventi</div>
+            <h2 class="cal-title">Calendario<br>Aprile–Maggio</h2>
+          </div>
+          <div>
+            <div class="cal-range">APR — MAG 2026</div>
+            <a href="#" onclick="showPage('events'); return false;" class="btn-secondary" style="margin-top:1rem; display:inline-block;">Vedi tutto il calendario →</a>
+          </div>
+        </div>
+
+        <!-- Category filter -->
+        <div class="cat-legend">
+          <button class="cat-pill all active" onclick="filterCards('all', this)">Tutti</button>
+          <button class="cat-pill food"        onclick="filterCards('food', this)">Food</button>
+          <button class="cat-pill arts"        onclick="filterCards('arts', this)">Arts</button>
+          <button class="cat-pill books"       onclick="filterCards('books', this)">Books</button>
+        </div>
+
+        <!-- Event grid - first 9 events -->
+        <div class="event-grid" id="homeEventGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- RESTAURANT TEASER -->
+    <section id="resto-teaser">
+      <div class="section-wrap">
+        <div class="resto-grid">
+          <div class="resto-intro gsap-fade">
+            <div class="section-label">Il Ristorante</div>
+            <h2>Cucina<br><em>libera</em><br>a Roma</h2>
+            <p>Due esperienze diverse sullo stesso tavolo. Il Chef's Dinner, sette portate con abbinamenti vino in un format raccolto e immersivo. À la Carte, dal tardo pomeriggio, per chi vuole fermarsi su una cosa sola o su tutto.</p>
+            <a href="#" class="btn-primary" onclick="showPage('restaurant'); return false;" style="display:inline-block; width:fit-content;">Scopri il ristorante</a>
+          </div>
+          <div class="resto-cards">
+            <div class="resto-card gsap-fade">
+              <div class="resto-card-label">Esperienza principale</div>
+              <h3>Chef's Dinner</h3>
+              <p>Ventidue coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Tre turni per scegliere il proprio ritmo.</p>
+              <div class="resto-detail">
+                <div class="detail-item">
+                  <span class="detail-label">Posti</span>
+                  <span class="detail-value">22 coperti</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Turni</span>
+                  <span class="detail-value">19:00 · 20:00 · 21:00</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Portate + vino</span>
+                  <span class="detail-value">€95 / persona</span>
+                </div>
+              </div>
+            </div>
+            <div class="resto-card gsap-fade">
+              <div class="resto-card-label" style="color: var(--ochre)">Formato libero</div>
+              <h3>À la Carte</h3>
+              <p>Dal tardo pomeriggio alla sera, con turni ogni 30 minuti. Perfetto per un aperitivo lungo o una cena dal menu stagionale.</p>
+              <div class="resto-detail">
+                <div class="detail-item">
+                  <span class="detail-label">Orario</span>
+                  <span class="detail-value">18:00 → 22:00</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Turni</span>
+                  <span class="detail-value">ogni 30 min</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section id="manifesto">
+      <div class="manifesto-inner">
+        <div class="manifesto-kicker">Manifesto</div>
+        <p class="manifesto-body gsap-scale">
+          Un posto dove la cucina,<br>
+          la musica, i libri<br>
+          e la <em>conversazione</em><br>
+          coesistono naturalmente.
+        </p>
+        <p class="manifesto-sub gsap-fade">
+          FAB è la propaggine naturale di Rimessa Roscioli, ma con un suo linguaggio, un suo ritmo e una sua logica di pubblico. Più porosa, più site-specific, più orientata agli eventi e aperta a musica, libri, talk e formati inattesi.
+        </p>
+      </div>
+    </section>
+
+    <!-- CATEGORY NAV -->
+    <section id="cat-nav">
+      <div class="section-wrap">
+        <div class="section-label">Esplora per area</div>
+        <h2 style="font-size: clamp(2rem,4vw,3.5rem); text-transform: uppercase; margin-bottom: 0;">Le tre anime di FAB</h2>
+        <div class="cat-blocks gsap-fade">
+          <a href="#" class="cat-block food" onclick="filterByCategory('food'); return false;">
+            <div class="cat-block-icon">F</div>
+            <h3>Food</h3>
+            <p>Chef's dinner, degustazioni, cene a quattro mani, produttori ospiti. La cucina come atto culturale.</p>
+          </a>
+          <a href="#" class="cat-block arts" onclick="filterByCategory('arts'); return false;">
+            <div class="cat-block-icon">A</div>
+            <h3>Arts</h3>
+            <p>Concerti di jazz e musica sperimentale, performance, interventi sonori. La sera come formato.</p>
+          </a>
+          <a href="#" class="cat-block books" onclick="filterByCategory('books'); return false;">
+            <div class="cat-block-icon">B</div>
+            <h3>Books</h3>
+            <p>Presentazioni, podcast dal vivo, reading, talk con autori. La parola come ospite fisso.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter">
+      <div class="section-wrap">
+        <div class="nl-inner">
+          <div class="nl-text">
+            <h3>Resta nel giro</h3>
+            <p>Nuovi eventi ogni settimana. Nessuno spam, solo cose che succedono.</p>
+          </div>
+          <form class="nl-form" onsubmit="return false;">
+            <input type="email" placeholder="La tua email">
+            <button type="submit">Iscriviti</button>
+          </form>
+          <a href="https://wa.me/39XXXXXXXXXX" class="nl-whatsapp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Aggiornamenti WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page-home -->
+
+
+  <!-- ══════════════════════════════════════ -->
+  <!--            RESTAURANT PAGE            -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="page-restaurant" class="page-section">
+
+    <div class="page-hero" style="background: var(--beige);">
+      <div class="section-label">Il Ristorante</div>
+      <h1>Come<br>funziona<br><em>mangiare</em><br>da FAB</h1>
+      <p class="page-hero-sub">Due format, un indirizzo, zero ambiguità. Il Chef's Dinner ti porta per mano. À la Carte ti lascia libero. Entrambi prendono sul serio ciò che mettono nel piatto.</p>
+    </div>
+
+    <div class="restaurant-content">
+
+      <div class="dining-section">
+        <div class="dining-card dark">
+          <div class="dining-card-type ochre-label">Esperienza principale</div>
+          <h2>Chef's<br>Dinner</h2>
+          <p>Ventidue coperti, sette portate, abbinamenti vino inclusi. Un percorso immersivo costruito dal chef ogni sera: ingredienti stagionali, tecnica, racconto. Il formato non prevede carte — c'è un menu, e si segue.</p>
+          <div class="dining-stats" style="border: 1px solid rgba(255,255,255,0.1);">
+            <div>
+              <div class="stat-label" style="color: rgba(255,255,255,0.4)">Posti disponibili</div>
+              <div class="stat-value" style="color: var(--offwhite)">22</div>
+            </div>
+            <div>
+              <div class="stat-label" style="color: rgba(255,255,255,0.4)">Portate</div>
+              <div class="stat-value" style="color: var(--offwhite)">7 + vino</div>
+            </div>
+            <div>
+              <div class="stat-label" style="color: rgba(255,255,255,0.4)">Turni serali</div>
+              <div class="stat-value" style="color: var(--offwhite)">19:00 · 20:00 · 21:00</div>
+            </div>
+            <div>
+              <div class="stat-label" style="color: rgba(255,255,255,0.4)">A persona</div>
+              <div class="stat-value" style="color: var(--ochre)">€95</div>
+            </div>
+          </div>
+          <a href="mailto:info@rimessa-fab.com?subject=Prenotazione Chef's Dinner" class="btn-primary" style="background: var(--offwhite); color: var(--ink); border-color: var(--offwhite);">Prenota Chef's Dinner</a>
+        </div>
+
+        <div class="dining-card">
+          <div class="dining-card-type green-label">Formato libero</div>
+          <h2>À la<br>Carte</h2>
+          <p>Dal tardo pomeriggio fino alla sera, con ingressi ogni 30 minuti. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.</p>
+          <div class="dining-stats">
+            <div>
+              <div class="stat-label">Apertura</div>
+              <div class="stat-value">18:00 → 22:00</div>
+            </div>
+            <div>
+              <div class="stat-label">Turni</div>
+              <div class="stat-value">ogni 30 min</div>
+            </div>
+          </div>
+          <a href="mailto:info@rimessa-fab.com?subject=Prenotazione À la Carte" class="btn-secondary" style="display:inline-block;">Prenota À la Carte</a>
+        </div>
+      </div>
+
+      <!-- FAQ strip -->
+      <div style="margin: 0 0 5rem; border: 1.5px solid var(--ink);">
+        <div style="background: var(--ink); color: var(--offwhite); padding: 1.2rem 2rem;">
+          <span style="font-family: 'Barlow Condensed'; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">Domande frequenti</span>
+        </div>
+        <div id="faqList"></div>
+      </div>
+
+    </div>
+
+    <!-- Newsletter -->
+    <section id="newsletter" style="border-top: 1.5px solid var(--ink);">
+      <div class="section-wrap">
+        <div class="nl-inner">
+          <div class="nl-text">
+            <h3>Resta nel giro</h3>
+            <p>Nuovi eventi ogni settimana.</p>
+          </div>
+          <form class="nl-form" onsubmit="return false;">
+            <input type="email" placeholder="La tua email">
+            <button type="submit">Iscriviti</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div><!-- /page-restaurant -->
+
+
+  <!-- ══════════════════════════════════════ -->
+  <!--             EVENTS PAGE               -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="page-events" class="page-section">
+
+    <div class="events-hero">
+      <div class="events-hero-inner">
+        <h1>Calen<br><em>dario</em><br>2026</h1>
+        <p class="events-hero-sub">Food, Arts & Books. Aprile–Giugno 2026. Ogni settimana qualcosa di diverso — stessa cucina, intenzioni diverse.</p>
+      </div>
+    </div>
+
+    <div class="events-controls">
+      <span class="filter-label">Filtra:</span>
+      <button class="cat-pill all active" onclick="filterEvents('all', this)">Tutti</button>
+      <button class="cat-pill food"       onclick="filterEvents('food', this)">Food</button>
+      <button class="cat-pill arts"       onclick="filterEvents('arts', this)">Arts</button>
+      <button class="cat-pill books"      onclick="filterEvents('books', this)">Books</button>
+    </div>
+
+    <div class="events-list" id="fullEventList">
+      <!-- Populated by JS -->
+    </div>
+
+  </div><!-- /page-events -->
+
+
+  <!-- ══════════════════════════════════════ -->
+  <!--            CONTACTS PAGE              -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="page-contacts" class="page-section">
+
+    <div class="contacts-inner">
+      <div class="contacts-left">
+        <div class="section-label">Dove siamo</div>
+        <h1>Vieni<br>a <em>trovarci</em></h1>
+
+        <div class="contact-block">
+          <div class="contact-block-label">Indirizzo</div>
+          <div class="contact-block-value">Via delle Zoccolette 28<br>Roma, 00186</div>
+        </div>
+
+        <div class="contact-block">
+          <div class="contact-block-label">Prenotazioni</div>
+          <div class="contact-block-value">
+            <a href="mailto:info@rimessa-fab.com">info@rimessa-fab.com</a>
+          </div>
+        </div>
+
+        <div class="contact-block">
+          <div class="contact-block-label">Orari ristorante</div>
+          <div class="contact-block-value" style="font-size: 1rem; font-family: 'Hanken Grotesk'; font-weight: 400; text-transform: none;">
+            <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">Chef's Dinner</strong> — 19:00, 20:00, 21:00<br>
+            <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">À la Carte</strong> — 18:00–22:00
+          </div>
+        </div>
+
+        <div class="contact-block">
+          <div class="contact-block-label">Social</div>
+          <div class="contact-block-value">
+            <a href="#" style="font-family: 'Hanken Grotesk'; text-transform: none; font-size: 0.95rem;">@rimessafab</a>
+          </div>
+        </div>
+
+        <div class="contact-block">
+          <div class="contact-block-label">Ecosistema Roscioli</div>
+          <div class="contact-block-value" style="font-family: 'Hanken Grotesk'; text-transform: none; font-size: 0.88rem; font-weight: 400; opacity: 0.7;">
+            FAB nasce da Rimessa Roscioli — stessa cura, intenzione diversa.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="map-placeholder">
+          <div class="map-pin">
+            <strong>Rimessa FAB</strong><br>
+            Via delle Zoccolette 28<br>
+            Roma
+          </div>
+        </div>
+        <div style="margin-top: 1px; background: var(--beige); border: 1.5px solid var(--ink); border-top: none; padding: 1.2rem 1.5rem; font-size: 0.8rem; opacity: 0.6; font-family: 'Hanken Grotesk';">
+          Parcheggio disponibile nelle vicinanze · Metro Linea B — Circo Massimo
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-contacts -->
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">Rimessa <span>FAB</span></span>
+          <p>Food, Arts & Books. Uno spazio culturale e gastronomico a Roma, nato da Rimessa Roscioli con una sua identità propria.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigazione</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
+            <li><a href="#" onclick="showPage('restaurant'); return false;">Ristorante</a></li>
+            <li><a href="#" onclick="showPage('events'); return false;">Calendario</a></li>
+            <li><a href="#" onclick="showPage('contacts'); return false;">Contatti</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contatti</h4>
+          <ul>
+            <li><a href="mailto:info@rimessa-fab.com">info@rimessa-fab.com</a></li>
+            <li><a href="#">@rimessafab</a></li>
+            <li><a href="#">WhatsApp</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Indirizzo</h4>
+          <ul>
+            <li><a href="#">Via delle Zoccolette 28</a></li>
+            <li><a href="#">Roma, 00186</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Rimessa FAB · rimessa-fab.com</p>
+        <div class="roscioli-bridge">
+          Parte dell'ecosistema
+          <a href="#">Roscioli →</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // ── DATA ──────────────────────────────────────
+    const EVENTS = [
+      { date: "3 Apr",    day: "3",   month: "Apr", title: "Perle ai Pochi",                               subtitle: "Duo al buio",                                          cats: ["books","performance"], time: null },
+      { date: "11 Apr",   day: "11",  month: "Apr", title: "Musica e diritti civili",                      subtitle: "Danilo Blaiotta",                                       cats: ["books","talk"],        time: "18:00" },
+      { date: "11 Apr",   day: "11",  month: "Apr", title: "Devil's Kitchen Music Club",                   subtitle: "Domenico Sanna / Francesco Fratini duo",                cats: ["arts","music"],        time: "22:30" },
+      { date: "12–13 Apr",day: "12",  month: "Apr", title: "Osterie del Mondo — Four Horsemen",            subtitle: "Il più famoso bistrot di NY a Roma",                    cats: ["food"],                time: "20:30" },
+      { date: "15 Apr",   day: "15",  month: "Apr", title: "Osterie d'Italia",                             subtitle: "Bistrot Quarticciolo + Leo Fulcro",                     cats: ["food","arts"],         time: null,   featured: true },
+      { date: "16 Apr",   day: "16",  month: "Apr", title: "La cucina italiana non esiste",                subtitle: "Podcast live con Alberto Grandi e Tommaso Melilli",     cats: ["books","food"],        time: null },
+      { date: "17 Apr",   day: "17",  month: "Apr", title: "In-Compresi / Perle ai Pochi",                 subtitle: "Italian Real Book con Francesca Faro",                  cats: ["books"],               time: null },
+      { date: "18 Apr",   day: "18",  month: "Apr", title: "Roberto Gatto Hammond 4et",                   subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
+      { date: "19 Apr",   day: "19",  month: "Apr", title: "Pizza la domenica / Una vita",                 subtitle: "Sancho Atto II + monologo Fabio Cicchiello",            cats: ["food","books"],        time: null },
+      { date: "21 Apr",   day: "21",  month: "Apr", title: "Pacina — Verticale",                           subtitle: null,                                                    cats: ["food","wine"],         time: "19:00" },
+      { date: "23 Apr",   day: "23",  month: "Apr", title: "Perle ai Pochi",                               subtitle: "Grandi Numeri dei Cor Veleno",                          cats: ["books"],               time: null },
+      { date: "25 Apr",   day: "25",  month: "Apr", title: "Traindeville",                                 subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
+      { date: "26 Apr",   day: "26",  month: "Apr", title: "Canone Mensile / Walseriana",                  subtitle: "Christian Raimo / Tommaso Ragno, Alberto Astorri, Lucia Re", cats: ["books","arts"],   time: null },
+      { date: "2 Mag",    day: "2",   month: "Mag", title: "Martina Castaldo Trio",                        subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
+      { date: "8 Mag",    day: "8",   month: "Mag", title: "Bottarga e Malvasia di Bosa",                  subtitle: "Con Tiziana Bacci e Cantina Columbu",                   cats: ["food"],                time: null },
+      { date: "9 Mag",    day: "9",   month: "Mag", title: "Musica e diritti civili ep.2",                 subtitle: "Achille Succi + Danilo Blaiotta",                       cats: ["books","arts"],        time: "18:00 / 22:30" },
+      { date: "10 Mag",   day: "10",  month: "Mag", title: "Pizza la domenica / Riccardo Staglianò",       subtitle: null,                                                    cats: ["food","books"],        time: "12:30 / 16:00 / 18:00" },
+      { date: "15 Mag",   day: "15",  month: "Mag", title: "Perle ai Pochi",                               subtitle: "Weird Instruments con Federico Pascucci",               cats: ["books"],               time: null },
+      { date: "16 Mag",   day: "16",  month: "Mag", title: "Gegè Munari 'The Legend' 5et",                 subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
+      { date: "17 Mag",   day: "17",  month: "Mag", title: "Forno Brisa / Amore in senso porno",           subtitle: null,                                                    cats: ["food","books"],        time: "12:30 / 18:00" },
+      { date: "23 Mag",   day: "23",  month: "Mag", title: "Scrivere di vino e paesaggio",                 subtitle: "Edoardo Liberati 'Synthetics' Trio",                    cats: ["books","arts"],        time: "12:00 / 22:30" },
+      { date: "24 Mag",   day: "24",  month: "Mag", title: "Storie di paesaggio",                          subtitle: null,                                                    cats: ["books"],               time: "18:00" },
+      { date: "27 Mag",   day: "27",  month: "Mag", title: "Cantina di Neoneli",                           subtitle: null,                                                    cats: ["food"],                time: "20:30" },
+      { date: "4 Giu",    day: "4",   month: "Giu", title: "Osterie del mondo",                            subtitle: "Da Brooklyn a NY",                                      cats: ["food"],                time: null },
+    ];
+
+    const FAQS = [
+      { q: "È necessario prenotare?",             a: "Sì, soprattutto per il Chef's Dinner che ha soli 22 coperti. Per l'À la Carte consigliamo comunque di prenotare, specialmente nei weekend." },
+      { q: "Si può scegliere il turno?",          a: "Per il Chef's Dinner i turni sono alle 19:00, 20:00 e 21:00. Per l'À la Carte gli ingressi sono ogni 30 minuti dalle 18:00." },
+      { q: "Il vino è incluso nel Chef's Dinner?",a: "Sì, il prezzo di €95 include sette portate con abbinamenti vino selezionati dal sommelier." },
+      { q: "Ci sono opzioni vegetariane?",        a: "Sì, si prega di comunicarlo al momento della prenotazione. Il menu viene adattato con lo stesso livello di cura." },
+      { q: "Si può pagare alla cassa?",           a: "Sì, accettiamo contanti e carta. La prenotazione si effettua via email o telefono, senza anticipo." },
+    ];
+
+    // ── RENDER ────────────────────────────────────
+
+    function catBadge(cat) {
+      return `<span class="event-cat ${cat}">${cat}</span>`;
+    }
+
+    function renderHomeGrid(filter) {
+      const grid = document.getElementById('homeEventGrid');
+      if (!grid) return;
+      let filtered = EVENTS;
+      if (filter && filter !== 'all') {
+        filtered = EVENTS.filter(e => e.cats.includes(filter));
+      }
+      const shown = filtered.slice(0, 9);
+      grid.innerHTML = shown.map(ev => `
+        <div class="event-card${ev.featured ? ' featured' : ''}" onclick="openEvent('${ev.title.replace(/'/g,"\\'")}')">
+          <div class="event-card-top">
+            <div>
+              <div class="event-date">${ev.date}</div>
+              ${ev.time ? `<div class="event-time">${ev.time}</div>` : ''}
+            </div>
+            <div class="event-cats">${ev.cats.map(catBadge).join('')}</div>
+          </div>
+          <div class="event-title">${ev.title}</div>
+          ${ev.subtitle ? `<div class="event-subtitle">${ev.subtitle}</div>` : ''}
+          <div class="event-card-cta">Prenota →</div>
+        </div>
+      `).join('');
+    }
+
+    function renderFullList(filter) {
+      const list = document.getElementById('fullEventList');
+      if (!list) return;
+      let filtered = EVENTS;
+      if (filter && filter !== 'all') {
+        filtered = EVENTS.filter(e => e.cats.includes(filter));
+      }
+      list.innerHTML = filtered.map(ev => `
+        <div class="event-row" data-cats="${ev.cats.join(' ')}">
+          <div class="event-row-date">
+            <span class="day">${ev.day}</span>
+            ${ev.month}
+          </div>
+          <div class="event-row-info">
+            <div class="event-row-title">${ev.title}</div>
+            ${ev.subtitle ? `<div class="event-row-sub">${ev.subtitle}</div>` : ''}
+            <div style="display:flex;gap:0.4rem;margin-top:0.4rem;">${ev.cats.map(catBadge).join('')}</div>
+          </div>
+          <div class="event-row-right">
+            ${ev.time ? `<div class="event-row-time">${ev.time}</div>` : ''}
+            <a href="mailto:info@rimessa-fab.com?subject=Prenotazione: ${encodeURIComponent(ev.title)}" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">Prenota</a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderFAQ() {
+      const faqList = document.getElementById('faqList');
+      if (!faqList) return;
+      faqList.innerHTML = FAQS.map((faq, i) => `
+        <div style="border-bottom: 1px solid rgba(17,17,17,0.1);">
+          <button onclick="toggleFaq(${i})" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;background:none;border:none;cursor:pointer;text-align:left;font-family:'Hanken Grotesk';font-weight:500;font-size:0.9rem;gap:1rem;">
+            <span>${faq.q}</span>
+            <span id="faq-icon-${i}" style="font-size:1.2rem;flex-shrink:0;transition:transform 0.2s;color:var(--green)">+</span>
+          </button>
+          <div id="faq-body-${i}" style="display:none;padding:0 2rem 1.2rem;font-size:0.85rem;line-height:1.6;opacity:0.7;">${faq.a}</div>
+        </div>
+      `).join('');
+    }
+
+    function toggleFaq(i) {
+      const body = document.getElementById(`faq-body-${i}`);
+      const icon = document.getElementById(`faq-icon-${i}`);
+      const open = body.style.display !== 'none';
+      body.style.display = open ? 'none' : 'block';
+      icon.textContent = open ? '+' : '−';
+    }
+
+    // ── NAVIGATION ───────────────────────────────
+
+    function showPage(page) {
+      document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === page);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Close mobile menu
+      document.getElementById('navLinks').classList.remove('open');
+      // Init page-specific content
+      if (page === 'events')     renderFullList('all');
+      if (page === 'restaurant') renderFAQ();
+      if (page === 'home')       { renderHomeGrid('all'); initGSAP(); }
+    }
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    // ── FILTERS ──────────────────────────────────
+
+    function filterCards(cat, btn) {
+      document.querySelectorAll('#calendar-spot .cat-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      renderHomeGrid(cat);
+    }
+
+    function filterEvents(cat, btn) {
+      document.querySelectorAll('#page-events .cat-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      renderFullList(cat);
+    }
+
+    function filterByCategory(cat) {
+      showPage('events');
+      setTimeout(() => {
+        const btn = document.querySelector(`#page-events .cat-pill.${cat}`);
+        if (btn) filterEvents(cat, btn);
+      }, 100);
+    }
+
+    function openEvent(title) {
+      const ev = EVENTS.find(e => e.title === title);
+      if (!ev) return;
+      alert(`${ev.title}\n${ev.date}${ev.time ? ' — ' + ev.time : ''}\n\nPer prenotare: info@rimessa-fab.com`);
+    }
+
+    // ── NAV SCROLL EFFECT ────────────────────────
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ── GSAP ─────────────────────────────────────
+    function initGSAP() {
+      if (typeof gsap === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero stagger
+      gsap.fromTo('.hero-headline .line-1',
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out', delay: 0.1 }
+      );
+      gsap.fromTo('.hero-headline .line-green',
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out', delay: 0.25 }
+      );
+      gsap.fromTo('.hero-headline .line-red',
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out', delay: 0.4 }
+      );
+      gsap.fromTo('.hero-side',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.55 }
+      );
+
+      // Scroll animations
+      gsap.utils.toArray('.gsap-fade').forEach(el => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 35 },
+          {
+            opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 85%' }
+          }
+        );
+      });
+
+      gsap.utils.toArray('.gsap-scale').forEach(el => {
+        gsap.fromTo(el,
+          { opacity: 0, scale: 0.96 },
+          {
+            opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 85%' }
+          }
+        );
+      });
+
+      // Event cards stagger
+      ScrollTrigger.create({
+        trigger: '#homeEventGrid',
+        start: 'top 80%',
+        onEnter: () => {
+          gsap.fromTo('#homeEventGrid .event-card',
+            { opacity: 0, y: 25 },
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.07 }
+          );
+        }
+      });
+    }
+
+    // ── INIT ─────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      renderHomeGrid('all');
+      renderFAQ();
+      setTimeout(initGSAP, 100);
+    });
+  </script>
+
+</body>
+</html>
