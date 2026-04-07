@@ -1341,6 +1341,7 @@
         <li><a href="#" onclick="showPage('restaurant'); return false;" data-page="restaurant">Ristorante</a></li>
         <li><a href="#" onclick="showPage('events'); return false;" data-page="events">Calendario</a></li>
         <li><a href="#" onclick="showPage('contacts'); return false;" data-page="contacts">Dove siamo</a></li>
+        <li><a href="#" onclick="showPage('archivio'); return false;" data-page="archivio">Archivio</a></li>
       </ul>
       <a href="mailto:info@rimessa-fab.com" class="btn-prenota">Prenota</a>
       <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
@@ -1596,6 +1597,26 @@
         </div>
       </div>
 
+      <!-- ResDiary Booking Widget -->
+      <div id="book" style="margin: 0 0 4rem;">
+        <div style="background: var(--ink); color: var(--offwhite); padding: 1.2rem 2rem; display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-family: 'Barlow Condensed'; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">Prenota un tavolo</span>
+          <span style="font-family: 'Hanken Grotesk'; font-size: 0.72rem; opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase;">Powered by ResDiary</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--ink); border:1.5px solid var(--ink); border-top:none;">
+          <div style="background:var(--offwhite); padding:2rem;">
+            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ochre); margin-bottom:0.75rem;">Esperienza principale</div>
+            <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.6rem; text-transform:uppercase; margin-bottom:1.5rem;">Chef's Dinner</div>
+            <iframe src="https://booking.resdiary.com/widget/Standard/RimessaRoscioli/60582" style="width:100%; height:420px; border:none;" title="Prenota Chef's Dinner" loading="lazy"></iframe>
+          </div>
+          <div style="background:var(--beige); padding:2rem;">
+            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--green); margin-bottom:0.75rem;">Formato libero</div>
+            <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.6rem; text-transform:uppercase; margin-bottom:1.5rem;">À la Carte</div>
+            <iframe src="https://booking.resdiary.com/widget/Standard/RimessaRoscioli/65720" style="width:100%; height:420px; border:none;" title="Prenota À la Carte" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
       <!-- FAQ strip -->
       <div style="margin: 0 0 5rem; border: 1.5px solid var(--ink);">
         <div style="background: var(--ink); color: var(--offwhite); padding: 1.2rem 2rem;">
@@ -1684,7 +1705,7 @@
         <div class="contact-block">
           <div class="contact-block-label">Social</div>
           <div class="contact-block-value">
-            <a href="#" style="font-family: 'Hanken Grotesk'; text-transform: none; font-size: 0.95rem;">@rimessafab</a>
+            <a href="https://www.instagram.com/rimessa_fab" target="_blank" rel="noopener" style="font-family: 'Hanken Grotesk'; text-transform: none; font-size: 0.95rem;">@rimessa_fab</a>
           </div>
         </div>
 
@@ -1713,6 +1734,33 @@
   </div><!-- /page-contacts -->
 
 
+  <!-- ══════════════════════════════════════ -->
+  <!--            ARCHIVIO PAGE              -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="page-archivio" class="page-section">
+
+    <div class="events-hero" style="background: var(--ink);">
+      <div class="events-hero-inner">
+        <h1>Archi<br><em>vio</em></h1>
+        <p class="events-hero-sub">Gli eventi passati di Rimessa FAB. Un registro di ciò che è stato.</p>
+      </div>
+    </div>
+
+    <div class="events-controls">
+      <span class="filter-label">Filtra:</span>
+      <button class="cat-pill all active" onclick="filterArchivio('all', this)">Tutti</button>
+      <button class="cat-pill food"       onclick="filterArchivio('food', this)">Food</button>
+      <button class="cat-pill arts"       onclick="filterArchivio('arts', this)">Arts</button>
+      <button class="cat-pill books"      onclick="filterArchivio('books', this)">Books</button>
+    </div>
+
+    <div class="events-list" id="archivioList">
+      <!-- Populated by JS -->
+    </div>
+
+  </div><!-- /page-archivio -->
+
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
@@ -1728,13 +1776,14 @@
             <li><a href="#" onclick="showPage('restaurant'); return false;">Ristorante</a></li>
             <li><a href="#" onclick="showPage('events'); return false;">Calendario</a></li>
             <li><a href="#" onclick="showPage('contacts'); return false;">Contatti</a></li>
+            <li><a href="#" onclick="showPage('archivio'); return false;">Archivio</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Contatti</h4>
           <ul>
             <li><a href="mailto:info@rimessa-fab.com">info@rimessa-fab.com</a></li>
-            <li><a href="#">@rimessafab</a></li>
+            <li><a href="https://www.instagram.com/rimessa_fab" target="_blank" rel="noopener">@rimessa_fab</a></li>
             <li><a href="#">WhatsApp</a></li>
           </ul>
         </div>
@@ -1749,8 +1798,8 @@
       <div class="footer-bottom">
         <p>© 2026 Rimessa FAB · rimessa-fab.com</p>
         <div class="roscioli-bridge">
-          Parte dell'ecosistema
-          <a href="#">Roscioli →</a>
+          Sito realizzato da <a href="https://daniferr.com" target="_blank" rel="noopener">daniferr.com</a>
+          &nbsp;·&nbsp; Parte dell'ecosistema <a href="#">Roscioli →</a>
         </div>
       </div>
     </div>
@@ -1794,20 +1843,63 @@
       { q: "Si può pagare alla cassa?",           a: "Sì, accettiamo contanti e carta. La prenotazione si effettua via email o telefono, senza anticipo." },
     ];
 
+    // ── DATE HELPERS ──────────────────────────────
+    const MONTH_MAP = { 'Gen':1,'Feb':2,'Mar':3,'Apr':4,'Mag':5,'Giu':6,'Lug':7,'Ago':8,'Set':9,'Ott':10,'Nov':11,'Dic':12 };
+
+    function eventDate(ev) {
+      // Parse "3 Apr", "12–13 Apr", "2 Mag" etc → Date object (end of that day)
+      const parts = ev.date.replace(/–\d+/, '').trim().split(' ');
+      const d = parseInt(parts[0], 10);
+      const m = MONTH_MAP[parts[1]] || 1;
+      const dt = new Date(2026, m - 1, d, 23, 59, 59);
+      return dt;
+    }
+
+    const TODAY = new Date();
+
+    function isUpcoming(ev) { return eventDate(ev) >= TODAY; }
+    function isPast(ev)     { return eventDate(ev) <  TODAY; }
+
     // ── RENDER ────────────────────────────────────
 
     function catBadge(cat) {
       return `<span class="event-cat ${cat}">${cat}</span>`;
     }
 
+    function eventRowHTML(ev, isPastItem) {
+      return `
+        <div class="event-row" data-cats="${ev.cats.join(' ')}"${isPastItem ? ' style="opacity:0.6;"' : ''}>
+          <div class="event-row-date">
+            <span class="day">${ev.day}</span>
+            ${ev.month}
+          </div>
+          <div class="event-row-info">
+            <div class="event-row-title">${ev.title}</div>
+            ${ev.subtitle ? `<div class="event-row-sub">${ev.subtitle}</div>` : ''}
+            <div style="display:flex;gap:0.4rem;margin-top:0.4rem;">${ev.cats.map(catBadge).join('')}</div>
+          </div>
+          <div class="event-row-right">
+            ${ev.time ? `<div class="event-row-time">${ev.time}</div>` : ''}
+            ${isPastItem
+              ? `<span style="font-size:0.68rem;padding:0.5rem 1rem;color:var(--ink);opacity:0.35;font-family:'Hanken Grotesk';font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">Concluso</span>`
+              : `<a href="mailto:info@rimessa-fab.com?subject=Prenotazione: ${encodeURIComponent(ev.title)}" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">Prenota</a>`
+            }
+          </div>
+        </div>`;
+    }
+
     function renderHomeGrid(filter) {
       const grid = document.getElementById('homeEventGrid');
       if (!grid) return;
-      let filtered = EVENTS;
+      let filtered = EVENTS.filter(isUpcoming);
       if (filter && filter !== 'all') {
-        filtered = EVENTS.filter(e => e.cats.includes(filter));
+        filtered = filtered.filter(e => e.cats.includes(filter));
       }
       const shown = filtered.slice(0, 9);
+      if (shown.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1;padding:3rem 2rem;opacity:0.4;font-family:'Hanken Grotesk';">Nessun evento in programma per questa categoria.</div>`;
+        return;
+      }
       grid.innerHTML = shown.map(ev => `
         <div class="event-card${ev.featured ? ' featured' : ''}" onclick="openEvent('${ev.title.replace(/'/g,"\\'")}')">
           <div class="event-card-top">
@@ -1827,27 +1919,30 @@
     function renderFullList(filter) {
       const list = document.getElementById('fullEventList');
       if (!list) return;
-      let filtered = EVENTS;
+      let filtered = EVENTS.filter(isUpcoming);
       if (filter && filter !== 'all') {
-        filtered = EVENTS.filter(e => e.cats.includes(filter));
+        filtered = filtered.filter(e => e.cats.includes(filter));
       }
-      list.innerHTML = filtered.map(ev => `
-        <div class="event-row" data-cats="${ev.cats.join(' ')}">
-          <div class="event-row-date">
-            <span class="day">${ev.day}</span>
-            ${ev.month}
-          </div>
-          <div class="event-row-info">
-            <div class="event-row-title">${ev.title}</div>
-            ${ev.subtitle ? `<div class="event-row-sub">${ev.subtitle}</div>` : ''}
-            <div style="display:flex;gap:0.4rem;margin-top:0.4rem;">${ev.cats.map(catBadge).join('')}</div>
-          </div>
-          <div class="event-row-right">
-            ${ev.time ? `<div class="event-row-time">${ev.time}</div>` : ''}
-            <a href="mailto:info@rimessa-fab.com?subject=Prenotazione: ${encodeURIComponent(ev.title)}" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">Prenota</a>
-          </div>
-        </div>
-      `).join('');
+      if (filtered.length === 0) {
+        list.innerHTML = `<div style="padding:3rem 0;opacity:0.4;font-family:'Hanken Grotesk';">Nessun evento in programma.</div>`;
+        return;
+      }
+      list.innerHTML = filtered.map(ev => eventRowHTML(ev, false)).join('');
+    }
+
+    function renderArchivio(filter) {
+      const list = document.getElementById('archivioList');
+      if (!list) return;
+      let filtered = EVENTS.filter(isPast);
+      if (filter && filter !== 'all') {
+        filtered = filtered.filter(e => e.cats.includes(filter));
+      }
+      if (filtered.length === 0) {
+        list.innerHTML = `<div style="padding:3rem 0;opacity:0.4;font-family:'Hanken Grotesk';">Nessun evento archiviato.</div>`;
+        return;
+      }
+      // Show most recent first
+      list.innerHTML = [...filtered].reverse().map(ev => eventRowHTML(ev, true)).join('');
     }
 
     function renderFAQ() {
@@ -1886,6 +1981,7 @@
       // Init page-specific content
       if (page === 'events')     renderFullList('all');
       if (page === 'restaurant') renderFAQ();
+      if (page === 'archivio')   renderArchivio('all');
       if (page === 'home')       { renderHomeGrid('all'); initGSAP(); }
     }
 
@@ -1905,6 +2001,12 @@
       document.querySelectorAll('#page-events .cat-pill').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       renderFullList(cat);
+    }
+
+    function filterArchivio(cat, btn) {
+      document.querySelectorAll('#page-archivio .cat-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      renderArchivio(cat);
     }
 
     function filterByCategory(cat) {
