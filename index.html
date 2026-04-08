@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rimessa FAB — Food, Arts & Books · Roma</title>
   <meta name="description" content="Uno spazio culturale e gastronomico a Roma. Nato da Rimessa Roscioli, con una sua identità editoriale e di eventi.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111111'/><text x='16' y='21' font-family='Arial Black,sans-serif' font-weight='900' font-size='20' fill='%23F8F2EC' text-anchor='middle'>F</text><rect x='9' y='23' width='14' height='3' fill='%231D7C4A'/></svg>">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -1327,6 +1328,30 @@
     .gsap-fade { opacity: 0; transform: translateY(30px); }
     .gsap-fade-left { opacity: 0; transform: translateX(-30px); }
     .gsap-scale { opacity: 0; transform: scale(0.95); }
+
+    /* ── LANG TOGGLE ── */
+    .lang-btn {
+      background: none;
+      border: 1.5px solid rgba(17,17,17,0.18);
+      cursor: pointer;
+      padding: 0.28rem 0.55rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .lang-btn:hover { border-color: var(--ink); background: rgba(17,17,17,0.04); }
+    .lang-btn .lang-flag { font-size: 0.95rem; line-height: 1; }
+    .lang-btn .lang-code {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.65;
+    }
   </style>
 </head>
 <body>
@@ -1338,12 +1363,16 @@
         RIMESSA <span>FAB</span>
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#" onclick="showPage('restaurant'); return false;" data-page="restaurant">Ristorante</a></li>
-        <li><a href="#" onclick="showPage('events'); return false;" data-page="events">Calendario</a></li>
-        <li><a href="#" onclick="showPage('contacts'); return false;" data-page="contacts">Dove siamo</a></li>
-        <li><a href="#" onclick="showPage('archivio'); return false;" data-page="archivio">Archivio</a></li>
+        <li><a href="#" onclick="showPage('restaurant'); return false;" data-page="restaurant" data-i18n="nav.restaurant">Ristorante</a></li>
+        <li><a href="#" onclick="showPage('events'); return false;" data-page="events" data-i18n="nav.calendar">Calendario</a></li>
+        <li><a href="#" onclick="showPage('contacts'); return false;" data-page="contacts" data-i18n="nav.where">Dove siamo</a></li>
+        <li><a href="#" onclick="showPage('archivio'); return false;" data-page="archivio" data-i18n="nav.archive">Archivio</a></li>
       </ul>
-      <a href="mailto:info@rimessa-fab.com" class="btn-prenota">Prenota</a>
+      <button class="lang-btn" id="langBtn" onclick="toggleLanguage()" title="Switch language">
+        <span class="lang-flag" id="langFlag">🇺🇸</span>
+        <span class="lang-code" id="langCode">EN</span>
+      </button>
+      <a href="mailto:info@rimessa-fab.com" class="btn-prenota" data-i18n="nav.book">Prenota</a>
       <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
@@ -1364,13 +1393,13 @@
           <span class="line-red">Roma</span>
         </div>
         <div class="hero-side">
-          <p class="hero-tagline">
+          <p class="hero-tagline" data-i18n="hero.tagline">
             Uno spazio culturale e gastronomico nato da Rimessa Roscioli.<br>
             Vieni per cena, un concerto, una presentazione,<br>o un bicchiere di vino.
           </p>
           <div class="hero-ctas">
-            <a href="#" class="btn-primary" onclick="showPage('events'); return false;">Calendario Aprile–Maggio</a>
-            <a href="#" class="btn-secondary" onclick="showPage('restaurant'); return false;">Il Ristorante</a>
+            <a href="#" class="btn-primary" onclick="showPage('events'); return false;" data-i18n="hero.cta1">Calendario Aprile–Maggio</a>
+            <a href="#" class="btn-secondary" onclick="showPage('restaurant'); return false;" data-i18n="hero.cta2">Il Ristorante</a>
           </div>
         </div>
       </div>
@@ -1402,18 +1431,18 @@
       <div class="section-wrap">
         <div class="cal-header">
           <div>
-            <div class="section-label">Prossimi eventi</div>
-            <h2 class="cal-title">Calendario<br>Aprile–Maggio</h2>
+            <div class="section-label" data-i18n="cal.label">Prossimi eventi</div>
+            <h2 class="cal-title" data-i18n="cal.title">Calendario<br>Aprile–Maggio</h2>
           </div>
           <div>
-            <div class="cal-range">APR — MAG 2026</div>
-            <a href="#" onclick="showPage('events'); return false;" class="btn-secondary" style="margin-top:1rem; display:inline-block;">Vedi tutto il calendario →</a>
+            <div class="cal-range" data-i18n="cal.range">APR — MAG 2026</div>
+            <a href="#" onclick="showPage('events'); return false;" class="btn-secondary" style="margin-top:1rem; display:inline-block;" data-i18n="cal.viewall">Vedi tutto il calendario →</a>
           </div>
         </div>
 
         <!-- Category filter -->
         <div class="cat-legend">
-          <button class="cat-pill all active" onclick="filterCards('all', this)">Tutti</button>
+          <button class="cat-pill all active" onclick="filterCards('all', this)" data-i18n="filter.all">Tutti</button>
           <button class="cat-pill food"        onclick="filterCards('food', this)">Food</button>
           <button class="cat-pill arts"        onclick="filterCards('arts', this)">Arts</button>
           <button class="cat-pill books"       onclick="filterCards('books', this)">Books</button>
@@ -1431,43 +1460,43 @@
       <div class="section-wrap">
         <div class="resto-grid">
           <div class="resto-intro gsap-fade">
-            <div class="section-label">Il Ristorante</div>
-            <h2>Cucina<br><em>libera</em><br>a Roma</h2>
-            <p>Due esperienze diverse sullo stesso tavolo. Il Chef's Dinner, sette portate con abbinamenti vino in un format raccolto e immersivo. À la Carte, dal tardo pomeriggio, per chi vuole fermarsi su una cosa sola o su tutto.</p>
-            <a href="#" class="btn-primary" onclick="showPage('restaurant'); return false;" style="display:inline-block; width:fit-content;">Scopri il ristorante</a>
+            <div class="section-label" data-i18n="resto.label">Il Ristorante</div>
+            <h2 data-i18n="resto.h2">Cucina<br><em>libera</em><br>a Roma</h2>
+            <p data-i18n="resto.desc">Due esperienze diverse sullo stesso tavolo. Il Chef's Dinner, sette portate con abbinamenti vino in un format raccolto e immersivo. À la Carte, dal tardo pomeriggio, per chi vuole fermarsi su una cosa sola o su tutto.</p>
+            <a href="#" class="btn-primary" onclick="showPage('restaurant'); return false;" style="display:inline-block; width:fit-content;" data-i18n="resto.cta">Scopri il ristorante</a>
           </div>
           <div class="resto-cards">
             <div class="resto-card gsap-fade">
-              <div class="resto-card-label">Esperienza principale</div>
+              <div class="resto-card-label" data-i18n="card.chefs.label">Esperienza principale</div>
               <h3>Chef's Dinner</h3>
-              <p>Ventidue coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Tre turni per scegliere il proprio ritmo.</p>
+              <p data-i18n="card.chefs.desc">Ventidue coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Tre turni per scegliere il proprio ritmo.</p>
               <div class="resto-detail">
                 <div class="detail-item">
-                  <span class="detail-label">Posti</span>
-                  <span class="detail-value">22 coperti</span>
+                  <span class="detail-label" data-i18n="detail.posti">Posti</span>
+                  <span class="detail-value" data-i18n="detail.seats.val">22 coperti</span>
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label">Turni</span>
+                  <span class="detail-label" data-i18n="detail.turni">Turni</span>
                   <span class="detail-value">19:00 · 20:00 · 21:00</span>
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label">Portate + vino</span>
+                  <span class="detail-label" data-i18n="detail.portate">Portate + vino</span>
                   <span class="detail-value">€95 / persona</span>
                 </div>
               </div>
             </div>
             <div class="resto-card gsap-fade">
-              <div class="resto-card-label" style="color: var(--ochre)">Formato libero</div>
+              <div class="resto-card-label" style="color: var(--ochre)" data-i18n="card.alacarte.label">Formato libero</div>
               <h3>À la Carte</h3>
-              <p>Dal tardo pomeriggio alla sera, con turni ogni 30 minuti. Perfetto per un aperitivo lungo o una cena dal menu stagionale.</p>
+              <p data-i18n="card.alacarte.desc">Dal tardo pomeriggio alla sera, con turni ogni 30 minuti. Perfetto per un aperitivo lungo o una cena dal menu stagionale.</p>
               <div class="resto-detail">
                 <div class="detail-item">
-                  <span class="detail-label">Orario</span>
+                  <span class="detail-label" data-i18n="detail.orario">Orario</span>
                   <span class="detail-value">18:00 → 22:00</span>
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label">Turni</span>
-                  <span class="detail-value">ogni 30 min</span>
+                  <span class="detail-label" data-i18n="detail.turni">Turni</span>
+                  <span class="detail-value" data-i18n="detail.alacarte.turns.val">ogni 30 min</span>
                 </div>
               </div>
             </div>
@@ -1479,14 +1508,14 @@
     <!-- MANIFESTO -->
     <section id="manifesto">
       <div class="manifesto-inner">
-        <div class="manifesto-kicker">Manifesto</div>
-        <p class="manifesto-body gsap-scale">
+        <div class="manifesto-kicker" data-i18n="manifesto.kicker">Manifesto</div>
+        <p class="manifesto-body gsap-scale" data-i18n="manifesto.body">
           Un posto dove la cucina,<br>
           la musica, i libri<br>
           e la <em>conversazione</em><br>
           coesistono naturalmente.
         </p>
-        <p class="manifesto-sub gsap-fade">
+        <p class="manifesto-sub gsap-fade" data-i18n="manifesto.sub">
           FAB è la propaggine naturale di Rimessa Roscioli, ma con un suo linguaggio, un suo ritmo e una sua logica di pubblico. Più porosa, più site-specific, più orientata agli eventi e aperta a musica, libri, talk e formati inattesi.
         </p>
       </div>
@@ -1495,23 +1524,23 @@
     <!-- CATEGORY NAV -->
     <section id="cat-nav">
       <div class="section-wrap">
-        <div class="section-label">Esplora per area</div>
-        <h2 style="font-size: clamp(2rem,4vw,3.5rem); text-transform: uppercase; margin-bottom: 0;">Le tre anime di FAB</h2>
+        <div class="section-label" data-i18n="cats.label">Esplora per area</div>
+        <h2 style="font-size: clamp(2rem,4vw,3.5rem); text-transform: uppercase; margin-bottom: 0;" data-i18n="cats.title">Le tre anime di FAB</h2>
         <div class="cat-blocks gsap-fade">
           <a href="#" class="cat-block food" onclick="filterByCategory('food'); return false;">
             <div class="cat-block-icon">F</div>
             <h3>Food</h3>
-            <p>Chef's dinner, degustazioni, cene a quattro mani, produttori ospiti. La cucina come atto culturale.</p>
+            <p data-i18n="cats.food.desc">Chef's dinner, degustazioni, cene a quattro mani, produttori ospiti. La cucina come atto culturale.</p>
           </a>
           <a href="#" class="cat-block arts" onclick="filterByCategory('arts'); return false;">
             <div class="cat-block-icon">A</div>
             <h3>Arts</h3>
-            <p>Concerti di jazz e musica sperimentale, performance, interventi sonori. La sera come formato.</p>
+            <p data-i18n="cats.arts.desc">Concerti di jazz e musica sperimentale, performance, interventi sonori. La sera come formato.</p>
           </a>
           <a href="#" class="cat-block books" onclick="filterByCategory('books'); return false;">
             <div class="cat-block-icon">B</div>
             <h3>Books</h3>
-            <p>Presentazioni, podcast dal vivo, reading, talk con autori. La parola come ospite fisso.</p>
+            <p data-i18n="cats.books.desc">Presentazioni, podcast dal vivo, reading, talk con autori. La parola come ospite fisso.</p>
           </a>
         </div>
       </div>
@@ -1522,16 +1551,16 @@
       <div class="section-wrap">
         <div class="nl-inner">
           <div class="nl-text">
-            <h3>Resta nel giro</h3>
-            <p>Nuovi eventi ogni settimana. Nessuno spam, solo cose che succedono.</p>
+            <h3 data-i18n="nl.title">Resta nel giro</h3>
+            <p data-i18n="nl.sub">Nuovi eventi ogni settimana. Nessuno spam, solo cose che succedono.</p>
           </div>
           <form class="nl-form" onsubmit="return false;">
-            <input type="email" placeholder="La tua email">
-            <button type="submit">Iscriviti</button>
+            <input type="email" data-i18n-placeholder="nl.placeholder" placeholder="La tua email">
+            <button type="submit" data-i18n="nl.button">Iscriviti</button>
           </form>
-          <a href="https://wa.me/39XXXXXXXXXX" class="nl-whatsapp">
+          <a href="https://wa.me/393493525981" target="_blank" rel="noopener" class="nl-whatsapp">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Aggiornamenti WhatsApp
+            <span data-i18n="nl.whatsapp">Aggiornamenti WhatsApp</span>
           </a>
         </div>
       </div>
@@ -1546,61 +1575,61 @@
   <div id="page-restaurant" class="page-section">
 
     <div class="page-hero" style="background: var(--beige);">
-      <div class="section-label">Il Ristorante</div>
-      <h1>Come<br>funziona<br><em>mangiare</em><br>da FAB</h1>
-      <p class="page-hero-sub">Due format, un indirizzo, zero ambiguità. Il Chef's Dinner ti porta per mano. À la Carte ti lascia libero. Entrambi prendono sul serio ciò che mettono nel piatto.</p>
+      <div class="section-label" data-i18n="resto.page.label">Il Ristorante</div>
+      <h1 data-i18n="resto.page.h1">Come<br>funziona<br><em>mangiare</em><br>da FAB</h1>
+      <p class="page-hero-sub" data-i18n="resto.page.sub">Due format, un indirizzo, zero ambiguità. Il Chef's Dinner ti porta per mano. À la Carte ti lascia libero. Entrambi prendono sul serio ciò che mettono nel piatto.</p>
     </div>
 
     <div class="restaurant-content">
 
       <div class="dining-section">
         <div class="dining-card dark">
-          <div class="dining-card-type ochre-label">Esperienza principale</div>
+          <div class="dining-card-type ochre-label" data-i18n="dining.chefs.type">Esperienza principale</div>
           <h2>Chef's<br>Dinner</h2>
-          <p>Ventidue coperti, sette portate, abbinamenti vino inclusi. Un percorso immersivo costruito dal chef ogni sera: ingredienti stagionali, tecnica, racconto. Il formato non prevede carte — c'è un menu, e si segue.</p>
+          <p data-i18n="dining.chefs.desc">Ventidue coperti, sette portate, abbinamenti vino inclusi. Un percorso immersivo costruito dal chef ogni sera: ingredienti stagionali, tecnica, racconto. Il formato non prevede carte — c'è un menu, e si segue.</p>
           <div class="dining-stats" style="border: 1px solid rgba(255,255,255,0.1);">
             <div>
-              <div class="stat-label" style="color: rgba(255,255,255,0.4)">Posti disponibili</div>
+              <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.seats">Posti disponibili</div>
               <div class="stat-value" style="color: var(--offwhite)">22</div>
             </div>
             <div>
-              <div class="stat-label" style="color: rgba(255,255,255,0.4)">Portate</div>
+              <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.portate">Portate</div>
               <div class="stat-value" style="color: var(--offwhite)">7 + vino</div>
             </div>
             <div>
-              <div class="stat-label" style="color: rgba(255,255,255,0.4)">Turni serali</div>
+              <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.turns">Turni serali</div>
               <div class="stat-value" style="color: var(--offwhite)">19:00 · 20:00 · 21:00</div>
             </div>
             <div>
-              <div class="stat-label" style="color: rgba(255,255,255,0.4)">A persona</div>
+              <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.person">A persona</div>
               <div class="stat-value" style="color: var(--ochre)">€95</div>
             </div>
           </div>
-          <a href="mailto:info@rimessa-fab.com?subject=Prenotazione Chef's Dinner" class="btn-primary" style="background: var(--offwhite); color: var(--ink); border-color: var(--offwhite);">Prenota Chef's Dinner</a>
+          <a href="mailto:info@rimessa-fab.com?subject=Prenotazione Chef's Dinner" class="btn-primary" style="background: var(--offwhite); color: var(--ink); border-color: var(--offwhite);" data-i18n="dining.chefs.cta">Prenota Chef's Dinner</a>
         </div>
 
         <div class="dining-card">
-          <div class="dining-card-type green-label">Formato libero</div>
+          <div class="dining-card-type green-label" data-i18n="dining.alacarte.type">Formato libero</div>
           <h2>À la<br>Carte</h2>
-          <p>Dal tardo pomeriggio fino alla sera, con ingressi ogni 30 minuti. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.</p>
+          <p data-i18n="dining.alacarte.desc">Dal tardo pomeriggio fino alla sera, con ingressi ogni 30 minuti. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.</p>
           <div class="dining-stats">
             <div>
-              <div class="stat-label">Apertura</div>
+              <div class="stat-label" data-i18n="dining.alacarte.stat.orario">Apertura</div>
               <div class="stat-value">18:00 → 22:00</div>
             </div>
             <div>
-              <div class="stat-label">Turni</div>
-              <div class="stat-value">ogni 30 min</div>
+              <div class="stat-label" data-i18n="dining.alacarte.stat.turns">Turni</div>
+              <div class="stat-value" data-i18n="detail.alacarte.turns.val">ogni 30 min</div>
             </div>
           </div>
-          <a href="mailto:info@rimessa-fab.com?subject=Prenotazione À la Carte" class="btn-secondary" style="display:inline-block;">Prenota À la Carte</a>
+          <a href="mailto:info@rimessa-fab.com?subject=Prenotazione À la Carte" class="btn-secondary" style="display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
         </div>
       </div>
 
       <!-- ResDiary Booking Widget -->
       <div id="book" style="margin: 0 0 4rem;">
         <div style="background: var(--ink); color: var(--offwhite); padding: 1.2rem 2rem; display:flex; align-items:center; justify-content:space-between;">
-          <span style="font-family: 'Barlow Condensed'; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">Prenota un tavolo</span>
+          <span style="font-family: 'Barlow Condensed'; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;" data-i18n="book.title">Prenota un tavolo</span>
           <span style="font-family: 'Hanken Grotesk'; font-size: 0.72rem; opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase;">Powered by ResDiary</span>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--ink); border:1.5px solid var(--ink); border-top:none;">
@@ -1652,14 +1681,14 @@
 
     <div class="events-hero">
       <div class="events-hero-inner">
-        <h1>Calen<br><em>dario</em><br>2026</h1>
-        <p class="events-hero-sub">Food, Arts & Books. Aprile–Giugno 2026. Ogni settimana qualcosa di diverso — stessa cucina, intenzioni diverse.</p>
+        <h1 data-i18n="events.h1">Calen<br><em>dario</em><br>2026</h1>
+        <p class="events-hero-sub" data-i18n="events.sub">Food, Arts & Books. Aprile–Giugno 2026. Ogni settimana qualcosa di diverso — stessa cucina, intenzioni diverse.</p>
       </div>
     </div>
 
     <div class="events-controls">
-      <span class="filter-label">Filtra:</span>
-      <button class="cat-pill all active" onclick="filterEvents('all', this)">Tutti</button>
+      <span class="filter-label" data-i18n="filter.label">Filtra:</span>
+      <button class="cat-pill all active" onclick="filterEvents('all', this)" data-i18n="filter.all">Tutti</button>
       <button class="cat-pill food"       onclick="filterEvents('food', this)">Food</button>
       <button class="cat-pill arts"       onclick="filterEvents('arts', this)">Arts</button>
       <button class="cat-pill books"      onclick="filterEvents('books', this)">Books</button>
@@ -1679,23 +1708,23 @@
 
     <div class="contacts-inner">
       <div class="contacts-left">
-        <div class="section-label">Dove siamo</div>
-        <h1>Vieni<br>a <em>trovarci</em></h1>
+        <div class="section-label" data-i18n="contacts.label">Dove siamo</div>
+        <h1 data-i18n="contacts.h1">Vieni<br>a <em>trovarci</em></h1>
 
         <div class="contact-block">
-          <div class="contact-block-label">Indirizzo</div>
+          <div class="contact-block-label" data-i18n="contacts.address.label">Indirizzo</div>
           <div class="contact-block-value">Via delle Zoccolette 28<br>Roma, 00186</div>
         </div>
 
         <div class="contact-block">
-          <div class="contact-block-label">Prenotazioni</div>
+          <div class="contact-block-label" data-i18n="contacts.booking.label">Prenotazioni</div>
           <div class="contact-block-value">
             <a href="mailto:info@rimessa-fab.com">info@rimessa-fab.com</a>
           </div>
         </div>
 
         <div class="contact-block">
-          <div class="contact-block-label">Orari ristorante</div>
+          <div class="contact-block-label" data-i18n="contacts.hours.label">Orari ristorante</div>
           <div class="contact-block-value" style="font-size: 1rem; font-family: 'Hanken Grotesk'; font-weight: 400; text-transform: none;">
             <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">Chef's Dinner</strong> — 19:00, 20:00, 21:00<br>
             <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">À la Carte</strong> — 18:00–22:00
@@ -1703,29 +1732,127 @@
         </div>
 
         <div class="contact-block">
-          <div class="contact-block-label">Social</div>
+          <div class="contact-block-label" data-i18n="contacts.social.label">Social</div>
           <div class="contact-block-value">
             <a href="https://www.instagram.com/rimessa_fab" target="_blank" rel="noopener" style="font-family: 'Hanken Grotesk'; text-transform: none; font-size: 0.95rem;">@rimessa_fab</a>
           </div>
         </div>
 
         <div class="contact-block">
-          <div class="contact-block-label">Ecosistema Roscioli</div>
-          <div class="contact-block-value" style="font-family: 'Hanken Grotesk'; text-transform: none; font-size: 0.88rem; font-weight: 400; opacity: 0.7;">
+          <div class="contact-block-label" data-i18n="contacts.ecosystem.label">Ecosistema Roscioli</div>
+          <div class="contact-block-value" style="font-family: 'Hanken Grotesk'; text-transform: none; font-size: 0.88rem; font-weight: 400; opacity: 0.7;" data-i18n="contacts.ecosystem.text">
             FAB nasce da Rimessa Roscioli — stessa cura, intenzione diversa.
           </div>
         </div>
       </div>
 
       <div>
-        <div class="map-placeholder">
-          <div class="map-pin">
-            <strong>Rimessa FAB</strong><br>
-            Via delle Zoccolette 28<br>
-            Roma
-          </div>
+        <div class="map-placeholder" style="padding:0; display:block; min-height:460px; overflow:hidden;">
+          <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;min-height:460px;" aria-label="Mappa Rimessa FAB, Via delle Zoccolette 28, Roma">
+            <!-- Base -->
+            <rect width="600" height="460" fill="#EDE4D6"/>
+            <!-- City block fills -->
+            <rect x="282" y="108" width="16" height="32" fill="#E2D5C2" opacity="0.7"/>
+            <rect x="300" y="108" width="28" height="32" fill="#E2D5C2" opacity="0.7"/>
+            <rect x="282" y="148" width="16" height="68" fill="#E2D5C2" opacity="0.7"/>
+            <rect x="300" y="148" width="28" height="68" fill="#E2D5C2" opacity="0.7"/>
+            <rect x="282" y="225" width="16" height="42" fill="#E2D5C2" opacity="0.7"/>
+            <rect x="300" y="225" width="28" height="42" fill="#E2D5C2" opacity="0.7"/>
+            <rect x="282" y="276" width="16" height="44" fill="#E2D5C2" opacity="0.7"/>
+            <rect x="300" y="276" width="28" height="44" fill="#E2D5C2" opacity="0.7"/>
+            <rect x="282" y="328" width="16" height="132" fill="#E2D5C2" opacity="0.6"/>
+            <rect x="300" y="328" width="28" height="132" fill="#E2D5C2" opacity="0.6"/>
+            <rect x="336" y="108" width="40" height="72" fill="#E2D5C2" opacity="0.65"/>
+            <rect x="336" y="188" width="40" height="30" fill="#E2D5C2" opacity="0.65"/>
+            <rect x="336" y="228" width="40" height="62" fill="#E2D5C2" opacity="0.65"/>
+            <rect x="336" y="300" width="40" height="160" fill="#E2D5C2" opacity="0.6"/>
+            <rect x="384" y="108" width="36" height="52" fill="#E2D5C2" opacity="0.55"/>
+            <rect x="384" y="188" width="36" height="70" fill="#E2D5C2" opacity="0.55"/>
+            <rect x="384" y="278" width="36" height="182" fill="#E2D5C2" opacity="0.5"/>
+            <rect x="428" y="108" width="44" height="48" fill="#E2D5C2" opacity="0.5"/>
+            <rect x="428" y="170" width="44" height="80" fill="#E2D5C2" opacity="0.5"/>
+            <rect x="428" y="268" width="44" height="192" fill="#E2D5C2" opacity="0.45"/>
+            <rect x="480" y="90" width="120" height="50" fill="#E2D5C2" opacity="0.45"/>
+            <rect x="480" y="155" width="120" height="170" fill="#E2D5C2" opacity="0.4"/>
+            <rect x="280" y="0" width="28" height="30" fill="#E2D5C2" opacity="0.6"/>
+            <rect x="336" y="0" width="80" height="40" fill="#E2D5C2" opacity="0.55"/>
+            <rect x="428" y="0" width="172" height="55" fill="#E2D5C2" opacity="0.45"/>
+            <!-- Tiber River -->
+            <path d="M 194 0 C 199 60 205 120 210 180 C 215 240 218 300 215 360 C 212 400 207 440 203 460 L 258 460 C 262 440 266 400 269 360 C 272 300 268 240 263 180 C 258 120 254 60 249 0 Z" fill="#8EB4C8"/>
+            <!-- Tiber wave lines for texture -->
+            <path d="M 210 150 Q 225 160 215 170 Q 205 180 220 190" fill="none" stroke="#7aa4bc" stroke-width="1" opacity="0.5"/>
+            <path d="M 215 240 Q 232 250 220 262 Q 210 272 225 282" fill="none" stroke="#7aa4bc" stroke-width="1" opacity="0.5"/>
+            <!-- Lungotevere dei Tebaldi -->
+            <path d="M 261 0 C 264 120 267 240 264 360 C 262 400 260 440 258 460" fill="none" stroke="#1A1A1A" stroke-width="2.5"/>
+            <!-- Via Giulia -->
+            <line x1="281" y1="0" x2="279" y2="460" stroke="#1A1A1A" stroke-width="2"/>
+            <!-- Corso Vittorio Emanuele II (major E-W) -->
+            <path d="M 259 104 Q 420 96 600 89" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+            <!-- Via dei Pettinari (E-W south) -->
+            <path d="M 261 292 Q 360 286 510 281" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+            <!-- Via del Pellegrino (N-S east) -->
+            <line x1="332" y1="90" x2="329" y2="420" stroke="#1A1A1A" stroke-width="1.5"/>
+            <!-- Via dei Giubbonari (E-W mid) -->
+            <path d="M 280 192 Q 365 187 450 183" fill="none" stroke="#1A1A1A" stroke-width="1.2" opacity="0.7"/>
+            <!-- Minor connecting streets -->
+            <line x1="280" y1="132" x2="332" y2="131" stroke="#1A1A1A" stroke-width="0.9" opacity="0.5"/>
+            <line x1="280" y1="164" x2="332" y2="162" stroke="#1A1A1A" stroke-width="0.9" opacity="0.5"/>
+            <line x1="280" y1="222" x2="332" y2="220" stroke="#1A1A1A" stroke-width="0.9" opacity="0.4"/>
+            <line x1="280" y1="252" x2="332" y2="250" stroke="#1A1A1A" stroke-width="0.9" opacity="0.4"/>
+            <line x1="280" y1="322" x2="332" y2="320" stroke="#1A1A1A" stroke-width="0.9" opacity="0.4"/>
+            <line x1="332" y1="220" x2="430" y2="216" stroke="#1A1A1A" stroke-width="0.9" opacity="0.35"/>
+            <line x1="332" y1="252" x2="430" y2="248" stroke="#1A1A1A" stroke-width="0.9" opacity="0.35"/>
+            <line x1="332" y1="150" x2="430" y2="147" stroke="#1A1A1A" stroke-width="0.9" opacity="0.35"/>
+            <!-- Via delle Zoccolette (in green) -->
+            <line x1="300" y1="108" x2="300" y2="272" stroke="#1D7C4A" stroke-width="3"/>
+            <!-- Ponte Sisto -->
+            <rect x="212" y="326" width="54" height="10" rx="2" fill="#C8BFA8" stroke="#1A1A1A" stroke-width="1.5"/>
+            <!-- Campo de' Fiori -->
+            <ellipse cx="400" cy="176" rx="21" ry="14" fill="#E8D1BF" stroke="#1A1A1A" stroke-width="1.5"/>
+            <!-- Piazza Farnese -->
+            <rect x="376" y="267" width="26" height="20" rx="2" fill="#E8D1BF" stroke="#1A1A1A" stroke-width="1.5"/>
+            <!-- Largo di Torre Argentina -->
+            <rect x="468" y="72" width="38" height="28" rx="2" fill="#E2D5C2" stroke="#1A1A1A" stroke-width="1" opacity="0.8"/>
+            <!-- 1km radius circle (dashed) -->
+            <circle cx="300" cy="220" r="210" fill="none" stroke="#1A1A1A" stroke-width="0.8" stroke-dasharray="4 7" opacity="0.15"/>
+            <!-- PIN -->
+            <g transform="translate(300, 210)">
+              <ellipse cx="0" cy="20" rx="7" ry="3" fill="rgba(0,0,0,0.12)"/>
+              <path d="M 0,-22 C -10,-22 -15,-15 -15,-7 C -15,5 0,22 0,22 C 0,22 15,5 15,-7 C 15,-15 10,-22 0,-22 Z" fill="#B33A2B"/>
+              <circle cx="0" cy="-7" r="6" fill="rgba(255,255,255,0.25)"/>
+              <circle cx="0" cy="-7" r="3" fill="white"/>
+            </g>
+            <!-- Rimessa FAB label bubble -->
+            <rect x="214" y="150" width="134" height="32" rx="2" fill="white" opacity="0.93"/>
+            <rect x="214" y="150" width="134" height="32" rx="2" fill="none" stroke="#1A1A1A" stroke-width="0.8" opacity="0.25"/>
+            <text x="281" y="163" font-family="'Barlow Condensed',Arial Narrow,sans-serif" font-size="11" fill="#B33A2B" text-anchor="middle" font-weight="800" letter-spacing="0.5">RIMESSA FAB</text>
+            <text x="281" y="175" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7.5" fill="#1A1A1A" text-anchor="middle" opacity="0.6">Via delle Zoccolette, 28 · Roma</text>
+            <!-- Labels -->
+            <text transform="translate(233,262) rotate(-75)" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="9" fill="#4d7a98" font-weight="600" letter-spacing="1.5" opacity="0.9">TEVERE</text>
+            <text transform="translate(267,400) rotate(-90)" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7.5" fill="#1A1A1A" opacity="0.45">Via Giulia</text>
+            <text x="285" y="87" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7.5" fill="#1A1A1A" opacity="0.5">Corso Vittorio Emanuele II</text>
+            <text x="400" y="165" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7.5" fill="#1A1A1A" text-anchor="middle" opacity="0.7" font-weight="600">Campo de' Fiori</text>
+            <text x="389" y="263" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7" fill="#1A1A1A" opacity="0.6">P.za Farnese</text>
+            <text x="236" y="322" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7" fill="#1A1A1A" text-anchor="middle" opacity="0.55">Ponte Sisto</text>
+            <text x="468" y="68" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7" fill="#1A1A1A" opacity="0.55">Largo Argentina</text>
+            <text x="508" y="222" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7" fill="#1A1A1A" opacity="0.2">1 km</text>
+            <!-- Scale bar -->
+            <line x1="18" y1="444" x2="228" y2="444" stroke="#1A1A1A" stroke-width="1.5" opacity="0.3"/>
+            <line x1="18" y1="439" x2="18" y2="449" stroke="#1A1A1A" stroke-width="1.5" opacity="0.3"/>
+            <line x1="123" y1="440" x2="123" y2="448" stroke="#1A1A1A" stroke-width="1" opacity="0.3"/>
+            <line x1="228" y1="439" x2="228" y2="449" stroke="#1A1A1A" stroke-width="1.5" opacity="0.3"/>
+            <text x="18" y="458" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7" text-anchor="middle" fill="#1A1A1A" opacity="0.35">0</text>
+            <text x="123" y="458" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7" text-anchor="middle" fill="#1A1A1A" opacity="0.35">500 m</text>
+            <text x="228" y="458" font-family="'Hanken Grotesk',Arial,sans-serif" font-size="7" text-anchor="middle" fill="#1A1A1A" opacity="0.35">1 km</text>
+            <!-- North arrow -->
+            <g opacity="0.4" transform="translate(568,22)">
+              <text x="0" y="0" font-family="'Barlow Condensed',sans-serif" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="700">N</text>
+              <line x1="0" y1="5" x2="0" y2="22" stroke="#1A1A1A" stroke-width="1.5"/>
+              <path d="M -4 16 L 0 5 L 4 16 Z" fill="#1A1A1A"/>
+            </g>
+          </svg>
         </div>
-        <div style="margin-top: 1px; background: var(--beige); border: 1.5px solid var(--ink); border-top: none; padding: 1.2rem 1.5rem; font-size: 0.8rem; opacity: 0.6; font-family: 'Hanken Grotesk';">
+        <div style="margin-top: 1px; background: var(--beige); border: 1.5px solid var(--ink); border-top: none; padding: 1.2rem 1.5rem; font-size: 0.8rem; opacity: 0.6; font-family: 'Hanken Grotesk';" data-i18n="contacts.parking">
           Parcheggio disponibile nelle vicinanze · Metro Linea B — Circo Massimo
         </div>
       </div>
@@ -1741,14 +1868,14 @@
 
     <div class="events-hero" style="background: var(--ink);">
       <div class="events-hero-inner">
-        <h1>Archi<br><em>vio</em></h1>
-        <p class="events-hero-sub">Gli eventi passati di Rimessa FAB. Un registro di ciò che è stato.</p>
+        <h1 data-i18n="archive.h1">Archi<br><em>vio</em></h1>
+        <p class="events-hero-sub" data-i18n="archive.sub">Gli eventi passati di Rimessa FAB. Un registro di ciò che è stato.</p>
       </div>
     </div>
 
     <div class="events-controls">
-      <span class="filter-label">Filtra:</span>
-      <button class="cat-pill all active" onclick="filterArchivio('all', this)">Tutti</button>
+      <span class="filter-label" data-i18n="filter.label">Filtra:</span>
+      <button class="cat-pill all active" onclick="filterArchivio('all', this)" data-i18n="filter.all">Tutti</button>
       <button class="cat-pill food"       onclick="filterArchivio('food', this)">Food</button>
       <button class="cat-pill arts"       onclick="filterArchivio('arts', this)">Arts</button>
       <button class="cat-pill books"      onclick="filterArchivio('books', this)">Books</button>
@@ -1767,28 +1894,28 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <span class="logo">Rimessa <span>FAB</span></span>
-          <p>Food, Arts & Books. Uno spazio culturale e gastronomico a Roma, nato da Rimessa Roscioli con una sua identità propria.</p>
+          <p data-i18n="footer.brand">Food, Arts & Books. Uno spazio culturale e gastronomico a Roma, nato da Rimessa Roscioli con una sua identità propria.</p>
         </div>
         <div class="footer-col">
-          <h4>Navigazione</h4>
+          <h4 data-i18n="footer.nav">Navigazione</h4>
           <ul>
-            <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
-            <li><a href="#" onclick="showPage('restaurant'); return false;">Ristorante</a></li>
-            <li><a href="#" onclick="showPage('events'); return false;">Calendario</a></li>
-            <li><a href="#" onclick="showPage('contacts'); return false;">Contatti</a></li>
-            <li><a href="#" onclick="showPage('archivio'); return false;">Archivio</a></li>
+            <li><a href="#" onclick="showPage('home'); return false;" data-i18n="footer.home">Home</a></li>
+            <li><a href="#" onclick="showPage('restaurant'); return false;" data-i18n="footer.restaurant">Ristorante</a></li>
+            <li><a href="#" onclick="showPage('events'); return false;" data-i18n="footer.calendar">Calendario</a></li>
+            <li><a href="#" onclick="showPage('contacts'); return false;" data-i18n="footer.where">Contatti</a></li>
+            <li><a href="#" onclick="showPage('archivio'); return false;" data-i18n="footer.archive">Archivio</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Contatti</h4>
+          <h4 data-i18n="footer.contacts">Contatti</h4>
           <ul>
             <li><a href="mailto:info@rimessa-fab.com">info@rimessa-fab.com</a></li>
             <li><a href="https://www.instagram.com/rimessa_fab" target="_blank" rel="noopener">@rimessa_fab</a></li>
-            <li><a href="#">WhatsApp</a></li>
+            <li><a href="https://wa.me/393493525981" target="_blank" rel="noopener">WhatsApp</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Indirizzo</h4>
+          <h4 data-i18n="footer.address">Indirizzo</h4>
           <ul>
             <li><a href="#">Via delle Zoccolette 28</a></li>
             <li><a href="#">Roma, 00186</a></li>
@@ -1807,6 +1934,140 @@
 
 
   <script>
+    // ── I18N ─────────────────────────────────────
+    let LANG = localStorage.getItem('fab-lang') || 'it';
+
+    const TRANSLATIONS = {
+      it: {
+        'nav.restaurant':'Ristorante','nav.calendar':'Calendario','nav.where':'Dove siamo','nav.archive':'Archivio','nav.book':'Prenota',
+        'hero.tagline':'Uno spazio culturale e gastronomico nato da Rimessa Roscioli.<br>Vieni per cena, un concerto, una presentazione,<br>o un bicchiere di vino.',
+        'hero.cta1':'Calendario Aprile–Maggio','hero.cta2':'Il Ristorante',
+        'cal.label':'Prossimi eventi','cal.title':'Calendario<br>Aprile–Maggio','cal.range':'APR — MAG 2026','cal.viewall':'Vedi tutto il calendario →',
+        'filter.all':'Tutti','filter.label':'Filtra:',
+        'resto.label':'Il Ristorante','resto.h2':'Cucina<br><em>libera</em><br>a Roma',
+        'resto.desc':'Due esperienze diverse sullo stesso tavolo. Il Chef\'s Dinner, sette portate con abbinamenti vino in un format raccolto e immersivo. À la Carte, dal tardo pomeriggio, per chi vuole fermarsi su una cosa sola o su tutto.',
+        'resto.cta':'Scopri il ristorante',
+        'card.chefs.label':'Esperienza principale','card.chefs.desc':'Ventidue coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Tre turni per scegliere il proprio ritmo.',
+        'card.alacarte.label':'Formato libero','card.alacarte.desc':'Dal tardo pomeriggio alla sera, con turni ogni 30 minuti. Perfetto per un aperitivo lungo o una cena dal menu stagionale.',
+        'detail.posti':'Posti','detail.turni':'Turni','detail.portate':'Portate + vino','detail.orario':'Orario',
+        'detail.seats.val':'22 coperti','detail.alacarte.turns.val':'ogni 30 min',
+        'manifesto.kicker':'Manifesto',
+        'manifesto.body':'Un posto dove la cucina,<br>la musica, i libri<br>e la <em>conversazione</em><br>coesistono naturalmente.',
+        'manifesto.sub':'FAB è la propaggine naturale di Rimessa Roscioli, ma con un suo linguaggio, un suo ritmo e una sua logica di pubblico. Più porosa, più site-specific, più orientata agli eventi e aperta a musica, libri, talk e formati inattesi.',
+        'cats.label':'Esplora per area','cats.title':'Le tre anime di FAB',
+        'cats.food.desc':'Chef\'s dinner, degustazioni, cene a quattro mani, produttori ospiti. La cucina come atto culturale.',
+        'cats.arts.desc':'Concerti di jazz e musica sperimentale, performance, interventi sonori. La sera come formato.',
+        'cats.books.desc':'Presentazioni, podcast dal vivo, reading, talk con autori. La parola come ospite fisso.',
+        'nl.title':'Resta nel giro','nl.sub':'Nuovi eventi ogni settimana. Nessuno spam, solo cose che succedono.','nl.placeholder':'La tua email','nl.button':'Iscriviti','nl.whatsapp':'Aggiornamenti WhatsApp',
+        'resto.page.label':'Il Ristorante','resto.page.h1':'Come<br>funziona<br><em>mangiare</em><br>da FAB',
+        'resto.page.sub':'Due format, un indirizzo, zero ambiguità. Il Chef\'s Dinner ti porta per mano. À la Carte ti lascia libero. Entrambi prendono sul serio ciò che mettono nel piatto.',
+        'dining.chefs.type':'Esperienza principale','dining.chefs.desc':'Ventidue coperti, sette portate, abbinamenti vino inclusi. Un percorso immersivo costruito dal chef ogni sera: ingredienti stagionali, tecnica, racconto. Il formato non prevede carte — c\'è un menu, e si segue.',
+        'dining.chefs.stat.seats':'Posti disponibili','dining.chefs.stat.portate':'Portate','dining.chefs.stat.turns':'Turni serali','dining.chefs.stat.person':'A persona',
+        'dining.chefs.cta':'Prenota Chef\'s Dinner',
+        'dining.alacarte.type':'Formato libero','dining.alacarte.desc':'Dal tardo pomeriggio fino alla sera, con ingressi ogni 30 minuti. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.',
+        'dining.alacarte.stat.orario':'Apertura','dining.alacarte.stat.turns':'Turni','dining.alacarte.cta':'Prenota À la Carte',
+        'book.title':'Prenota un tavolo','faq.title':'Domande frequenti',
+        'events.h1':'Calen<br><em>dario</em><br>2026','events.sub':'Food, Arts & Books. Aprile–Giugno 2026. Ogni settimana qualcosa di diverso — stessa cucina, intenzioni diverse.',
+        'archive.h1':'Archi<br><em>vio</em>','archive.sub':'Gli eventi passati di Rimessa FAB. Un registro di ciò che è stato.',
+        'contacts.label':'Dove siamo','contacts.h1':'Vieni<br>a <em>trovarci</em>',
+        'contacts.address.label':'Indirizzo','contacts.booking.label':'Prenotazioni','contacts.hours.label':'Orari ristorante','contacts.social.label':'Social',
+        'contacts.ecosystem.label':'Ecosistema Roscioli','contacts.ecosystem.text':'FAB nasce da Rimessa Roscioli — stessa cura, intenzione diversa.',
+        'contacts.parking':'Parcheggio disponibile nelle vicinanze · Metro Linea B — Circo Massimo',
+        'footer.brand':'Food, Arts & Books. Uno spazio culturale e gastronomico a Roma, nato da Rimessa Roscioli con una sua identità propria.',
+        'footer.nav':'Navigazione','footer.contacts':'Contatti','footer.address':'Indirizzo',
+        'footer.home':'Home','footer.restaurant':'Ristorante','footer.calendar':'Calendario','footer.where':'Contatti','footer.archive':'Archivio',
+        'btn.book':'Prenota →','btn.done':'Concluso','no.events':'Nessun evento in programma.',
+      },
+      en: {
+        'nav.restaurant':'Restaurant','nav.calendar':'Calendar','nav.where':'Find us','nav.archive':'Archive','nav.book':'Book',
+        'hero.tagline':'A cultural and gastronomic space born from Rimessa Roscioli.<br>Come for dinner, a concert, a book talk,<br>or a glass of wine.',
+        'hero.cta1':'April–May Calendar','hero.cta2':'The Restaurant',
+        'cal.label':'Upcoming events','cal.title':'Calendar<br>April–May','cal.range':'APR — MAY 2026','cal.viewall':'View full calendar →',
+        'filter.all':'All','filter.label':'Filter:',
+        'resto.label':'The Restaurant','resto.h2':'Free<br><em>cuisine</em><br>in Rome',
+        'resto.desc':'Two different experiences at the same table. The Chef\'s Dinner: seven courses with wine pairings in an intimate, immersive format. À la Carte from late afternoon, for those who want to linger on one thing or everything.',
+        'resto.cta':'Discover the restaurant',
+        'card.chefs.label':'Main experience','card.chefs.desc':'Twenty-two covers, seven courses with wine pairings. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. Three seatings to choose your own pace.',
+        'card.alacarte.label':'Free format','card.alacarte.desc':'From late afternoon into the evening, with seatings every 30 minutes. Perfect for a long aperitivo or a dinner from the seasonal menu.',
+        'detail.posti':'Seats','detail.turni':'Seatings','detail.portate':'Courses + wine','detail.orario':'Hours',
+        'detail.seats.val':'22 covers','detail.alacarte.turns.val':'every 30 min',
+        'manifesto.kicker':'Manifesto',
+        'manifesto.body':'A place where food,<br>music, books<br>and <em>conversation</em><br>coexist naturally.',
+        'manifesto.sub':'FAB is the natural extension of Rimessa Roscioli, but with its own language, its own rhythm and its own audience. More porous, more site-specific, more event-driven, and open to music, books, talks and unexpected formats.',
+        'cats.label':'Explore by area','cats.title':'The three souls of FAB',
+        'cats.food.desc':'Chef\'s dinners, tastings, collaborative dinners, guest producers. Food as a cultural act.',
+        'cats.arts.desc':'Jazz concerts and experimental music, performances, sonic interventions. The evening as a format.',
+        'cats.books.desc':'Book presentations, live podcasts, readings, author talks. The word as a regular guest.',
+        'nl.title':'Stay in the loop','nl.sub':'New events every week. No spam, just things that happen.','nl.placeholder':'Your email','nl.button':'Subscribe','nl.whatsapp':'WhatsApp updates',
+        'resto.page.label':'The Restaurant','resto.page.h1':'How to<br>dine<br><em>at FAB</em>',
+        'resto.page.sub':'Two formats, one address, zero ambiguity. The Chef\'s Dinner guides you. À la Carte sets you free. Both take seriously what they put on the plate.',
+        'dining.chefs.type':'Main experience','dining.chefs.desc':'Twenty-two covers, seven courses, wine pairings included. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. No menu cards — one menu, and you follow it.',
+        'dining.chefs.stat.seats':'Available seats','dining.chefs.stat.portate':'Courses','dining.chefs.stat.turns':'Evening seatings','dining.chefs.stat.person':'Per person',
+        'dining.chefs.cta':'Book Chef\'s Dinner',
+        'dining.alacarte.type':'Free format','dining.alacarte.desc':'From late afternoon into the evening, with entries every 30 minutes. Ideal for a long aperitivo or a dinner built piece by piece from the seasonal menu. One dish or everything — your call.',
+        'dining.alacarte.stat.orario':'Opening','dining.alacarte.stat.turns':'Seatings','dining.alacarte.cta':'Book À la Carte',
+        'book.title':'Reserve a table','faq.title':'FAQ',
+        'events.h1':'Calen<br><em>dar</em><br>2026','events.sub':'Food, Arts & Books. April–June 2026. Something different every week — same kitchen, different intentions.',
+        'archive.h1':'Archi<br><em>ve</em>','archive.sub':'Past events at Rimessa FAB. A record of what has been.',
+        'contacts.label':'Find us','contacts.h1':'Come<br><em>find us</em>',
+        'contacts.address.label':'Address','contacts.booking.label':'Reservations','contacts.hours.label':'Restaurant hours','contacts.social.label':'Social',
+        'contacts.ecosystem.label':'The Roscioli family','contacts.ecosystem.text':'FAB was born from Rimessa Roscioli — the same care, a different intention.',
+        'contacts.parking':'Parking available nearby · Metro Line B — Circo Massimo',
+        'footer.brand':'Food, Arts & Books. A cultural and gastronomic space in Rome, born from Rimessa Roscioli with its own distinct identity.',
+        'footer.nav':'Navigation','footer.contacts':'Contact','footer.address':'Address',
+        'footer.home':'Home','footer.restaurant':'Restaurant','footer.calendar':'Calendar','footer.where':'Contact','footer.archive':'Archive',
+        'btn.book':'Book →','btn.done':'Past','no.events':'No upcoming events.',
+      }
+    };
+
+    const FAQS_EN = [
+      { q: "Is a reservation required?",          a: "Yes, especially for the Chef's Dinner which has only 22 covers. For À la Carte we still recommend booking, especially on weekends." },
+      { q: "Can you choose your seating time?",   a: "For the Chef's Dinner, seatings are at 7pm, 8pm and 9pm. For À la Carte, entries are every 30 minutes from 6pm." },
+      { q: "Is wine included in the Chef's Dinner?", a: "Yes, the €95 price includes seven courses with wine pairings selected by the sommelier." },
+      { q: "Are there vegetarian options?",       a: "Yes, please let us know when booking. The menu is adapted with the same level of care." },
+      { q: "Can I pay on the day?",               a: "Yes, we accept cash and card. Reservations are made by email or phone, with no advance payment required." },
+    ];
+
+    function t(key) {
+      return (TRANSLATIONS[LANG] && TRANSLATIONS[LANG][key]) || TRANSLATIONS['it'][key] || key;
+    }
+
+    function setLanguage(lang) {
+      LANG = lang;
+      localStorage.setItem('fab-lang', lang);
+      document.documentElement.lang = lang;
+      // Update flag button
+      const flag = document.getElementById('langFlag');
+      const code = document.getElementById('langCode');
+      if (flag) flag.textContent = lang === 'it' ? '🇺🇸' : '🇮🇹';
+      if (code) code.textContent = lang === 'it' ? 'EN' : 'IT';
+      // Update all data-i18n text elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const val = t(el.getAttribute('data-i18n'));
+        if (val) el.innerHTML = val;
+      });
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+      });
+      // Re-render dynamic content
+      renderHomeGrid('all');
+      renderFAQ();
+      const active = document.querySelector('.page-section.active');
+      if (active) {
+        const page = active.id.replace('page-', '');
+        if (page === 'events')   renderFullList('all');
+        if (page === 'archivio') renderArchivio('all');
+      }
+      // Reset active filter pills
+      document.querySelectorAll('.cat-pill').forEach(p => {
+        if (p.classList.contains('all')) { p.classList.add('active'); p.innerHTML = t('filter.all'); }
+        else p.classList.remove('active');
+      });
+    }
+
+    function toggleLanguage() { setLanguage(LANG === 'it' ? 'en' : 'it'); }
+
     // ── DATA ──────────────────────────────────────
     const EVENTS = [
       { date: "3 Apr",    day: "3",   month: "Apr", title: "Perle ai Pochi",                               subtitle: "Duo al buio",                                          cats: ["books","performance"], time: null },
@@ -1817,7 +2078,7 @@
       { date: "16 Apr",   day: "16",  month: "Apr", title: "La cucina italiana non esiste",                subtitle: "Podcast live con Alberto Grandi e Tommaso Melilli",     cats: ["books","food"],        time: null },
       { date: "17 Apr",   day: "17",  month: "Apr", title: "In-Compresi / Perle ai Pochi",                 subtitle: "Italian Real Book con Francesca Faro",                  cats: ["books"],               time: null },
       { date: "18 Apr",   day: "18",  month: "Apr", title: "Roberto Gatto Hammond 4et",                   subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
-      { date: "19 Apr",   day: "19",  month: "Apr", title: "Pizza la domenica / Una vita",                 subtitle: "Sancho Atto II + monologo Fabio Cicchiello",            cats: ["food","books"],        time: null },
+      { date: "19 Apr",   day: "19",  month: "Apr", title: "Una vita",                                     subtitle: "Monologo di Fabio Cicchiello",                          cats: ["books"],               time: null },
       { date: "21 Apr",   day: "21",  month: "Apr", title: "Pacina — Verticale",                           subtitle: null,                                                    cats: ["food","wine"],         time: "19:00" },
       { date: "23 Apr",   day: "23",  month: "Apr", title: "Perle ai Pochi",                               subtitle: "Grandi Numeri dei Cor Veleno",                          cats: ["books"],               time: null },
       { date: "25 Apr",   day: "25",  month: "Apr", title: "Traindeville",                                 subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
@@ -1881,8 +2142,8 @@
           <div class="event-row-right">
             ${ev.time ? `<div class="event-row-time">${ev.time}</div>` : ''}
             ${isPastItem
-              ? `<span style="font-size:0.68rem;padding:0.5rem 1rem;color:var(--ink);opacity:0.35;font-family:'Hanken Grotesk';font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">Concluso</span>`
-              : `<a href="mailto:info@rimessa-fab.com?subject=Prenotazione: ${encodeURIComponent(ev.title)}" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">Prenota</a>`
+              ? `<span style="font-size:0.68rem;padding:0.5rem 1rem;color:var(--ink);opacity:0.35;font-family:'Hanken Grotesk';font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">${t('btn.done')}</span>`
+              : `<a href="mailto:info@rimessa-fab.com?subject=Prenotazione: ${encodeURIComponent(ev.title)}" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">${t('btn.book')}</a>`
             }
           </div>
         </div>`;
@@ -1948,7 +2209,8 @@
     function renderFAQ() {
       const faqList = document.getElementById('faqList');
       if (!faqList) return;
-      faqList.innerHTML = FAQS.map((faq, i) => `
+      const items = LANG === 'en' ? FAQS_EN : FAQS;
+      faqList.innerHTML = items.map((faq, i) => `
         <div style="border-bottom: 1px solid rgba(17,17,17,0.1);">
           <button onclick="toggleFaq(${i})" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;background:none;border:none;cursor:pointer;text-align:left;font-family:'Hanken Grotesk';font-weight:500;font-size:0.9rem;gap:1rem;">
             <span>${faq.q}</span>
@@ -2087,8 +2349,7 @@
 
     // ── INIT ─────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
-      renderHomeGrid('all');
-      renderFAQ();
+      setLanguage(LANG); // applies stored preference + renders all content
       setTimeout(initGSAP, 100);
     });
   </script>
