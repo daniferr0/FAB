@@ -1336,6 +1336,12 @@
 
       .page-hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
       .events-hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
+
+      /* ResDiary booking widget — mobile tab layout */
+      .book-tabs { display: flex !important; }
+      .book-grid { grid-template-columns: 1fr !important; }
+      .book-panel { display: none; }
+      .book-panel.active { display: block; }
     }
 
     /* ── ANIMATIONS ── */
@@ -1487,11 +1493,11 @@
               <div class="resto-detail">
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.posti">Posti</span>
-                  <span class="detail-value" data-i18n="detail.seats.val">22 coperti</span>
+                  <span class="detail-value" data-i18n="detail.seats.val">14 coperti</span>
                 </div>
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.turni">Turni</span>
-                  <span class="detail-value">19:00 · 20:00 · 21:00</span>
+                  <span class="detail-value">19:00 · 20:30</span>
                 </div>
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.portate">Portate + vino</span>
@@ -1502,7 +1508,7 @@
             <div class="resto-card gsap-fade">
               <div class="resto-card-label" style="color: var(--ochre)" data-i18n="card.alacarte.label">Formato libero</div>
               <h3>À la Carte</h3>
-              <p data-i18n="card.alacarte.desc">Dal tardo pomeriggio alla sera, con turni ogni 30 minuti. Perfetto per un aperitivo lungo o una cena dal menu stagionale.</p>
+              <p data-i18n="card.alacarte.desc">Dal tardo pomeriggio alla sera. Perfetto per un aperitivo lungo o una cena dal menu stagionale.</p>
               <div class="resto-detail">
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.orario">Orario</span>
@@ -1593,8 +1599,8 @@
 
     <div class="page-hero" style="background: var(--beige);">
       <div class="section-label" data-i18n="resto.page.label">Il Ristorante</div>
-      <h1 data-i18n="resto.page.h1">Come<br>funziona<br><em>mangiare</em><br>da FAB</h1>
-      <p class="page-hero-sub" data-i18n="resto.page.sub">Due format, un indirizzo, zero ambiguità. Il Chef's Dinner ti porta per mano. À la Carte ti lascia libero. Entrambi prendono sul serio ciò che mettono nel piatto.</p>
+      <h1 data-i18n="resto.page.h1">Come<br>funziona<br><em>mangiare</em><br>al FAB</h1>
+      <p class="page-hero-sub" data-i18n="resto.page.sub">Due format, un indirizzo, zero ambiguità. Lo Chef's Dinner ti porta per mano. La carta ti lascia libera. Entrambi prendono sul serio ciò che mettono nel piatto.</p>
     </div>
 
     <div class="restaurant-content">
@@ -1603,11 +1609,11 @@
         <div class="dining-card dark">
           <div class="dining-card-type ochre-label" data-i18n="dining.chefs.type">Esperienza principale</div>
           <h2>Chef's<br>Dinner</h2>
-          <p data-i18n="dining.chefs.desc">Ventidue coperti, sette portate, abbinamenti vino inclusi. Un percorso immersivo costruito dal chef ogni sera: ingredienti stagionali, tecnica, racconto. Il formato non prevede carte — c'è un menu, e si segue.</p>
+          <p data-i18n="dining.chefs.desc">Quattordici coperti, sette portate, abbinamenti vino inclusi. Un percorso immersivo costruito dallo chef ogni sera: ingredienti stagionali, tecnica, racconto. Il formato non prevede carte — c'è un menu, e si segue.</p>
           <div class="dining-stats" style="border: 1px solid rgba(255,255,255,0.1);">
             <div>
               <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.seats">Posti disponibili</div>
-              <div class="stat-value" style="color: var(--offwhite)">22</div>
+              <div class="stat-value" style="color: var(--offwhite)">14</div>
             </div>
             <div>
               <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.portate">Portate</div>
@@ -1615,7 +1621,7 @@
             </div>
             <div>
               <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.turns">Turni serali</div>
-              <div class="stat-value" style="color: var(--offwhite)">19:00 · 20:00 · 21:00</div>
+              <div class="stat-value" style="color: var(--offwhite)">19:00 · 20:30</div>
             </div>
             <div>
               <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.person">A persona</div>
@@ -1628,15 +1634,11 @@
         <div class="dining-card">
           <div class="dining-card-type green-label" data-i18n="dining.alacarte.type">Formato libero</div>
           <h2>À la<br>Carte</h2>
-          <p data-i18n="dining.alacarte.desc">Dal tardo pomeriggio fino alla sera, con ingressi ogni 30 minuti. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.</p>
+          <p data-i18n="dining.alacarte.desc">Dal tardo pomeriggio fino alla sera. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.</p>
           <div class="dining-stats">
             <div>
               <div class="stat-label" data-i18n="dining.alacarte.stat.orario">Apertura</div>
               <div class="stat-value">18:00 → 22:00</div>
-            </div>
-            <div>
-              <div class="stat-label" data-i18n="dining.alacarte.stat.turns">Turni</div>
-              <div class="stat-value" data-i18n="detail.alacarte.turns.val">ogni 30 min</div>
             </div>
           </div>
           <a href="mailto:info@rimessa-fab.com?subject=Prenotazione À la Carte" class="btn-secondary" style="display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
@@ -1645,20 +1647,25 @@
 
       <!-- ResDiary Booking Widget -->
       <div id="book" style="margin: 0 0 4rem;">
-        <div style="background: var(--ink); color: var(--offwhite); padding: 1.2rem 2rem; display:flex; align-items:center; justify-content:space-between;">
+        <div style="background: var(--ink); color: var(--offwhite); padding: 1.2rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
           <span style="font-family: 'Barlow Condensed'; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;" data-i18n="book.title">Prenota un tavolo</span>
           <span style="font-family: 'Hanken Grotesk'; font-size: 0.72rem; opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase;">Powered by ResDiary</span>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--ink); border:1.5px solid var(--ink); border-top:none;">
-          <div style="background:var(--offwhite); padding:2rem;">
-            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ochre); margin-bottom:0.75rem;">Esperienza principale</div>
+        <!-- Tab switcher (mobile only) -->
+        <div class="book-tabs" style="display:none; background:var(--ink); border-bottom:1px solid rgba(255,255,255,0.08);">
+          <button class="book-tab active" onclick="switchBookTab('chefs')" style="flex:1; padding:0.8rem; font-family:'Barlow Condensed'; font-weight:700; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.08em; background:transparent; border:none; color:var(--ochre); cursor:pointer; border-bottom:2px solid var(--ochre);">Chef's Dinner</button>
+          <button class="book-tab" onclick="switchBookTab('alacarte')" style="flex:1; padding:0.8rem; font-family:'Barlow Condensed'; font-weight:700; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.08em; background:transparent; border:none; color:rgba(255,255,255,0.4); cursor:pointer; border-bottom:2px solid transparent;">À la Carte</button>
+        </div>
+        <div class="book-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--ink); border:1.5px solid var(--ink); border-top:none;">
+          <div class="book-panel active" id="book-chefs" style="background:var(--offwhite); padding:2rem;">
+            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ochre); margin-bottom:0.75rem;" data-i18n="dining.chefs.type">Esperienza principale</div>
             <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.6rem; text-transform:uppercase; margin-bottom:1.5rem;">Chef's Dinner</div>
-            <iframe src="https://booking.resdiary.com/widget/Standard/RimessaRoscioli/60582" style="width:100%; height:420px; border:none;" title="Prenota Chef's Dinner" loading="lazy"></iframe>
+            <iframe src="https://booking.resdiary.com/widget/Standard/RimessaRoscioli/60582" style="width:100%; height:480px; border:none;" title="Prenota Chef's Dinner" loading="lazy"></iframe>
           </div>
-          <div style="background:var(--beige); padding:2rem;">
-            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--green); margin-bottom:0.75rem;">Formato libero</div>
+          <div class="book-panel" id="book-alacarte" style="background:var(--beige); padding:2rem;">
+            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--green); margin-bottom:0.75rem;" data-i18n="dining.alacarte.type">Formato libero</div>
             <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.6rem; text-transform:uppercase; margin-bottom:1.5rem;">À la Carte</div>
-            <iframe src="https://booking.resdiary.com/widget/Standard/RimessaRoscioli/65720" style="width:100%; height:420px; border:none;" title="Prenota À la Carte" loading="lazy"></iframe>
+            <iframe src="https://booking.resdiary.com/widget/Standard/RimessaRoscioli/65720" style="width:100%; height:480px; border:none;" title="Prenota À la Carte" loading="lazy"></iframe>
           </div>
         </div>
       </div>
@@ -1746,7 +1753,7 @@
         <div class="contact-block">
           <div class="contact-block-label" data-i18n="contacts.hours.label">Orari ristorante</div>
           <div class="contact-block-value" style="font-size: 1rem; font-family: 'Hanken Grotesk'; font-weight: 400; text-transform: none;">
-            <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">Chef's Dinner</strong> — 19:00, 20:00, 21:00<br>
+            <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">Chef's Dinner</strong> — 19:00, 20:30<br>
             <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">À la Carte</strong> — 18:00–22:00
           </div>
         </div>
@@ -1967,10 +1974,10 @@
         'resto.label':'Il Ristorante','resto.h2':'Cucina<br><em>libera</em><br>a Roma',
         'resto.desc':'Due esperienze diverse sullo stesso tavolo. Il Chef\'s Dinner, sette portate con abbinamenti vino in un format raccolto e immersivo. À la Carte, dal tardo pomeriggio, per chi vuole fermarsi su una cosa sola o su tutto.',
         'resto.cta':'Scopri il ristorante',
-        'card.chefs.label':'Esperienza principale','card.chefs.desc':'Ventidue coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Tre turni per scegliere il proprio ritmo.',
-        'card.alacarte.label':'Formato libero','card.alacarte.desc':'Dal tardo pomeriggio alla sera, con turni ogni 30 minuti. Perfetto per un aperitivo lungo o una cena dal menu stagionale.',
+        'card.chefs.label':'Esperienza principale','card.chefs.desc':'Quattordici coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Due turni: 19:00 e 20:30.',
+        'card.alacarte.label':'Formato libero','card.alacarte.desc':'Dal tardo pomeriggio alla sera. Perfetto per un aperitivo lungo o una cena dal menu stagionale.',
         'detail.posti':'Posti','detail.turni':'Turni','detail.portate':'Portate + vino','detail.orario':'Orario',
-        'detail.seats.val':'22 coperti','detail.alacarte.turns.val':'ogni 30 min',
+        'detail.seats.val':'14 coperti','detail.alacarte.turns.val':'ogni 30 min',
         'manifesto.kicker':'Manifesto',
         'manifesto.body':'Un posto dove la cucina,<br>la musica, i libri<br>e la <em>conversazione</em><br>coesistono naturalmente.',
         'manifesto.sub':'FAB è la propaggine naturale di Rimessa Roscioli, ma con un suo linguaggio, un suo ritmo e una sua logica di pubblico. Più porosa, più site-specific, più orientata agli eventi e aperta a musica, libri, talk e formati inattesi.',
@@ -1979,12 +1986,12 @@
         'cats.arts.desc':'Concerti di jazz e musica sperimentale, performance, interventi sonori. La sera come formato.',
         'cats.books.desc':'Presentazioni, podcast dal vivo, reading, talk con autori. La parola come ospite fisso.',
         'nl.title':'Resta nel giro','nl.sub':'Nuovi eventi ogni settimana. Nessuno spam, solo cose che succedono.','nl.placeholder':'La tua email','nl.button':'Iscriviti','nl.whatsapp':'Aggiornamenti WhatsApp',
-        'resto.page.label':'Il Ristorante','resto.page.h1':'Come<br>funziona<br><em>mangiare</em><br>da FAB',
-        'resto.page.sub':'Due format, un indirizzo, zero ambiguità. Il Chef\'s Dinner ti porta per mano. À la Carte ti lascia libero. Entrambi prendono sul serio ciò che mettono nel piatto.',
-        'dining.chefs.type':'Esperienza principale','dining.chefs.desc':'Ventidue coperti, sette portate, abbinamenti vino inclusi. Un percorso immersivo costruito dal chef ogni sera: ingredienti stagionali, tecnica, racconto. Il formato non prevede carte — c\'è un menu, e si segue.',
+        'resto.page.label':'Il Ristorante','resto.page.h1':'Come<br>funziona<br><em>mangiare</em><br>al FAB',
+        'resto.page.sub':'Due format, un indirizzo, zero ambiguità. Lo Chef\'s Dinner ti porta per mano. La carta ti lascia libera. Entrambi prendono sul serio ciò che mettono nel piatto.',
+        'dining.chefs.type':'Esperienza principale','dining.chefs.desc':'Quattordici coperti, sette portate, abbinamenti vino inclusi. Un percorso immersivo costruito dallo chef ogni sera: ingredienti stagionali, tecnica, racconto. Il formato non prevede carte — c\'è un menu, e si segue.',
         'dining.chefs.stat.seats':'Posti disponibili','dining.chefs.stat.portate':'Portate','dining.chefs.stat.turns':'Turni serali','dining.chefs.stat.person':'A persona',
         'dining.chefs.cta':'Prenota Chef\'s Dinner',
-        'dining.alacarte.type':'Formato libero','dining.alacarte.desc':'Dal tardo pomeriggio fino alla sera, con ingressi ogni 30 minuti. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.',
+        'dining.alacarte.type':'Formato libero','dining.alacarte.desc':'Dal tardo pomeriggio fino alla sera. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.',
         'dining.alacarte.stat.orario':'Apertura','dining.alacarte.stat.turns':'Turni','dining.alacarte.cta':'Prenota À la Carte',
         'book.title':'Prenota un tavolo','faq.title':'Domande frequenti',
         'events.h1':'Calen<br><em>dario</em><br>2026','events.sub':'Food, Arts & Books. Aprile–Giugno 2026. Ogni settimana qualcosa di diverso — stessa cucina, intenzioni diverse.',
@@ -2007,10 +2014,10 @@
         'resto.label':'The Restaurant','resto.h2':'Free<br><em>cuisine</em><br>in Rome',
         'resto.desc':'Two different experiences at the same table. The Chef\'s Dinner: seven courses with wine pairings in an intimate, immersive format. À la Carte from late afternoon, for those who want to linger on one thing or everything.',
         'resto.cta':'Discover the restaurant',
-        'card.chefs.label':'Main experience','card.chefs.desc':'Twenty-two covers, seven courses with wine pairings. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. Three seatings to choose your own pace.',
+        'card.chefs.label':'Main experience','card.chefs.desc':'Fourteen covers, seven courses with wine pairings. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. Two seatings: 7pm and 8:30pm.',
         'card.alacarte.label':'Free format','card.alacarte.desc':'From late afternoon into the evening, with seatings every 30 minutes. Perfect for a long aperitivo or a dinner from the seasonal menu.',
         'detail.posti':'Seats','detail.turni':'Seatings','detail.portate':'Courses + wine','detail.orario':'Hours',
-        'detail.seats.val':'22 covers','detail.alacarte.turns.val':'every 30 min',
+        'detail.seats.val':'14 covers','detail.alacarte.turns.val':'every 30 min',
         'manifesto.kicker':'Manifesto',
         'manifesto.body':'A place where food,<br>music, books<br>and <em>conversation</em><br>coexist naturally.',
         'manifesto.sub':'FAB is the natural extension of Rimessa Roscioli, but with its own language, its own rhythm and its own audience. More porous, more site-specific, more event-driven, and open to music, books, talks and unexpected formats.',
@@ -2021,7 +2028,7 @@
         'nl.title':'Stay in the loop','nl.sub':'New events every week. No spam, just things that happen.','nl.placeholder':'Your email','nl.button':'Subscribe','nl.whatsapp':'WhatsApp updates',
         'resto.page.label':'The Restaurant','resto.page.h1':'How to<br>dine<br><em>at FAB</em>',
         'resto.page.sub':'Two formats, one address, zero ambiguity. The Chef\'s Dinner guides you. À la Carte sets you free. Both take seriously what they put on the plate.',
-        'dining.chefs.type':'Main experience','dining.chefs.desc':'Twenty-two covers, seven courses, wine pairings included. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. No menu cards — one menu, and you follow it.',
+        'dining.chefs.type':'Main experience','dining.chefs.desc':'Fourteen covers, seven courses, wine pairings included. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. No menu cards — one menu, and you follow it.',
         'dining.chefs.stat.seats':'Available seats','dining.chefs.stat.portate':'Courses','dining.chefs.stat.turns':'Evening seatings','dining.chefs.stat.person':'Per person',
         'dining.chefs.cta':'Book Chef\'s Dinner',
         'dining.alacarte.type':'Free format','dining.alacarte.desc':'From late afternoon into the evening, with entries every 30 minutes. Ideal for a long aperitivo or a dinner built piece by piece from the seasonal menu. One dish or everything — your call.',
@@ -2041,8 +2048,8 @@
     };
 
     const FAQS_EN = [
-      { q: "Is a reservation required?",          a: "Yes, especially for the Chef's Dinner which has only 22 covers. For À la Carte we still recommend booking, especially on weekends." },
-      { q: "Can you choose your seating time?",   a: "For the Chef's Dinner, seatings are at 7pm, 8pm and 9pm. For À la Carte, entries are every 30 minutes from 6pm." },
+      { q: "Is a reservation required?",          a: "Yes, especially for the Chef's Dinner which has only 14 covers. For À la Carte we still recommend booking, especially on weekends." },
+      { q: "Can you choose your seating time?",   a: "For the Chef's Dinner, seatings are at 7pm and 8:30pm. For À la Carte, entries are every 30 minutes from 6pm." },
       { q: "Is wine included in the Chef's Dinner?", a: "Yes, the €95 price includes seven courses with wine pairings selected by the sommelier." },
       { q: "Are there vegetarian options?",       a: "Yes, please let us know when booking. The menu is adapted with the same level of care." },
       { q: "Can I pay on the day?",               a: "Yes, we accept cash and card. Reservations are made by email or phone, with no advance payment required." },
@@ -2088,6 +2095,27 @@
 
     function toggleLanguage() { setLanguage(LANG === 'it' ? 'en' : 'it'); }
 
+    // ── BOOKING TAB SWITCHER (mobile) ─────────────
+    function switchBookTab(which) {
+      document.querySelectorAll('.book-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.book-tab').forEach(b => {
+        b.style.color = 'rgba(255,255,255,0.4)';
+        b.style.borderBottomColor = 'transparent';
+      });
+      const panel = document.getElementById('book-' + which);
+      if (panel) panel.classList.add('active');
+      const tabs = document.querySelectorAll('.book-tab');
+      const idx = which === 'chefs' ? 0 : 1;
+      if (tabs[idx]) {
+        tabs[idx].style.color = which === 'chefs' ? 'var(--ochre)' : 'var(--green)';
+        tabs[idx].style.borderBottomColor = which === 'chefs' ? 'var(--ochre)' : 'var(--green)';
+      }
+    }
+    // Init: on mobile show first panel by default
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.innerWidth <= 768) switchBookTab('chefs');
+    });
+
     // ── DATA ──────────────────────────────────────
     const EVENTS = [
       { date: "3 Apr",    day: "3",   month: "Apr", title: "Perle ai Pochi",                               subtitle: "Duo al buio",                                          cats: ["books","performance"], time: null },
@@ -2117,11 +2145,11 @@
     ];
 
     const FAQS = [
-      { q: "È necessario prenotare?",             a: "Sì, soprattutto per il Chef's Dinner che ha soli 22 coperti. Per l'À la Carte consigliamo comunque di prenotare, specialmente nei weekend." },
-      { q: "Si può scegliere il turno?",          a: "Per il Chef's Dinner i turni sono alle 19:00, 20:00 e 21:00. Per l'À la Carte gli ingressi sono ogni 30 minuti dalle 18:00." },
+      { q: "È necessario prenotare?",             a: "Sì, soprattutto per lo Chef's Dinner che ha soli 14 coperti. Per la carta consigliamo comunque di prenotare, specialmente nei weekend." },
+      { q: "Si può scegliere il turno?",          a: "Nello Chef's Dinner i turni sono alle 19:00 e alle 20:30. Per la carta gli ingressi sono ogni 30 minuti dalle 18:00." },
       { q: "Il vino è incluso nel Chef's Dinner?",a: "Sì, il prezzo di €95 include sette portate con abbinamenti vino selezionati dal sommelier." },
       { q: "Ci sono opzioni vegetariane?",        a: "Sì, si prega di comunicarlo al momento della prenotazione. Il menu viene adattato con lo stesso livello di cura." },
-      { q: "Si può pagare alla cassa?",           a: "Sì, accettiamo contanti e carta. La prenotazione si effettua via email o telefono, senza anticipo." },
+      { q: "Si può pagare alla cassa?",           a: "Per lo Chef's Dinner richiediamo il 50% al momento della prenotazione, e il saldo si paga alla cassa." },
     ];
 
     // ── DATE HELPERS ──────────────────────────────
