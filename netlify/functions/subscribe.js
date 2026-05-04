@@ -1,35 +1,55 @@
 const crypto = require('crypto');
 
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Content-Type': 'application/json',
-};
+const ALLOWED_ORIGINS = [
+  'https://rimessa-fab.com',
+  'https://www.rimessa-fab.com',
+];
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function corsHeaders(origin) {
+  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': allowed,
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+    'Content-Type': 'application/json',
+  };
+}
 
 exports.handler = async (event) => {
-  // Handle preflight
+  const origin = event.headers['origin'] || event.headers['Origin'] || '';
+  const headers = corsHeaders(origin);
+
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers: CORS_HEADERS, body: '' };
+    return { statusCode: 204, headers, body: '' };
   }
 
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, headers: CORS_HEADERS, body: JSON.stringify({ error: 'method_not_allowed' }) };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: 'method_not_allowed' }) };
   }
 
   let email, language;
   try {
     ({ email, language } = JSON.parse(event.body || '{}'));
   } catch {
-    return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'invalid_json' }) };
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'invalid_json' }) };
   }
 
-  if (!email || !language) {
-    return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'missing_fields' }) };
+  email = (email || '').trim().toLowerCase();
+  language = (language || '').trim().toLowerCase();
+
+  if (!email || !EMAIL_RE.test(email)) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'invalid_email' }) };
+  }
+
+  if (!['it', 'en'].includes(language)) {
+    language = 'it';
   }
 
   const apiKey = process.env.MAILCHIMP_API_KEY;
   if (!apiKey) {
-    return { statusCode: 500, headers: CORS_HEADERS, body: JSON.stringify({ error: 'server_config' }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'server_config' }) };
   }
 
   const LIST_ID = '6ba64db552';
@@ -37,7 +57,6 @@ exports.handler = async (event) => {
   const auth = Buffer.from(`anystring:${apiKey}`).toString('base64');
   const baseUrl = `https://${SERVER}.api.mailchimp.com/3.0/lists/${LIST_ID}`;
 
-  // ── 1. Add member (POST — fails with 400 if already exists) ──
   const addRes = await fetch(`${baseUrl}/members`, {
     method: 'POST',
     headers: { Authorization: `Basic ${auth}`, 'Content-Type': 'application/json' },
@@ -51,14 +70,13 @@ exports.handler = async (event) => {
   if (!addRes.ok) {
     const err = await addRes.json();
     if (err.title === 'Member Exists') {
-      return { statusCode: 200, headers: CORS_HEADERS, body: JSON.stringify({ error: 'already_subscribed' }) };
+      return { statusCode: 200, headers, body: JSON.stringify({ error: 'already_subscribed' }) };
     }
     console.error('Mailchimp add member error:', err);
-    return { statusCode: 500, headers: CORS_HEADERS, body: JSON.stringify({ error: 'generic' }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'generic' }) };
   }
 
-  // ── 2. Add tags ──
-  const subscriberHash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
+  const subscriberHash = crypto.createHash('md5').update(email).digest('hex');
   await fetch(`${baseUrl}/members/${subscriberHash}/tags`, {
     method: 'POST',
     headers: { Authorization: `Basic ${auth}`, 'Content-Type': 'application/json' },
@@ -70,5 +88,5 @@ exports.handler = async (event) => {
     }),
   });
 
-  return { statusCode: 200, headers: CORS_HEADERS, body: JSON.stringify({ success: true }) };
+  return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
 };

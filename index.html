@@ -7,6 +7,33 @@
   <meta name="description" content="Uno spazio culturale e gastronomico a Roma. Nato da Rimessa Roscioli, con una sua identità editoriale e di eventi.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23111111'/><text x='4' y='23' font-family='Arial Black,Impact,sans-serif' font-weight='900' font-size='14' fill='%23D89A22' letter-spacing='-0.5'>F</text><text x='12' y='23' font-family='Arial Black,Impact,sans-serif' font-weight='900' font-size='14' fill='%23B33A2B' letter-spacing='-0.5'>A</text><text x='20' y='23' font-family='Arial Black,Impact,sans-serif' font-weight='900' font-size='14' fill='%231D7C4A' letter-spacing='-0.5'>B</text><rect x='4' y='25' width='24' height='2' rx='1' fill='%23F8F2EC' opacity='0.15'/></svg>">
 
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rimessa-fab.com/">
+  <meta property="og:title" content="Rimessa FAB — Food, Arts & Books · Roma">
+  <meta property="og:description" content="Uno spazio culturale e gastronomico a Roma. Cucina libera, arte e libri. Nato da Rimessa Roscioli.">
+  <meta property="og:image" content="https://rimessa-fab.com/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="Rimessa FAB">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rimessa FAB — Food, Arts & Books · Roma">
+  <meta name="twitter:description" content="Uno spazio culturale e gastronomico a Roma. Cucina libera, arte e libri. Nato da Rimessa Roscioli.">
+  <meta name="twitter:image" content="https://rimessa-fab.com/img/og-image.jpg">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FM1GZ1J7G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3FM1GZ1J7G');
+  </script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -28,6 +55,57 @@
         }
       }
     }
+  </script>
+
+  <!-- Schema markup — Restaurant + LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["Restaurant", "LocalBusiness"],
+    "@id": "https://rimessa-fab.com/#restaurant",
+    "name": "Rimessa FAB",
+    "alternateName": "Rimessa F.A.B.",
+    "description": "Spazio culturale e gastronomico a Roma. Food, Arts & Books: cucina libera, eventi musicali, presentazioni letterarie. Nato da Rimessa Roscioli.",
+    "url": "https://rimessa-fab.com",
+    "telephone": "+390695550234",
+    "email": "info@rimessa-fab.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via delle Zoccolette, 28",
+      "addressLocality": "Roma",
+      "postalCode": "00186",
+      "addressCountry": "IT"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 41.8928264,
+      "longitude": 12.4722562
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "18:00",
+        "closes": "23:00"
+      }
+    ],
+    "servesCuisine": ["Italian", "Contemporary", "Roman"],
+    "priceRange": "€€€",
+    "currenciesAccepted": "EUR",
+    "paymentAccepted": "Cash, Credit Card",
+    "menu": "https://rimessa-fab.com/#ristorante",
+    "reservations": "https://rimessa-fab.com/#ristorante",
+    "image": "https://rimessa-fab.com/img/og-image.jpg",
+    "sameAs": [
+      "https://www.instagram.com/rimessa_fab/",
+      "https://rimessaroscioli.com/fab/"
+    ],
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Roscioli",
+      "url": "https://rimessaroscioli.com"
+    }
+  }
   </script>
 
   <!-- Google Fonts -->
@@ -1372,6 +1450,148 @@
       color: var(--ink);
       opacity: 0.65;
     }
+  /* ── MENU EMBED ──────────────────────────── */
+  .menu-desktop { display: block; }
+  .menu-mobile  { display: none; }
+  @media (max-width: 768px) {
+    .menu-desktop { display: none; }
+    .menu-mobile  { display: block; }
+  }
+
+  /* ── PRESS ───────────────────────────────── */
+  .press-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--ink);
+    border: 1.5px solid var(--ink);
+    margin-top: 2.5rem;
+  }
+  .press-quote {
+    background: var(--offwhite);
+    padding: 3rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .press-quote-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0;
+  }
+  .press-source {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(17,17,17,0.15);
+  }
+  .press-pub {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .press-link {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--green);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .press-link:hover { opacity: 0.65; }
+
+  @media (max-width: 768px) {
+    .press-grid { grid-template-columns: 1fr; }
+    .press-quote { padding: 2rem; }
+  }
+
+  /* ── GALLERY ─────────────────────────────── */
+  .gallery-grid {
+    columns: 2;
+    column-gap: 3px;
+    padding: 0;
+  }
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    display: block;
+    position: relative;
+  }
+  .gallery-item img {
+    width: 100%;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .gallery-item:hover img { transform: scale(1.04); }
+
+  /* ── LIGHTBOX ────────────────────────────── */
+  #lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.96);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox-img {
+    max-height: 90vh;
+    max-width: 90vw;
+    object-fit: contain;
+    user-select: none;
+  }
+  .lb-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 1rem;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .lb-btn:hover { color: #fff; }
+  .lb-btn.prev { left: 0.5rem; }
+  .lb-btn.next { right: 0.5rem; }
+  .lb-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .lb-close:hover { color: #fff; }
+
+  @media (max-width: 640px) {
+    .gallery-grid { columns: 1; }
+  }
+
   </style>
 </head>
 <body>
@@ -1392,7 +1612,7 @@
         <span class="lang-flag" id="langFlag">🇺🇸</span>
         <span class="lang-code" id="langCode">EN</span>
       </button>
-      <a href="mailto:info@rimessa-fab.com" class="btn-prenota" data-i18n="nav.book">Prenota</a>
+      <a href="#" onclick="bookNow(); return false;" class="btn-prenota" data-i18n="nav.book">Prenota</a>
       <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
@@ -1541,6 +1761,47 @@
       </div>
     </section>
 
+    <!-- GALLERY -->
+    <section id="gallery" style="background: var(--ink); padding: 2.5rem 0 0; border-top: 1.5px solid rgba(248,242,236,0.12);">
+      <div style="padding: 0 clamp(1.5rem,5vw,4rem) 2rem;">
+        <div class="section-label" style="color: rgba(248,242,236,0.45);" data-i18n="gallery.label">L'atmosfera</div>
+      </div>
+      <div class="gallery-grid" id="gallery-grid">
+        <div class="gallery-item gsap-fade" onclick="openLightbox(0)">
+          <img src="img/gallery-sala-piena.jpg" alt="La sala di Rimessa FAB durante una serata" loading="lazy">
+        </div>
+        <div class="gallery-item gsap-fade" onclick="openLightbox(1)">
+          <img src="img/gallery-sala-quadro.jpg" alt="La sala di Rimessa FAB con il quadro" loading="lazy">
+        </div>
+        <div class="gallery-item gsap-fade" onclick="openLightbox(2)">
+          <img src="img/gallery-team.jpg" alt="Il team di cucina di Rimessa FAB" loading="lazy">
+        </div>
+        <div class="gallery-item gsap-fade" onclick="openLightbox(3)">
+          <img src="img/gallery-chefs-table-setup.jpg" alt="Il Chef's Table di Rimessa FAB" loading="lazy">
+        </div>
+        <div class="gallery-item gsap-fade" onclick="openLightbox(4)">
+          <img src="img/gallery-sala-vini.jpg" alt="La sala vini di Rimessa FAB" loading="lazy">
+        </div>
+        <div class="gallery-item gsap-fade" onclick="openLightbox(5)">
+          <img src="img/gallery-botanico-vermouth.jpg" alt="Collettivo Botanico e Roscioli Rimessa" loading="lazy">
+        </div>
+        <div class="gallery-item gsap-fade" onclick="openLightbox(6)">
+          <img src="img/gallery-chefs-table-live.jpg" alt="Una serata al Chef's Table" loading="lazy">
+        </div>
+        <div class="gallery-item gsap-fade" onclick="openLightbox(7)">
+          <img src="img/gallery-botanico-birra.jpg" alt="Birre artigianali Collettivo Botanico" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Galleria immagini" onclick="closeLightbox()">
+      <button class="lb-close" onclick="event.stopPropagation(); closeLightbox();" aria-label="Chiudi">✕</button>
+      <button class="lb-btn prev" onclick="event.stopPropagation(); moveLightbox(-1);" aria-label="Precedente">&#8592;</button>
+      <img id="lightbox-img" src="" alt="">
+      <button class="lb-btn next" onclick="event.stopPropagation(); moveLightbox(1);" aria-label="Successiva">&#8594;</button>
+    </div>
+
     <!-- CATEGORY NAV -->
     <section id="cat-nav">
       <div class="section-wrap">
@@ -1562,6 +1823,48 @@
             <h3>Books</h3>
             <p data-i18n="cats.books.desc">Presentazioni, podcast dal vivo, reading, talk con autori. La parola come ospite fisso.</p>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESS -->
+    <section id="press" style="padding: 5rem 0; background: var(--offwhite); border-top: 1.5px solid var(--ink);">
+      <div class="section-wrap">
+        <div class="section-label" data-i18n="press.label">Dicono di noi</div>
+        <div class="press-grid">
+
+          <blockquote class="press-quote">
+            <p class="press-quote-text">«Non chiamatelo locale: è una tela viva, dove ogni serata è diversa.»</p>
+            <footer class="press-source">
+              <span class="press-pub">Di Testa e Di Gola</span>
+              <a href="https://www.ditestaedigola.com/rimessa-fab-una-nuova-stella-nella-ristorazione/" target="_blank" rel="noopener" class="press-link" data-i18n="press.read">Leggi l'articolo →</a>
+            </footer>
+          </blockquote>
+
+          <blockquote class="press-quote">
+            <p class="press-quote-text">«Un tentativo di restituire al ristorante un ruolo attivo come luogo di incontro umano.»</p>
+            <footer class="press-source">
+              <span class="press-pub">Jazz Agenda</span>
+              <a href="https://www.jazzagenda.it/fabio-zeppetella-rimessa-fab-2/" target="_blank" rel="noopener" class="press-link" data-i18n="press.read">Leggi l'articolo →</a>
+            </footer>
+          </blockquote>
+
+          <blockquote class="press-quote">
+            <p class="press-quote-text">«Uno spazio ibrido e multifunzionale tra musica, libri e cucina d'autore.»</p>
+            <footer class="press-source">
+              <span class="press-pub">RomaToday</span>
+              <a href="https://www.romatoday.it/eventi/rimessa-fab-programmazione-febbraio-marzo-2026.html" target="_blank" rel="noopener" class="press-link" data-i18n="press.read">Leggi l'articolo →</a>
+            </footer>
+          </blockquote>
+
+          <blockquote class="press-quote">
+            <p class="press-quote-text">«Un hub culturale che sperimenta il melting pot artistico.»</p>
+            <footer class="press-source">
+              <span class="press-pub">Musica Jazz</span>
+              <a href="https://www.musicajazz.it/rimessa-fab-2025/" target="_blank" rel="noopener" class="press-link" data-i18n="press.read">Leggi l'articolo →</a>
+            </footer>
+          </blockquote>
+
         </div>
       </div>
     </section>
@@ -1628,7 +1931,7 @@
               <div class="stat-value" style="color: var(--ochre)">€95</div>
             </div>
           </div>
-          <a href="mailto:info@rimessa-fab.com?subject=Prenotazione Chef's Dinner" class="btn-primary" style="background: var(--offwhite); color: var(--ink); border-color: var(--offwhite);" data-i18n="dining.chefs.cta">Prenota Chef's Dinner</a>
+          <a href="#" onclick="bookNow('chefs'); return false;" class="btn-primary" style="background: var(--offwhite); color: var(--ink); border-color: var(--offwhite);" data-i18n="dining.chefs.cta">Prenota Chef's Dinner</a>
         </div>
 
         <div class="dining-card">
@@ -1641,8 +1944,18 @@
               <div class="stat-value">18:00 → 22:00</div>
             </div>
           </div>
-          <a href="mailto:info@rimessa-fab.com?subject=Prenotazione À la Carte" class="btn-secondary" style="display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
+          <a href="#" onclick="bookNow('alacarte'); return false;" class="btn-secondary" style="display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
         </div>
+      </div>
+
+      <!-- MENU -->
+      <div id="menu" style="margin: 0 0 4rem; border: 1.5px solid var(--ink); padding: 2.5rem 3rem; background: var(--beige); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;">
+        <div>
+          <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink); opacity:0.5; margin-bottom:0.5rem;" data-i18n="menu.label">Menu</div>
+          <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:clamp(1.5rem,2.5vw,2rem); text-transform:uppercase; line-height:1;" data-i18n="menu.title">À la Carte</div>
+          <p style="font-family:'Hanken Grotesk'; font-size:0.85rem; line-height:1.6; opacity:0.6; margin-top:0.75rem; max-width:360px;" data-i18n="menu.desc">Stagionale, in continuo aggiornamento. Si aggiorna automaticamente ad ogni modifica.</p>
+        </div>
+        <a href="https://l.ead.me/bgJB62" target="_blank" rel="noopener" class="btn-primary" data-i18n="menu.cta">Vedi il menu →</a>
       </div>
 
       <!-- ResDiary Booking Widget -->
@@ -1985,6 +2298,9 @@
         'cats.food.desc':'Chef\'s dinner, degustazioni, cene a quattro mani, produttori ospiti. La cucina come atto culturale.',
         'cats.arts.desc':'Concerti di jazz e musica sperimentale, performance, interventi sonori. La sera come formato.',
         'cats.books.desc':'Presentazioni, podcast dal vivo, reading, talk con autori. La parola come ospite fisso.',
+        'gallery.label':'L\'atmosfera',
+        'press.label':'Dicono di noi','press.read':'Leggi l\'articolo →',
+        'menu.label':'Menu','menu.title':'À la Carte','menu.desc':'Stagionale, in continuo aggiornamento.','menu.cta':'Vedi il menu →',
         'nl.title':'Resta nel giro','nl.sub':'Nuovi eventi ogni settimana. Nessuno spam, solo cose che succedono.','nl.placeholder':'La tua email','nl.button':'Iscriviti','nl.whatsapp':'Aggiornamenti WhatsApp',
         'resto.page.label':'Il Ristorante','resto.page.h1':'Come<br>funziona<br><em>mangiare</em><br>al FAB',
         'resto.page.sub':'Due format, un indirizzo, zero ambiguità. Lo Chef\'s Dinner ti porta per mano. La carta ti lascia libera. Entrambi prendono sul serio ciò che mettono nel piatto.',
@@ -2025,6 +2341,9 @@
         'cats.food.desc':'Chef\'s dinners, tastings, collaborative dinners, guest producers. Food as a cultural act.',
         'cats.arts.desc':'Jazz concerts and experimental music, performances, sonic interventions. The evening as a format.',
         'cats.books.desc':'Book presentations, live podcasts, readings, author talks. The word as a regular guest.',
+        'gallery.label':'The atmosphere',
+        'press.label':'Press','press.read':'Read the article →',
+        'menu.label':'Menu','menu.title':'À la Carte','menu.desc':'Seasonal, constantly updated.','menu.cta':'View the menu →',
         'nl.title':'Stay in the loop','nl.sub':'New events every week. No spam, just things that happen.','nl.placeholder':'Your email','nl.button':'Subscribe','nl.whatsapp':'WhatsApp updates',
         'resto.page.label':'The Restaurant','resto.page.h1':'How to<br>dine<br><em>at FAB</em>',
         'resto.page.sub':'Two formats, one address, zero ambiguity. The Chef\'s Dinner guides you. À la Carte sets you free. Both take seriously what they put on the plate.',
@@ -2378,6 +2697,59 @@
       el.style.display = 'block';
       setTimeout(() => { el.style.display = 'none'; }, 6000);
     }
+
+    // ── BOOK NOW ─────────────────────────────────
+    function bookNow(panel) {
+      showPage('restaurant');
+      requestAnimationFrame(() => {
+        const bookEl = document.getElementById('book');
+        if (bookEl) bookEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (panel) switchBookTab(panel);
+      });
+    }
+
+    // ── LIGHTBOX ─────────────────────────────────
+    const galleryImages = [
+      { src: 'img/gallery-sala-piena.jpg',        alt: 'La sala di Rimessa FAB durante una serata' },
+      { src: 'img/gallery-sala-quadro.jpg',        alt: 'La sala con il quadro' },
+      { src: 'img/gallery-team.jpg',               alt: 'Il team di cucina' },
+      { src: 'img/gallery-chefs-table-setup.jpg',  alt: 'Il Chef\'s Table' },
+      { src: 'img/gallery-sala-vini.jpg',          alt: 'La sala vini' },
+      { src: 'img/gallery-botanico-vermouth.jpg',  alt: 'Collettivo Botanico' },
+      { src: 'img/gallery-chefs-table-live.jpg',   alt: 'Una serata al Chef\'s Table' },
+      { src: 'img/gallery-botanico-birra.jpg',     alt: 'Birre artigianali Collettivo Botanico' },
+    ];
+    let lbIndex = 0;
+
+    function openLightbox(idx) {
+      lbIndex = idx;
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = galleryImages[idx].src;
+      img.alt = galleryImages[idx].alt;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function moveLightbox(dir) {
+      lbIndex = (lbIndex + dir + galleryImages.length) % galleryImages.length;
+      const img = document.getElementById('lightbox-img');
+      img.src = galleryImages[lbIndex].src;
+      img.alt = galleryImages[lbIndex].alt;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft')  moveLightbox(-1);
+      if (e.key === 'ArrowRight') moveLightbox(1);
+    });
 
     // ── NAV SCROLL EFFECT ────────────────────────
     window.addEventListener('scroll', () => {
