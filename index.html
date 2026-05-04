@@ -25,6 +25,9 @@
   <meta name="twitter:description" content="Uno spazio culturale e gastronomico a Roma. Cucina libera, arte e libri. Nato da Rimessa Roscioli.">
   <meta name="twitter:image" content="https://rimessa-fab.com/img/og-image.jpg">
 
+  <!-- Elfsight Instagram Feed -->
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FM1GZ1J7G"></script>
   <script>
@@ -1606,7 +1609,7 @@
         <li><a href="#" onclick="showPage('restaurant'); return false;" data-page="restaurant" data-i18n="nav.restaurant">Ristorante</a></li>
         <li><a href="#" onclick="showPage('events'); return false;" data-page="events" data-i18n="nav.calendar">Calendario</a></li>
         <li><a href="#" onclick="showPage('contacts'); return false;" data-page="contacts" data-i18n="nav.where">Dove siamo</a></li>
-        <li><a href="#" onclick="showPage('archivio'); return false;" data-page="archivio" data-i18n="nav.archive">Archivio</a></li>
+        <li><a href="#" onclick="showPage('gallery'); return false;" data-page="gallery" data-i18n="nav.gallery">Galleria</a></li>
       </ul>
       <button class="lang-btn" id="langBtn" onclick="toggleLanguage()" title="Switch language">
         <span class="lang-flag" id="langFlag">🇺🇸</span>
@@ -1735,8 +1738,8 @@
                   <span class="detail-value">18:00 → 22:00</span>
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label" data-i18n="detail.turni">Turni</span>
-                  <span class="detail-value" data-i18n="detail.alacarte.turns.val">ogni 30 min</span>
+                  <span class="detail-label" data-i18n="detail.booking">Prenotazione</span>
+                  <span class="detail-value" data-i18n="detail.booking.val">consigliata</span>
                 </div>
               </div>
             </div>
@@ -1776,31 +1779,14 @@
         <div class="gallery-item gsap-fade" onclick="openLightbox(2)">
           <img src="img/gallery-team.jpg" alt="Il team di cucina di Rimessa FAB" loading="lazy">
         </div>
-        <div class="gallery-item gsap-fade" onclick="openLightbox(3)">
-          <img src="img/gallery-chefs-table-setup.jpg" alt="Il Chef's Table di Rimessa FAB" loading="lazy">
-        </div>
-        <div class="gallery-item gsap-fade" onclick="openLightbox(4)">
-          <img src="img/gallery-sala-vini.jpg" alt="La sala vini di Rimessa FAB" loading="lazy">
-        </div>
-        <div class="gallery-item gsap-fade" onclick="openLightbox(5)">
-          <img src="img/gallery-botanico-vermouth.jpg" alt="Collettivo Botanico e Roscioli Rimessa" loading="lazy">
-        </div>
         <div class="gallery-item gsap-fade" onclick="openLightbox(6)">
           <img src="img/gallery-chefs-table-live.jpg" alt="Una serata al Chef's Table" loading="lazy">
         </div>
-        <div class="gallery-item gsap-fade" onclick="openLightbox(7)">
-          <img src="img/gallery-botanico-birra.jpg" alt="Birre artigianali Collettivo Botanico" loading="lazy">
-        </div>
+      </div>
+      <div style="padding: 1.5rem clamp(1.5rem,5vw,4rem) 2.5rem; text-align: right;">
+        <a href="#" onclick="showPage('gallery'); return false;" style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; letter-spacing:0.08em; text-transform:uppercase; color:rgba(248,242,236,0.55); text-decoration:none; border-bottom:1px solid rgba(248,242,236,0.25); padding-bottom:2px; transition:color 0.2s;" data-i18n="gallery.viewall">Vedi tutta la galleria →</a>
       </div>
     </section>
-
-    <!-- LIGHTBOX -->
-    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Galleria immagini" onclick="closeLightbox()">
-      <button class="lb-close" onclick="event.stopPropagation(); closeLightbox();" aria-label="Chiudi">✕</button>
-      <button class="lb-btn prev" onclick="event.stopPropagation(); moveLightbox(-1);" aria-label="Precedente">&#8592;</button>
-      <img id="lightbox-img" src="" alt="">
-      <button class="lb-btn next" onclick="event.stopPropagation(); moveLightbox(1);" aria-label="Successiva">&#8594;</button>
-    </div>
 
     <!-- CATEGORY NAV -->
     <section id="cat-nav">
@@ -1942,6 +1928,10 @@
             <div>
               <div class="stat-label" data-i18n="dining.alacarte.stat.orario">Apertura</div>
               <div class="stat-value">18:00 → 22:00</div>
+            </div>
+            <div>
+              <div class="stat-label" data-i18n="dining.alacarte.stat.booking">Prenotazione</div>
+              <div class="stat-value" data-i18n="dining.alacarte.stat.booking.val">consigliata</div>
             </div>
           </div>
           <a href="#" onclick="bookNow('alacarte'); return false;" class="btn-secondary" style="display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
@@ -2202,31 +2192,140 @@
 
 
   <!-- ══════════════════════════════════════ -->
-  <!--            ARCHIVIO PAGE              -->
+  <!--            GALLERY PAGE               -->
   <!-- ══════════════════════════════════════ -->
-  <div id="page-archivio" class="page-section">
+  <div id="page-gallery" class="page-section">
 
     <div class="events-hero" style="background: var(--ink);">
       <div class="events-hero-inner">
-        <h1 data-i18n="archive.h1">Archi<br><em>vio</em></h1>
-        <p class="events-hero-sub" data-i18n="archive.sub">Gli eventi passati di Rimessa FAB. Un registro di ciò che è stato.</p>
+        <h1 data-i18n="gallery.page.h1">Galle<br><em>ria</em></h1>
+        <p class="events-hero-sub" data-i18n="gallery.page.sub">Fotografie da Rimessa FAB. L'atmosfera, la cucina, gli eventi.</p>
       </div>
     </div>
 
-    <div class="events-controls">
-      <span class="filter-label" data-i18n="filter.label">Filtra:</span>
-      <button class="cat-pill all active" onclick="filterArchivio('all', this)" data-i18n="filter.all">Tutti</button>
-      <button class="cat-pill food"       onclick="filterArchivio('food', this)">Food</button>
-      <button class="cat-pill arts"       onclick="filterArchivio('arts', this)">Arts</button>
-      <button class="cat-pill books"      onclick="filterArchivio('books', this)">Books</button>
+    <!-- FULL PHOTO GRID -->
+    <section style="background: var(--ink); padding: 2.5rem 0 0;">
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(0)">
+          <img src="img/gallery-sala-piena.jpg" alt="La sala di Rimessa FAB durante una serata" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(1)">
+          <img src="img/gallery-sala-quadro.jpg" alt="La sala di Rimessa FAB con il quadro" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(2)">
+          <img src="img/gallery-team.jpg" alt="Il team di cucina di Rimessa FAB" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(3)">
+          <img src="img/gallery-chefs-table-setup.jpg" alt="Il Chef's Table di Rimessa FAB" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(4)">
+          <img src="img/gallery-sala-vini.jpg" alt="La sala vini di Rimessa FAB" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(5)">
+          <img src="img/gallery-botanico-vermouth.jpg" alt="Collettivo Botanico e Roscioli Rimessa" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(6)">
+          <img src="img/gallery-chefs-table-live.jpg" alt="Una serata al Chef's Table" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(7)">
+          <img src="img/gallery-botanico-birra.jpg" alt="Birre artigianali Collettivo Botanico" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(8)">
+          <img src="img/7Y4A5962.jpg" alt="Rimessa FAB — dettaglio" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(9)">
+          <img src="img/7Y4A5967.jpg" alt="Rimessa FAB — cucina" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(10)">
+          <img src="img/7Y4A5972.jpg" alt="Rimessa FAB — atmosfera" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(11)">
+          <img src="img/7Y4A7310.jpg" alt="Rimessa FAB — sala" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(12)">
+          <img src="img/7Y4A7313.jpg" alt="Rimessa FAB — serata" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(13)">
+          <img src="img/gallery-cena-carbonara.jpg" alt="Cena Carbonara da Rimessa FAB" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM FEED -->
+    <section style="padding: 5rem 0; background: var(--offwhite); border-top: 1.5px solid var(--ink);">
+      <div class="section-wrap">
+        <div class="section-label" data-i18n="gallery.insta.label">Su Instagram</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif; font-size: clamp(2.5rem,5vw,4rem); text-transform:uppercase; color:var(--ink); margin-bottom:2.5rem;" data-i18n="gallery.insta.title">@rimessa_fab</h2>
+        <div class="elfsight-app-cb6f655d-602c-485d-93a6-7c69066cc565" data-elfsight-app-lazy></div>
+      </div>
+    </section>
+
+  </div><!-- /page-gallery -->
+
+  <!-- ══════════════════════════════════════ -->
+  <!--           PRIVACY POLICY PAGE         -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="page-privacy" class="page-section">
+
+    <div class="events-hero" style="background: var(--ink);">
+      <div class="events-hero-inner">
+        <h1>Privacy<br><em>Policy</em></h1>
+        <p class="events-hero-sub">Informativa sul trattamento dei dati personali ai sensi del Regolamento (UE) 2016/679 (GDPR).</p>
+      </div>
     </div>
 
-    <div class="events-list" id="archivioList">
-      <!-- Populated by JS -->
-    </div>
+    <section style="padding: 4rem 0; background: var(--offwhite);">
+      <div class="section-wrap" style="max-width: 760px;">
 
-  </div><!-- /page-archivio -->
+        <div style="font-family:'Hanken Grotesk',sans-serif; font-size:0.9rem; line-height:1.8; color:var(--ink);">
 
+          <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">1. Titolare del trattamento</h2>
+          <p>Rimessa FAB / Rimessa Roscioli<br>
+          Via delle Zoccolette 28, 00186 Roma (RM)<br>
+          Email: <a href="mailto:info@rimessa-fab.com" style="color:var(--green);">info@rimessa-fab.com</a><br>
+          Tel: +39 06 9555 0234</p>
+
+          <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">2. Dati trattati e finalità</h2>
+          <p><strong>Newsletter:</strong> raccogliamo l'indirizzo email degli utenti che si iscrivono volontariamente alla nostra newsletter. I dati vengono utilizzati esclusivamente per l'invio di comunicazioni relative agli eventi e alle attività di Rimessa FAB. Base giuridica: consenso dell'interessato (art. 6, par. 1, lett. a GDPR).</p>
+          <p><strong>Dati di navigazione (Analytics):</strong> il sito utilizza Google Analytics 4 per raccogliere dati aggregati e anonimi sull'utilizzo del sito (pagine visitate, durata sessione, provenienza geografica). I dati sono trattati in forma aggregata e non consentono l'identificazione del singolo utente. Base giuridica: legittimo interesse (art. 6, par. 1, lett. f GDPR). Informativa Google Analytics: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:var(--green);">policies.google.com/privacy</a>.</p>
+          <p><strong>Prenotazioni:</strong> i dati inseriti nei form di prenotazione (gestiti da ResDiary) sono trattati dal provider secondo la propria informativa privacy. Rimessa FAB riceve i dati strettamente necessari alla gestione della prenotazione.</p>
+
+          <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">3. Terze parti</h2>
+          <p><strong>Mailchimp</strong> (The Rocket Science Group LLC, USA): gestione della lista newsletter. I dati sono trasferiti negli USA sulla base delle Standard Contractual Clauses. Informativa: <a href="https://mailchimp.com/legal/privacy/" target="_blank" rel="noopener" style="color:var(--green);">mailchimp.com/legal/privacy</a>.</p>
+          <p><strong>Google LLC</strong>: Analytics e tag manager. I dati vengono trasferiti negli USA sulla base delle Standard Contractual Clauses. IP anonimizzato attivo.</p>
+          <p><strong>ResDiary</strong>: gestione prenotazioni. Informativa: <a href="https://www.resdiary.com/privacy-policy" target="_blank" rel="noopener" style="color:var(--green);">resdiary.com/privacy-policy</a>.</p>
+          <p><strong>Elfsight</strong>: feed Instagram integrato nella pagina Galleria. Informativa: <a href="https://elfsight.com/privacy-policy/" target="_blank" rel="noopener" style="color:var(--green);">elfsight.com/privacy-policy</a>.</p>
+
+          <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">4. Conservazione dei dati</h2>
+          <p>I dati della newsletter vengono conservati fino alla cancellazione della sottoscrizione da parte dell'utente. Per cancellare l'iscrizione è sufficiente cliccare il link "Unsubscribe" presente in ogni email, o scrivere a <a href="mailto:info@rimessa-fab.com" style="color:var(--green);">info@rimessa-fab.com</a>.</p>
+          <p>I dati di navigazione raccolti tramite Google Analytics sono conservati secondo le impostazioni della proprietà GA4 (default: 14 mesi).</p>
+
+          <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">5. Diritti dell'interessato</h2>
+          <p>Ai sensi degli artt. 15–22 GDPR, ogni interessato ha il diritto di: accedere ai propri dati, rettificarli, cancellarli, limitarne il trattamento, opporsi al trattamento, richiedere la portabilità dei dati. Per esercitare questi diritti è possibile scrivere a <a href="mailto:info@rimessa-fab.com" style="color:var(--green);">info@rimessa-fab.com</a>.</p>
+          <p>È inoltre possibile presentare reclamo all'Autorità Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener" style="color:var(--green);">garanteprivacy.it</a>).</p>
+
+          <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">6. Cookie</h2>
+          <p>Il sito utilizza cookie tecnici necessari al funzionamento e cookie analitici di terze parti (Google Analytics 4). Non vengono utilizzati cookie di profilazione. Continuando la navigazione si accetta l'utilizzo dei cookie tecnici. Per i cookie analitici, puoi disattivare la raccolta installando il componente aggiuntivo del browser Google Analytics Opt-out: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener" style="color:var(--green);">tools.google.com/dlpage/gaoptout</a>.</p>
+
+          <p style="margin-top:3rem; opacity:0.5; font-size:0.8rem;">Ultima modifica: maggio 2026</p>
+
+          <div style="margin-top:2rem;">
+            <a href="#" onclick="history.back() || showPage('home'); return false;" style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--green); text-decoration:none; border-bottom:1px solid var(--green); padding-bottom:2px;">← Torna al sito</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page-privacy -->
+
+  <!-- LIGHTBOX (global) -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Galleria immagini" onclick="closeLightbox()">
+    <button class="lb-close" onclick="event.stopPropagation(); closeLightbox();" aria-label="Chiudi">✕</button>
+    <button class="lb-btn prev" onclick="event.stopPropagation(); moveLightbox(-1);" aria-label="Precedente">&#8592;</button>
+    <img id="lightbox-img" src="" alt="">
+    <button class="lb-btn next" onclick="event.stopPropagation(); moveLightbox(1);" aria-label="Successiva">&#8594;</button>
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -2243,7 +2342,7 @@
             <li><a href="#" onclick="showPage('restaurant'); return false;" data-i18n="footer.restaurant">Ristorante</a></li>
             <li><a href="#" onclick="showPage('events'); return false;" data-i18n="footer.calendar">Calendario</a></li>
             <li><a href="#" onclick="showPage('contacts'); return false;" data-i18n="footer.where">Contatti</a></li>
-            <li><a href="#" onclick="showPage('archivio'); return false;" data-i18n="footer.archive">Archivio</a></li>
+            <li><a href="#" onclick="showPage('gallery'); return false;" data-i18n="footer.gallery">Galleria</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -2263,7 +2362,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 Rimessa FAB · rimessa-fab.com</p>
+        <p>© 2026 Rimessa FAB · rimessa-fab.com &nbsp;·&nbsp; <a href="#" onclick="showPage('privacy'); return false;" style="opacity:0.5; text-decoration:none; border-bottom:1px solid currentColor;" data-i18n="footer.privacy">Privacy Policy</a></p>
         <div class="roscioli-bridge">
           Sito realizzato da <a href="https://daniferr.com" target="_blank" rel="noopener">daniferr.com</a>
           &nbsp;·&nbsp; Parte dell'ecosistema <a href="#">Roscioli →</a>
@@ -2279,7 +2378,7 @@
 
     const TRANSLATIONS = {
       it: {
-        'nav.restaurant':'Ristorante','nav.calendar':'Calendario','nav.where':'Dove siamo','nav.archive':'Archivio','nav.book':'Prenota',
+        'nav.restaurant':'Ristorante','nav.calendar':'Calendario','nav.where':'Dove siamo','nav.gallery':'Galleria','nav.book':'Prenota',
         'hero.tagline':'Uno spazio culturale e gastronomico nato da Rimessa Roscioli.<br>Vieni per cena, un concerto, una presentazione,<br>o un bicchiere di vino.',
         'hero.cta1':'Calendario Aprile–Maggio','hero.cta2':'Il Ristorante',
         'cal.label':'Prossimi eventi','cal.title':'Calendario<br>Aprile–Maggio','cal.range':'APR — MAG 2026','cal.viewall':'Vedi tutto il calendario →',
@@ -2290,7 +2389,7 @@
         'card.chefs.label':'Esperienza principale','card.chefs.desc':'Quattordici coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Due turni: 19:00 e 20:30.',
         'card.alacarte.label':'Formato libero','card.alacarte.desc':'Dal tardo pomeriggio alla sera. Perfetto per un aperitivo lungo o una cena dal menu stagionale.',
         'detail.posti':'Posti','detail.turni':'Turni','detail.portate':'Portate + vino','detail.orario':'Orario',
-        'detail.seats.val':'14 coperti','detail.alacarte.turns.val':'ogni 30 min',
+        'detail.seats.val':'14 coperti','detail.booking':'Prenotazione','detail.booking.val':'consigliata',
         'manifesto.kicker':'Manifesto',
         'manifesto.body':'Un posto dove la cucina,<br>la musica, i libri<br>e la <em>conversazione</em><br>coesistono naturalmente.',
         'manifesto.sub':'FAB è la propaggine naturale di Rimessa Roscioli, ma con un suo linguaggio, un suo ritmo e una sua logica di pubblico. Più porosa, più site-specific, più orientata agli eventi e aperta a musica, libri, talk e formati inattesi.',
@@ -2298,7 +2397,9 @@
         'cats.food.desc':'Chef\'s dinner, degustazioni, cene a quattro mani, produttori ospiti. La cucina come atto culturale.',
         'cats.arts.desc':'Concerti di jazz e musica sperimentale, performance, interventi sonori. La sera come formato.',
         'cats.books.desc':'Presentazioni, podcast dal vivo, reading, talk con autori. La parola come ospite fisso.',
-        'gallery.label':'L\'atmosfera',
+        'gallery.label':'L\'atmosfera','gallery.viewall':'Vedi tutta la galleria →',
+        'gallery.page.h1':'Galle<br><em>ria</em>','gallery.page.sub':'Fotografie da Rimessa FAB. L\'atmosfera, la cucina, gli eventi.',
+        'gallery.insta.label':'Su Instagram','gallery.insta.title':'@rimessa_fab',
         'press.label':'Dicono di noi','press.read':'Leggi l\'articolo →',
         'menu.label':'Menu','menu.title':'À la Carte','menu.desc':'Stagionale, in continuo aggiornamento.','menu.cta':'Vedi il menu →',
         'nl.title':'Resta nel giro','nl.sub':'Nuovi eventi ogni settimana. Nessuno spam, solo cose che succedono.','nl.placeholder':'La tua email','nl.button':'Iscriviti','nl.whatsapp':'Aggiornamenti WhatsApp',
@@ -2308,21 +2409,20 @@
         'dining.chefs.stat.seats':'Posti disponibili','dining.chefs.stat.portate':'Portate','dining.chefs.stat.turns':'Turni serali','dining.chefs.stat.person':'A persona',
         'dining.chefs.cta':'Prenota Chef\'s Dinner',
         'dining.alacarte.type':'Formato libero','dining.alacarte.desc':'Dal tardo pomeriggio fino alla sera. Ideale per un aperitivo lungo o una cena costruita pezzo per pezzo dal menu stagionale. Puoi fermarti su una cosa sola oppure su tutto.',
-        'dining.alacarte.stat.orario':'Apertura','dining.alacarte.stat.turns':'Turni','dining.alacarte.cta':'Prenota À la Carte',
+        'dining.alacarte.stat.orario':'Apertura','dining.alacarte.stat.booking':'Prenotazione','dining.alacarte.stat.booking.val':'consigliata','dining.alacarte.cta':'Prenota À la Carte',
         'book.title':'Prenota un tavolo','faq.title':'Domande frequenti',
         'events.h1':'Calen<br><em>dario</em><br>2026','events.sub':'Food, Arts & Books. Aprile–Giugno 2026. Ogni settimana qualcosa di diverso — stessa cucina, intenzioni diverse.',
-        'archive.h1':'Archi<br><em>vio</em>','archive.sub':'Gli eventi passati di Rimessa FAB. Un registro di ciò che è stato.',
         'contacts.label':'Dove siamo','contacts.h1':'Vieni<br>a <em>trovarci</em>',
         'contacts.address.label':'Indirizzo','contacts.booking.label':'Prenotazioni','contacts.hours.label':'Orari ristorante','contacts.social.label':'Social',
         'contacts.ecosystem.label':'Ecosistema Roscioli','contacts.ecosystem.text':'FAB nasce da Rimessa Roscioli — stessa cura, intenzione diversa.',
         'contacts.parking':'Parcheggio disponibile nelle vicinanze · Metro Linea B — Circo Massimo',
         'footer.brand':'Food, Arts & Books. Uno spazio culturale e gastronomico a Roma, nato da Rimessa Roscioli con una sua identità propria.',
         'footer.nav':'Navigazione','footer.contacts':'Contatti','footer.address':'Indirizzo',
-        'footer.home':'Home','footer.restaurant':'Ristorante','footer.calendar':'Calendario','footer.where':'Contatti','footer.archive':'Archivio',
+        'footer.home':'Home','footer.restaurant':'Ristorante','footer.calendar':'Calendario','footer.where':'Contatti','footer.gallery':'Galleria','footer.privacy':'Privacy Policy',
         'btn.book':'Prenota →','btn.done':'Concluso','no.events':'Nessun evento in programma.',
       },
       en: {
-        'nav.restaurant':'Restaurant','nav.calendar':'Calendar','nav.where':'Find us','nav.archive':'Archive','nav.book':'Book',
+        'nav.restaurant':'Restaurant','nav.calendar':'Calendar','nav.where':'Find us','nav.gallery':'Gallery','nav.book':'Book',
         'hero.tagline':'A cultural and gastronomic space born from Rimessa Roscioli.<br>Come for dinner, a concert, a book talk,<br>or a glass of wine.',
         'hero.cta1':'April–May Calendar','hero.cta2':'The Restaurant',
         'cal.label':'Upcoming events','cal.title':'Calendar<br>April–May','cal.range':'APR — MAY 2026','cal.viewall':'View full calendar →',
@@ -2331,9 +2431,9 @@
         'resto.desc':'Two different experiences at the same table. The Chef\'s Dinner: seven courses with wine pairings in an intimate, immersive format. À la Carte from late afternoon, for those who want to linger on one thing or everything.',
         'resto.cta':'Discover the restaurant',
         'card.chefs.label':'Main experience','card.chefs.desc':'Fourteen covers, seven courses with wine pairings. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. Two seatings: 7pm and 8:30pm.',
-        'card.alacarte.label':'Free format','card.alacarte.desc':'From late afternoon into the evening, with seatings every 30 minutes. Perfect for a long aperitivo or a dinner from the seasonal menu.',
+        'card.alacarte.label':'Free format','card.alacarte.desc':'From late afternoon into the evening. Perfect for a long aperitivo or a dinner from the seasonal menu.',
         'detail.posti':'Seats','detail.turni':'Seatings','detail.portate':'Courses + wine','detail.orario':'Hours',
-        'detail.seats.val':'14 covers','detail.alacarte.turns.val':'every 30 min',
+        'detail.seats.val':'14 covers','detail.booking':'Reservation','detail.booking.val':'recommended',
         'manifesto.kicker':'Manifesto',
         'manifesto.body':'A place where food,<br>music, books<br>and <em>conversation</em><br>coexist naturally.',
         'manifesto.sub':'FAB is the natural extension of Rimessa Roscioli, but with its own language, its own rhythm and its own audience. More porous, more site-specific, more event-driven, and open to music, books, talks and unexpected formats.',
@@ -2341,7 +2441,9 @@
         'cats.food.desc':'Chef\'s dinners, tastings, collaborative dinners, guest producers. Food as a cultural act.',
         'cats.arts.desc':'Jazz concerts and experimental music, performances, sonic interventions. The evening as a format.',
         'cats.books.desc':'Book presentations, live podcasts, readings, author talks. The word as a regular guest.',
-        'gallery.label':'The atmosphere',
+        'gallery.label':'The atmosphere','gallery.viewall':'View full gallery →',
+        'gallery.page.h1':'Galle<br><em>ry</em>','gallery.page.sub':'Photos from Rimessa FAB. The atmosphere, the kitchen, the events.',
+        'gallery.insta.label':'On Instagram','gallery.insta.title':'@rimessa_fab',
         'press.label':'Press','press.read':'Read the article →',
         'menu.label':'Menu','menu.title':'À la Carte','menu.desc':'Seasonal, constantly updated.','menu.cta':'View the menu →',
         'nl.title':'Stay in the loop','nl.sub':'New events every week. No spam, just things that happen.','nl.placeholder':'Your email','nl.button':'Subscribe','nl.whatsapp':'WhatsApp updates',
@@ -2350,18 +2452,17 @@
         'dining.chefs.type':'Main experience','dining.chefs.desc':'Fourteen covers, seven courses, wine pairings included. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. No menu cards — one menu, and you follow it.',
         'dining.chefs.stat.seats':'Available seats','dining.chefs.stat.portate':'Courses','dining.chefs.stat.turns':'Evening seatings','dining.chefs.stat.person':'Per person',
         'dining.chefs.cta':'Book Chef\'s Dinner',
-        'dining.alacarte.type':'Free format','dining.alacarte.desc':'From late afternoon into the evening, with entries every 30 minutes. Ideal for a long aperitivo or a dinner built piece by piece from the seasonal menu. One dish or everything — your call.',
-        'dining.alacarte.stat.orario':'Opening','dining.alacarte.stat.turns':'Seatings','dining.alacarte.cta':'Book À la Carte',
+        'dining.alacarte.type':'Free format','dining.alacarte.desc':'From late afternoon into the evening. Ideal for a long aperitivo or a dinner built piece by piece from the seasonal menu. One dish or everything — your call.',
+        'dining.alacarte.stat.orario':'Opening','dining.alacarte.stat.booking':'Reservation','dining.alacarte.stat.booking.val':'recommended','dining.alacarte.cta':'Book À la Carte',
         'book.title':'Reserve a table','faq.title':'FAQ',
         'events.h1':'Calen<br><em>dar</em><br>2026','events.sub':'Food, Arts & Books. April–June 2026. Something different every week — same kitchen, different intentions.',
-        'archive.h1':'Archi<br><em>ve</em>','archive.sub':'Past events at Rimessa FAB. A record of what has been.',
         'contacts.label':'Find us','contacts.h1':'Come<br><em>find us</em>',
         'contacts.address.label':'Address','contacts.booking.label':'Reservations','contacts.hours.label':'Restaurant hours','contacts.social.label':'Social',
         'contacts.ecosystem.label':'The Roscioli family','contacts.ecosystem.text':'FAB was born from Rimessa Roscioli — the same care, a different intention.',
         'contacts.parking':'Parking available nearby · Metro Line B — Circo Massimo',
         'footer.brand':'Food, Arts & Books. A cultural and gastronomic space in Rome, born from Rimessa Roscioli with its own distinct identity.',
         'footer.nav':'Navigation','footer.contacts':'Contact','footer.address':'Address',
-        'footer.home':'Home','footer.restaurant':'Restaurant','footer.calendar':'Calendar','footer.where':'Contact','footer.archive':'Archive',
+        'footer.home':'Home','footer.restaurant':'Restaurant','footer.calendar':'Calendar','footer.where':'Contact','footer.gallery':'Gallery','footer.privacy':'Privacy Policy',
         'btn.book':'Book →','btn.done':'Past','no.events':'No upcoming events.',
       }
     };
@@ -2403,7 +2504,6 @@
       if (active) {
         const page = active.id.replace('page-', '');
         if (page === 'events')   renderFullList('all');
-        if (page === 'archivio') renderArchivio('all');
       }
       // Reset active filter pills
       document.querySelectorAll('.cat-pill').forEach(p => {
@@ -2558,21 +2658,6 @@
       list.innerHTML = filtered.map(ev => eventRowHTML(ev, false)).join('');
     }
 
-    function renderArchivio(filter) {
-      const list = document.getElementById('archivioList');
-      if (!list) return;
-      let filtered = EVENTS.filter(isPast);
-      if (filter && filter !== 'all') {
-        filtered = filtered.filter(e => e.cats.includes(filter));
-      }
-      if (filtered.length === 0) {
-        list.innerHTML = `<div style="padding:3rem 0;opacity:0.4;font-family:'Hanken Grotesk';">Nessun evento archiviato.</div>`;
-        return;
-      }
-      // Show most recent first
-      list.innerHTML = [...filtered].reverse().map(ev => eventRowHTML(ev, true)).join('');
-    }
-
     function renderFAQ() {
       const faqList = document.getElementById('faqList');
       if (!faqList) return;
@@ -2610,7 +2695,6 @@
       // Init page-specific content
       if (page === 'events')     renderFullList('all');
       if (page === 'restaurant') renderFAQ();
-      if (page === 'archivio')   renderArchivio('all');
       if (page === 'home')       { renderHomeGrid('all'); initGSAP(); }
     }
 
@@ -2630,12 +2714,6 @@
       document.querySelectorAll('#page-events .cat-pill').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       renderFullList(cat);
-    }
-
-    function filterArchivio(cat, btn) {
-      document.querySelectorAll('#page-archivio .cat-pill').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      renderArchivio(cat);
     }
 
     function filterByCategory(cat) {
@@ -2718,6 +2796,12 @@
       { src: 'img/gallery-botanico-vermouth.jpg',  alt: 'Collettivo Botanico' },
       { src: 'img/gallery-chefs-table-live.jpg',   alt: 'Una serata al Chef\'s Table' },
       { src: 'img/gallery-botanico-birra.jpg',     alt: 'Birre artigianali Collettivo Botanico' },
+      { src: 'img/7Y4A5962.jpg',                   alt: 'Rimessa FAB — dettaglio' },
+      { src: 'img/7Y4A5967.jpg',                   alt: 'Rimessa FAB — cucina' },
+      { src: 'img/7Y4A5972.jpg',                   alt: 'Rimessa FAB — atmosfera' },
+      { src: 'img/7Y4A7310.jpg',                   alt: 'Rimessa FAB — sala' },
+      { src: 'img/7Y4A7313.jpg',                   alt: 'Rimessa FAB — serata' },
+      { src: 'img/gallery-cena-carbonara.jpg',     alt: 'Cena Carbonara da Rimessa FAB' },
     ];
     let lbIndex = 0;
 
