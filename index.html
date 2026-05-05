@@ -1610,6 +1610,7 @@
         <li><a href="#" onclick="showPage('events'); return false;" data-page="events" data-i18n="nav.calendar">Calendario</a></li>
         <li><a href="#" onclick="showPage('contacts'); return false;" data-page="contacts" data-i18n="nav.where">Dove siamo</a></li>
         <li><a href="#" onclick="showPage('gallery'); return false;" data-page="gallery" data-i18n="nav.gallery">Galleria</a></li>
+        <li><a href="#" onclick="showPage('private'); return false;" data-page="private" data-i18n="nav.private">Eventi</a></li>
       </ul>
       <button class="lang-btn" id="langBtn" onclick="toggleLanguage()" title="Switch language">
         <span class="lang-flag" id="langFlag">🇺🇸</span>
@@ -1720,7 +1721,7 @@
                 </div>
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.turni">Turni</span>
-                  <span class="detail-value">19:00 · 20:30</span>
+                  <span class="detail-value">19:00 · 21:00</span>
                 </div>
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.portate">Portate + vino</span>
@@ -1910,7 +1911,7 @@
             </div>
             <div>
               <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.turns">Turni serali</div>
-              <div class="stat-value" style="color: var(--offwhite)">19:00 · 20:30</div>
+              <div class="stat-value" style="color: var(--offwhite)">19:00 · 21:00</div>
             </div>
             <div>
               <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.person">A persona</div>
@@ -2056,7 +2057,7 @@
         <div class="contact-block">
           <div class="contact-block-label" data-i18n="contacts.hours.label">Orari ristorante</div>
           <div class="contact-block-value" style="font-size: 1rem; font-family: 'Hanken Grotesk'; font-weight: 400; text-transform: none;">
-            <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">Chef's Dinner</strong> — 19:00, 20:30<br>
+            <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">Chef's Dinner</strong> — 19:00, 21:00<br>
             <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">À la Carte</strong> — 18:00–22:00
           </div>
         </div>
@@ -2319,6 +2320,167 @@
 
   </div><!-- /page-privacy -->
 
+
+  <!-- ══════════════════════════════════════ -->
+  <!--         PRIVATE EVENTS PAGE           -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="page-private" class="page-section">
+
+    <!-- HERO -->
+    <div class="events-hero" style="background: var(--ink);">
+      <div class="events-hero-inner">
+        <h1 data-i18n="private.h1">Il tuo<br><em>evento</em><br>al FAB</h1>
+        <p class="events-hero-sub" data-i18n="private.sub">Dalla cena privata all'evento culturale. Affittiamo lo spazio per serate esclusive — anche nei nostri giorni di chiusura.</p>
+      </div>
+    </div>
+
+    <!-- 3 FORMATI -->
+    <section style="padding: 5rem 0; background: var(--offwhite);">
+      <div class="section-wrap">
+        <div class="section-label" data-i18n="private.formats.label">I formati</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); border:1.5px solid var(--ink); margin-top:2rem;">
+
+          <div style="padding:2.5rem 2rem; background:var(--offwhite); border-right:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink);">
+            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ochre); margin-bottom:1rem;" data-i18n="private.ct.label">Esperienza intima</div>
+            <h3 style="font-family:'Barlow Condensed'; font-weight:800; font-size:2rem; text-transform:uppercase; margin-bottom:1rem; line-height:0.95;" data-i18n="private.ct.title">Chef's Table Privato</h3>
+            <p style="font-family:'Hanken Grotesk'; font-size:0.85rem; line-height:1.65; opacity:0.75; margin-bottom:1.5rem;" data-i18n="private.ct.desc">Una cena su misura al tavolo del cuoco. Sette portate, abbinamenti vino, interazione diretta con i cuochi. Il formato più raccolto e immersivo che offriamo.</p>
+            <div style="border-top:1px solid rgba(17,17,17,0.12); padding-top:1.25rem;">
+              <div style="font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; opacity:0.5; font-family:'Hanken Grotesk';" data-i18n="private.stat.capacity">Capacità</div>
+              <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:1.1rem; text-transform:uppercase;" data-i18n="private.ct.capacity">Fino a 14</div>
+            </div>
+          </div>
+
+          <div style="padding:2.5rem 2rem; background:var(--beige); border-right:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink);">
+            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--green); margin-bottom:1rem;" data-i18n="private.dinner.label">Formato principale</div>
+            <h3 style="font-family:'Barlow Condensed'; font-weight:800; font-size:2rem; text-transform:uppercase; margin-bottom:1rem; line-height:0.95;" data-i18n="private.dinner.title">Cena Privata</h3>
+            <p style="font-family:'Hanken Grotesk'; font-size:0.85rem; line-height:1.65; opacity:0.75; margin-bottom:1.5rem;" data-i18n="private.dinner.desc">La sala è vostra. Un menu costruito insieme, un servizio dedicato, una serata che si adatta alla vostra occasione — che sia una laurea, un compleanno o una cena aziendale.</p>
+            <div style="border-top:1px solid rgba(17,17,17,0.12); padding-top:1.25rem;">
+              <div style="font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; opacity:0.5; font-family:'Hanken Grotesk';" data-i18n="private.stat.capacity">Capacità</div>
+              <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:1.1rem; text-transform:uppercase;" data-i18n="private.dinner.capacity">Fino a 50</div>
+            </div>
+          </div>
+
+          <div style="padding:2.5rem 2rem; background:var(--ink); color:var(--offwhite); border-bottom:1.5px solid var(--ink);">
+            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ochre); margin-bottom:1rem;" data-i18n="private.buyout.label">Accesso esclusivo</div>
+            <h3 style="font-family:'Barlow Condensed'; font-weight:800; font-size:2rem; text-transform:uppercase; margin-bottom:1rem; line-height:0.95; color:var(--offwhite);" data-i18n="private.buyout.title">Buyout Esclusivo</h3>
+            <p style="font-family:'Hanken Grotesk'; font-size:0.85rem; line-height:1.65; opacity:0.7; margin-bottom:1.5rem;" data-i18n="private.buyout.desc">Il locale è tutto vostro. Disponibile su richiesta tutti i giorni della settimana, con la possibilità di costruire una programmazione culturale: musica live, presentazioni, talk, performance.</p>
+            <div style="display:flex; gap:2rem; flex-wrap:wrap; border-top:1px solid rgba(248,242,236,0.15); padding-top:1.25rem;">
+              <div>
+                <div style="font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; opacity:0.4; font-family:'Hanken Grotesk';" data-i18n="private.stat.capacity">Capacità</div>
+                <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:1.1rem; text-transform:uppercase; color:var(--offwhite);" data-i18n="private.buyout.capacity">Fino a 50</div>
+              </div>
+              <div>
+                <div style="font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; opacity:0.4; font-family:'Hanken Grotesk';" data-i18n="private.stat.avail">Disponibilità</div>
+                <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:1.1rem; text-transform:uppercase; color:var(--ochre);" data-i18n="private.buyout.avail">Su richiesta</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PERCHÉ FAB -->
+    <section style="padding:5rem 0; background:var(--ink); color:var(--offwhite); border-top:1.5px solid rgba(248,242,236,0.12);">
+      <div class="section-wrap">
+        <div class="section-label" style="color:rgba(248,242,236,0.45);" data-i18n="private.why.label">Perché FAB</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2.5rem; margin-top:2.5rem;">
+          <div>
+            <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.3rem; text-transform:uppercase; color:var(--ochre); margin-bottom:0.6rem;" data-i18n="private.why1.title">Cucina su misura</div>
+            <p style="font-family:'Hanken Grotesk'; font-size:0.85rem; line-height:1.65; opacity:0.65;" data-i18n="private.why1.desc">Menu stagionale costruito insieme a voi. Ingredienti selezionati, abbinamenti vino curati, nessun compromesso.</p>
+          </div>
+          <div>
+            <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.3rem; text-transform:uppercase; color:var(--ochre); margin-bottom:0.6rem;" data-i18n="private.why2.title">Tutti i giorni</div>
+            <p style="font-family:'Hanken Grotesk'; font-size:0.85rem; line-height:1.65; opacity:0.65;" data-i18n="private.why2.desc">Su richiesta, affittiamo lo spazio tutti e sette i giorni della settimana. Ci adattiamo alle vostre date, non il contrario.</p>
+          </div>
+          <div>
+            <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.3rem; text-transform:uppercase; color:var(--ochre); margin-bottom:0.6rem;" data-i18n="private.why3.title">La serata è vostra</div>
+            <p style="font-family:'Hanken Grotesk'; font-size:0.85rem; line-height:1.65; opacity:0.65;" data-i18n="private.why3.desc">Un concerto jazz, una presentazione, una ripresa del vostro videomaker, un talk. Costruiamo il programma della serata attorno alle vostre esigenze.</p>
+          </div>
+          <div>
+            <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.3rem; text-transform:uppercase; color:var(--ochre); margin-bottom:0.6rem;" data-i18n="private.why4.title">Patrimonio Roscioli</div>
+            <p style="font-family:'Hanken Grotesk'; font-size:0.85rem; line-height:1.65; opacity:0.65;" data-i18n="private.why4.desc">Nati da Rimessa Roscioli, con la nostra identità. L'eccellenza gastronomica Roscioli in uno spazio con un linguaggio tutto suo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM RICHIESTA -->
+    <section id="private-events-form" style="padding:5rem 0; background:var(--offwhite); border-top:1.5px solid var(--ink);">
+      <div class="section-wrap" style="max-width:760px;">
+        <div class="section-label" data-i18n="private.form.label">Richiedi informazioni</div>
+        <h2 style="font-family:'Barlow Condensed'; font-size:clamp(2.5rem,5vw,4rem); text-transform:uppercase; margin-bottom:0.5rem; line-height:0.9;" data-i18n="private.form.title">Il tuo<br><em style="color:var(--red);">evento</em></h2>
+        <p style="font-family:'Hanken Grotesk'; font-size:0.9rem; opacity:0.65; margin-bottom:2.5rem; line-height:1.65;" data-i18n="private.form.sub">Raccontaci la tua idea. Ti risponderemo entro 24 ore.</p>
+
+        <form name="private-events" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handlePrivateEventSubmit(event, this)" style="display:flex; flex-direction:column; gap:1.25rem;">
+          <input type="hidden" name="form-name" value="private-events">
+          <p style="display:none;"><input name="bot-field"></p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+            <div>
+              <label style="display:block; font-family:'Hanken Grotesk'; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; opacity:0.55;" data-i18n="private.form.name">Nome e cognome</label>
+              <input type="text" name="name" required style="width:100%; padding:0.9rem 1rem; border:1.5px solid var(--ink); background:transparent; font-family:'Hanken Grotesk'; font-size:0.9rem; outline:none; box-sizing:border-box;">
+            </div>
+            <div>
+              <label style="display:block; font-family:'Hanken Grotesk'; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; opacity:0.55;" data-i18n="private.form.email">Email</label>
+              <input type="email" name="email" required style="width:100%; padding:0.9rem 1rem; border:1.5px solid var(--ink); background:transparent; font-family:'Hanken Grotesk'; font-size:0.9rem; outline:none; box-sizing:border-box;">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+            <div>
+              <label style="display:block; font-family:'Hanken Grotesk'; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; opacity:0.55;" data-i18n="private.form.phone">Telefono</label>
+              <input type="tel" name="phone" style="width:100%; padding:0.9rem 1rem; border:1.5px solid var(--ink); background:transparent; font-family:'Hanken Grotesk'; font-size:0.9rem; outline:none; box-sizing:border-box;">
+            </div>
+            <div>
+              <label style="display:block; font-family:'Hanken Grotesk'; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; opacity:0.55;" data-i18n="private.form.guests">Numero di persone</label>
+              <input type="number" name="guests" min="1" max="50" required style="width:100%; padding:0.9rem 1rem; border:1.5px solid var(--ink); background:transparent; font-family:'Hanken Grotesk'; font-size:0.9rem; outline:none; box-sizing:border-box;">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+            <div style="position:relative;">
+              <label style="display:block; font-family:'Hanken Grotesk'; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; opacity:0.55;" data-i18n="private.form.type">Tipo di evento</label>
+              <select name="event-type" required style="width:100%; padding:0.9rem 1rem; border:1.5px solid var(--ink); background:var(--offwhite); font-family:'Hanken Grotesk'; font-size:0.9rem; outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; box-sizing:border-box;">
+                <option value="" data-i18n="private.form.select">Seleziona...</option>
+                <option value="cena-privata" data-i18n="private.form.type.dinner">Cena privata / Gathering</option>
+                <option value="compleanno-laurea" data-i18n="private.form.type.celebration">Compleanno o laurea</option>
+                <option value="evento-aziendale" data-i18n="private.form.type.corporate">Evento aziendale</option>
+                <option value="evento-culturale" data-i18n="private.form.type.cultural">Evento culturale (musica, libri, talk)</option>
+                <option value="ricorrenza" data-i18n="private.form.type.anniversary">Ricorrenza (anniversario, matrimonio)</option>
+                <option value="altro" data-i18n="private.form.type.other">Altro</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-family:'Hanken Grotesk'; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; opacity:0.55;" data-i18n="private.form.date">Data preferita</label>
+              <input type="date" name="date" style="width:100%; padding:0.9rem 1rem; border:1.5px solid var(--ink); background:var(--offwhite); font-family:'Hanken Grotesk'; font-size:0.9rem; outline:none; box-sizing:border-box;">
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block; font-family:'Hanken Grotesk'; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; opacity:0.55;" data-i18n="private.form.notes">Raccontaci il tuo evento</label>
+            <textarea name="notes" rows="4" data-i18n-placeholder="private.form.notes.ph" placeholder="Preferenze di vino, richieste musicali, esigenze di accessibilità, budget indicativo..." style="width:100%; padding:0.9rem 1rem; border:1.5px solid var(--ink); background:transparent; font-family:'Hanken Grotesk'; font-size:0.9rem; outline:none; resize:vertical; box-sizing:border-box;"></textarea>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:0.5rem;">
+            <p style="font-family:'Hanken Grotesk'; font-size:0.8rem; opacity:0.5; margin:0;" data-i18n="private.form.reply">Ti risponderemo entro 24 ore · info@rimessa-fab.com</p>
+            <button type="submit" style="font-family:'Barlow Condensed'; font-weight:700; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem 2.5rem; background:var(--ink); color:var(--offwhite); border:1.5px solid var(--ink); cursor:pointer; transition:background 0.2s, color 0.2s;" data-i18n="private.form.submit">Invia la tua richiesta →</button>
+          </div>
+          <div id="private-form-msg" style="font-family:'Hanken Grotesk'; font-size:0.9rem; min-height:1.4em;"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="padding:4rem 0; background:var(--beige); border-top:1.5px solid var(--ink);">
+      <div class="section-wrap" style="max-width:760px;">
+        <div class="section-label" data-i18n="private.faq.label">Domande frequenti</div>
+        <div id="privateEventsFaqList" style="margin-top:2rem; border-top:1px solid rgba(17,17,17,0.1);"></div>
+      </div>
+    </section>
+
+  </div><!-- /page-private -->
+
   <!-- LIGHTBOX (global) -->
   <div id="lightbox" role="dialog" aria-modal="true" aria-label="Galleria immagini" onclick="closeLightbox()">
     <button class="lb-close" onclick="event.stopPropagation(); closeLightbox();" aria-label="Chiudi">✕</button>
@@ -2343,6 +2505,7 @@
             <li><a href="#" onclick="showPage('events'); return false;" data-i18n="footer.calendar">Calendario</a></li>
             <li><a href="#" onclick="showPage('contacts'); return false;" data-i18n="footer.where">Contatti</a></li>
             <li><a href="#" onclick="showPage('gallery'); return false;" data-i18n="footer.gallery">Galleria</a></li>
+            <li><a href="#" onclick="showPage('private'); return false;" data-i18n="footer.private">Eventi Privati</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -2386,7 +2549,7 @@
         'resto.label':'Il Ristorante','resto.h2':'Cucina<br><em>libera</em><br>a Roma',
         'resto.desc':'Due esperienze diverse sullo stesso tavolo. Il Chef\'s Dinner, sette portate con abbinamenti vino in un format raccolto e immersivo. À la Carte, dal tardo pomeriggio, per chi vuole fermarsi su una cosa sola o su tutto.',
         'resto.cta':'Scopri il ristorante',
-        'card.chefs.label':'Esperienza principale','card.chefs.desc':'Quattordici coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Due turni: 19:00 e 20:30.',
+        'card.chefs.label':'Esperienza principale','card.chefs.desc':'Quattordici coperti, sette portate con abbinamenti vino. Un percorso immersivo tra ingredienti, racconto e tecnica. Due turni: 19:00 e 21:00.',
         'card.alacarte.label':'Formato libero','card.alacarte.desc':'Dal tardo pomeriggio alla sera. Perfetto per un aperitivo lungo o una cena dal menu stagionale.',
         'detail.posti':'Posti','detail.turni':'Turni','detail.portate':'Portate + vino','detail.orario':'Orario',
         'detail.seats.val':'14 coperti','detail.booking':'Prenotazione','detail.booking.val':'consigliata',
@@ -2420,6 +2583,38 @@
         'footer.nav':'Navigazione','footer.contacts':'Contatti','footer.address':'Indirizzo',
         'footer.home':'Home','footer.restaurant':'Ristorante','footer.calendar':'Calendario','footer.where':'Contatti','footer.gallery':'Galleria','footer.privacy':'Privacy Policy',
         'btn.book':'Prenota →','btn.done':'Concluso','no.events':'Nessun evento in programma.',
+        'nav.private':'Eventi','footer.private':'Eventi Privati',
+        'private.h1':'Il tuo<br><em>evento</em><br>al FAB',
+        'private.sub':'Dalla cena privata all\'evento culturale. Affittiamo lo spazio per serate esclusive — anche nei nostri giorni di chiusura.',
+        'private.formats.label':'I formati',
+        'private.ct.label':'Esperienza intima','private.ct.title':'Chef\'s Table Privato',
+        'private.ct.desc':'Una cena su misura al tavolo del cuoco. Sette portate, abbinamenti vino, interazione diretta con i cuochi. Il formato più raccolto e immersivo che offriamo.',
+        'private.ct.capacity':'Fino a 14',
+        'private.dinner.label':'Formato principale','private.dinner.title':'Cena Privata',
+        'private.dinner.desc':'La sala è vostra. Un menu costruito insieme, un servizio dedicato, una serata che si adatta alla vostra occasione — che sia una laurea, un compleanno o una cena aziendale.',
+        'private.dinner.capacity':'Fino a 50',
+        'private.buyout.label':'Accesso esclusivo','private.buyout.title':'Buyout Esclusivo',
+        'private.buyout.desc':'Il locale è tutto vostro. Disponibile su richiesta tutti i giorni della settimana, con la possibilità di costruire una programmazione culturale: musica live, presentazioni, talk, performance.',
+        'private.buyout.capacity':'Fino a 50','private.buyout.avail':'Su richiesta',
+        'private.stat.capacity':'Capacità','private.stat.avail':'Disponibilità',
+        'private.why.label':'Perché FAB',
+        'private.why1.title':'Cucina su misura','private.why1.desc':'Menu stagionale costruito insieme a voi. Ingredienti selezionati, abbinamenti vino curati, nessun compromesso.',
+        'private.why2.title':'Tutti i giorni','private.why2.desc':'Su richiesta, affittiamo lo spazio tutti e sette i giorni della settimana. Ci adattiamo alle vostre date, non il contrario.',
+        'private.why3.title':'La serata è vostra','private.why3.desc':'Un concerto jazz, una presentazione, una ripresa del vostro videomaker, un talk. Costruiamo il programma della serata attorno alle vostre esigenze.',
+        'private.why4.title':'Patrimonio Roscioli','private.why4.desc':'Nati da Rimessa Roscioli, con la nostra identità. L\'eccellenza gastronomica Roscioli in uno spazio con un linguaggio tutto suo.',
+        'private.form.label':'Richiedi informazioni','private.form.title':'Il tuo<br><em>evento</em>',
+        'private.form.sub':'Raccontaci la tua idea. Ti risponderemo entro 24 ore.',
+        'private.form.name':'Nome e cognome','private.form.email':'Email',
+        'private.form.phone':'Telefono','private.form.guests':'Numero di persone',
+        'private.form.type':'Tipo di evento','private.form.select':'Seleziona...',
+        'private.form.type.dinner':'Cena privata / Gathering','private.form.type.celebration':'Compleanno o laurea',
+        'private.form.type.corporate':'Evento aziendale','private.form.type.cultural':'Evento culturale (musica, libri, talk)',
+        'private.form.type.anniversary':'Ricorrenza (anniversario, matrimonio)','private.form.type.other':'Altro',
+        'private.form.date':'Data preferita','private.form.notes':'Raccontaci il tuo evento',
+        'private.form.notes.ph':'Preferenze di vino, richieste musicali, esigenze di accessibilità, budget indicativo...',
+        'private.form.reply':'Ti risponderemo entro 24 ore · info@rimessa-fab.com',
+        'private.form.submit':'Invia la tua richiesta →',
+        'private.faq.label':'Domande frequenti',
       },
       en: {
         'nav.restaurant':'Restaurant','nav.calendar':'Calendar','nav.where':'Find us','nav.gallery':'Gallery','nav.book':'Book',
@@ -2430,7 +2625,7 @@
         'resto.label':'The Restaurant','resto.h2':'Free<br><em>cuisine</em><br>in Rome',
         'resto.desc':'Two different experiences at the same table. The Chef\'s Dinner: seven courses with wine pairings in an intimate, immersive format. À la Carte from late afternoon, for those who want to linger on one thing or everything.',
         'resto.cta':'Discover the restaurant',
-        'card.chefs.label':'Main experience','card.chefs.desc':'Fourteen covers, seven courses with wine pairings. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. Two seatings: 7pm and 8:30pm.',
+        'card.chefs.label':'Main experience','card.chefs.desc':'Fourteen covers, seven courses with wine pairings. An immersive journey built by the chef each evening: seasonal ingredients, technique, storytelling. Two seatings: 7pm and 9pm.',
         'card.alacarte.label':'Free format','card.alacarte.desc':'From late afternoon into the evening. Perfect for a long aperitivo or a dinner from the seasonal menu.',
         'detail.posti':'Seats','detail.turni':'Seatings','detail.portate':'Courses + wine','detail.orario':'Hours',
         'detail.seats.val':'14 covers','detail.booking':'Reservation','detail.booking.val':'recommended',
@@ -2464,12 +2659,44 @@
         'footer.nav':'Navigation','footer.contacts':'Contact','footer.address':'Address',
         'footer.home':'Home','footer.restaurant':'Restaurant','footer.calendar':'Calendar','footer.where':'Contact','footer.gallery':'Gallery','footer.privacy':'Privacy Policy',
         'btn.book':'Book →','btn.done':'Past','no.events':'No upcoming events.',
+        'nav.private':'Events','footer.private':'Private Events',
+        'private.h1':'Your<br><em>event</em><br>at FAB',
+        'private.sub':'From private dinners to cultural events. We hire out the space for exclusive evenings — including our regular days off.',
+        'private.formats.label':'The formats',
+        'private.ct.label':'Intimate experience','private.ct.title':'Private Chef\'s Table',
+        'private.ct.desc':'A bespoke dinner at the chef\'s table. Seven courses, wine pairings, direct interaction with the chefs. Our most intimate and immersive format.',
+        'private.ct.capacity':'Up to 14',
+        'private.dinner.label':'Main format','private.dinner.title':'Private Dinner',
+        'private.dinner.desc':'The room is yours. A menu built together, dedicated service, an evening shaped around your occasion — graduation, birthday or corporate dinner.',
+        'private.dinner.capacity':'Up to 50',
+        'private.buyout.label':'Exclusive access','private.buyout.title':'Exclusive Buyout',
+        'private.buyout.desc':'The whole venue is yours. Available on request any day of the week, with the option of building a cultural programme: live music, talks, readings, performances.',
+        'private.buyout.capacity':'Up to 50','private.buyout.avail':'On request',
+        'private.stat.capacity':'Capacity','private.stat.avail':'Availability',
+        'private.why.label':'Why FAB',
+        'private.why1.title':'Bespoke cuisine','private.why1.desc':'A seasonal menu built together with you. Carefully sourced ingredients, curated wine pairings, no shortcuts.',
+        'private.why2.title':'Every day','private.why2.desc':'On request, we hire out the space any day of the week. We adapt to your dates, not the other way around.',
+        'private.why3.title':'Your evening, your way','private.why3.desc':'A jazz concert, a book presentation, a shoot with your videographer, a talk. We build the evening\'s programme around your needs.',
+        'private.why4.title':'Roscioli heritage','private.why4.desc':'Born from Rimessa Roscioli, with our own identity. Roscioli\'s gastronomic excellence in a space with a language all its own.',
+        'private.form.label':'Get in touch','private.form.title':'Your<br><em>event</em>',
+        'private.form.sub':'Tell us your idea. We\'ll get back to you within 24 hours.',
+        'private.form.name':'Full name','private.form.email':'Email',
+        'private.form.phone':'Phone','private.form.guests':'Number of guests',
+        'private.form.type':'Event type','private.form.select':'Select...',
+        'private.form.type.dinner':'Private dinner / Gathering','private.form.type.celebration':'Birthday or graduation',
+        'private.form.type.corporate':'Corporate event','private.form.type.cultural':'Cultural event (music, books, talk)',
+        'private.form.type.anniversary':'Anniversary or wedding','private.form.type.other':'Other',
+        'private.form.date':'Preferred date','private.form.notes':'Tell us about your event',
+        'private.form.notes.ph':'Wine preferences, music requests, accessibility needs, indicative budget...',
+        'private.form.reply':'We\'ll get back to you within 24 hours · info@rimessa-fab.com',
+        'private.form.submit':'Send your enquiry →',
+        'private.faq.label':'Frequently asked questions',
       }
     };
 
     const FAQS_EN = [
       { q: "Is a reservation required?",          a: "Yes, especially for the Chef's Dinner which has only 14 covers. For À la Carte we still recommend booking, especially on weekends." },
-      { q: "Can you choose your seating time?",   a: "For the Chef's Dinner, seatings are at 7pm and 8:30pm. For À la Carte, entries are every 30 minutes from 6pm." },
+      { q: "Can you choose your seating time?",   a: "For the Chef's Dinner, seatings are at 7pm and 9pm. For À la Carte, entries are every 30 minutes from 6pm." },
       { q: "Is wine included in the Chef's Dinner?", a: "Yes, the €95 price includes seven courses with wine pairings selected by the sommelier." },
       { q: "Are there vegetarian options?",       a: "Yes, please let us know when booking. The menu is adapted with the same level of care." },
       { q: "Can I pay on the day?",               a: "Yes, we accept cash and card. Reservations are made by email or phone, with no advance payment required." },
@@ -2504,6 +2731,7 @@
       if (active) {
         const page = active.id.replace('page-', '');
         if (page === 'events')   renderFullList('all');
+        if (page === 'private')  renderPrivateFAQ();
       }
       // Reset active filter pills
       document.querySelectorAll('.cat-pill').forEach(p => {
@@ -2565,7 +2793,7 @@
 
     const FAQS = [
       { q: "È necessario prenotare?",             a: "Sì, soprattutto per lo Chef's Dinner che ha soli 14 coperti. Per la carta consigliamo comunque di prenotare, specialmente nei weekend." },
-      { q: "Si può scegliere il turno?",          a: "Nello Chef's Dinner i turni sono alle 19:00 e alle 20:30. Per la carta gli ingressi sono ogni 30 minuti dalle 18:00." },
+      { q: "Si può scegliere il turno?",          a: "Nello Chef's Dinner i turni sono alle 19:00 e alle 21:00. Per la carta gli ingressi sono ogni 30 minuti dalle 18:00." },
       { q: "Il vino è incluso nel Chef's Dinner?",a: "Sì, il prezzo di €95 include sette portate con abbinamenti vino selezionati dal sommelier." },
       { q: "Ci sono opzioni vegetariane?",        a: "Sì, si prega di comunicarlo al momento della prenotazione. Il menu viene adattato con lo stesso livello di cura." },
       { q: "Si può pagare alla cassa?",           a: "Per lo Chef's Dinner richiediamo il 50% al momento della prenotazione, e il saldo si paga alla cassa." },
@@ -2681,6 +2909,70 @@
       icon.textContent = open ? '+' : '−';
     }
 
+    // ── PRIVATE EVENTS FAQ ────────────────────────
+    const FAQS_PRIVATE = [
+      { q: 'Posso avere un menu completamente personalizzato?',             a: 'Assolutamente sì. Lavoriamo con voi per costruire un menu su misura in base ai vostri gusti, alle preferenze alimentari degli ospiti e al tipo di serata che avete in mente.' },
+      { q: 'Potete organizzare musica live o eventi culturali?',            a: 'Sì. Abbiamo esperienza nell\'ospitare concerti jazz, presentazioni letterarie, talk e performance. Possiamo costruire una programmazione culturale su misura attorno alla vostra cena.' },
+      { q: 'Con quanto anticipo devo prenotare?',                          a: 'Consigliamo almeno 3–4 settimane per eventi fino a 50 persone, e 6–8 settimane per eventi con programmazione culturale su misura. Per date specifiche, prima è meglio.' },
+      { q: 'Come funziona il preventivo? C\'è un costo minimo?',           a: 'Dopo aver ricevuto la vostra richiesta, vi contatteremo entro 24 ore per un primo confronto. Il preventivo viene costruito su misura in base al formato, al numero di ospiti e alle vostre preferenze.' },
+    ];
+    const FAQS_PRIVATE_EN = [
+      { q: 'Can I have a fully customised menu?',                           a: 'Absolutely. We work with you to build a bespoke menu based on your tastes, your guests\' dietary preferences, and the type of evening you have in mind.' },
+      { q: 'Can you organise live music or cultural events?',               a: 'Yes. We have experience hosting jazz concerts, book presentations, talks and performances. We can build bespoke cultural programming around your dinner.' },
+      { q: 'How far in advance should I book?',                            a: 'We recommend at least 3–4 weeks for events up to 50 guests, and 6–8 weeks for events with bespoke cultural programming. For specific dates, the earlier the better.' },
+      { q: 'How does the quote work? Is there a minimum spend?',           a: 'After receiving your enquiry, we\'ll get back to you within 24 hours for an initial conversation. The quote is built to your specific format, guest count and preferences.' },
+    ];
+
+    function renderPrivateFAQ() {
+      const list = document.getElementById('privateEventsFaqList');
+      if (!list) return;
+      const items = LANG === 'en' ? FAQS_PRIVATE_EN : FAQS_PRIVATE;
+      list.innerHTML = items.map((faq, i) => `
+        <div style="border-bottom:1px solid rgba(17,17,17,0.1);">
+          <button onclick="togglePrivateFaq(${i})" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0;background:none;border:none;cursor:pointer;text-align:left;font-family:'Hanken Grotesk';font-weight:500;font-size:0.9rem;gap:1rem;">
+            <span>${faq.q}</span>
+            <span id="pfaq-icon-${i}" style="font-size:1.2rem;flex-shrink:0;transition:transform 0.2s;color:var(--green)">+</span>
+          </button>
+          <div id="pfaq-body-${i}" style="display:none;padding:0 0 1.2rem;font-size:0.85rem;line-height:1.6;opacity:0.7;">${faq.a}</div>
+        </div>
+      `).join('');
+    }
+
+    function togglePrivateFaq(i) {
+      const body = document.getElementById(`pfaq-body-${i}`);
+      const icon = document.getElementById(`pfaq-icon-${i}`);
+      const open = body.style.display !== 'none';
+      body.style.display = open ? 'none' : 'block';
+      icon.textContent = open ? '+' : '−';
+    }
+
+    function handlePrivateEventSubmit(event, form) {
+      event.preventDefault();
+      const msg = document.getElementById('private-form-msg');
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      })
+      .then(() => {
+        msg.style.color = 'var(--green)';
+        msg.textContent = LANG === 'en'
+          ? 'Thank you! We will get back to you within 24 hours.'
+          : 'Grazie! Ti risponderemo entro 24 ore.';
+        form.reset();
+        btn.disabled = false;
+      })
+      .catch(() => {
+        msg.style.color = 'var(--red)';
+        msg.textContent = LANG === 'en'
+          ? 'Something went wrong. Please write to info@rimessa-fab.com.'
+          : 'Qualcosa è andato storto. Scrivi a info@rimessa-fab.com.';
+        btn.disabled = false;
+      });
+    }
+
     // ── NAVIGATION ───────────────────────────────
 
     function showPage(page) {
@@ -2695,6 +2987,7 @@
       // Init page-specific content
       if (page === 'events')     renderFullList('all');
       if (page === 'restaurant') renderFAQ();
+      if (page === 'private')    renderPrivateFAQ();
       if (page === 'home')       { renderHomeGrid('all'); initGSAP(); }
     }
 
