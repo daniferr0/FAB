@@ -1594,6 +1594,17 @@
     #home-private-cta .section-wrap > div { grid-template-columns: 1fr !important; }
     #home-private-cta .section-wrap > div > div:last-child { display: none !important; }
     #private-events-form form div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    /* Reduce vertical padding on heavy sections */
+    #home-private-cta, #press, #private-events-form { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+    /* Menu block horizontal padding */
+    #menu { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+    /* Section wrap extra breathing room on small phones */
+    .section-wrap { padding-left: clamp(1rem, 4vw, 2rem); padding-right: clamp(1rem, 4vw, 2rem); }
+  }
+  @media (max-width: 480px) {
+    .hero-headline { font-size: clamp(3.5rem, 20vw, 6rem) !important; }
+    .hero-ctas { flex-direction: column; align-items: flex-start; }
+    .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; text-align: center; box-sizing: border-box; }
   }
 
   /* ── GALLERY ─────────────────────────────── */
@@ -1691,7 +1702,6 @@
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#" onclick="showPage('restaurant'); return false;" data-page="restaurant" data-i18n="nav.restaurant">Ristorante</a></li>
-        <li><a href="#" onclick="showPage('events'); return false;" data-page="events" data-i18n="nav.calendar">Calendario</a></li>
         <li><a href="#" onclick="showPage('contacts'); return false;" data-page="contacts" data-i18n="nav.where">Dove siamo</a></li>
         <li><a href="#" onclick="showPage('gallery'); return false;" data-page="gallery" data-i18n="nav.gallery">Galleria</a></li>
         <li><a href="#" onclick="showPage('private'); return false;" data-page="private" data-i18n="nav.private">Eventi</a></li>
@@ -1726,8 +1736,8 @@
             Vieni per una cena, un concerto, una presentazione,<br>o un bicchiere di vino.
           </p>
           <div class="hero-ctas">
-            <a href="#" class="btn-primary" onclick="showPage('events'); return false;" data-i18n="hero.cta1">Scopri il programma</a>
-            <a href="#" class="btn-secondary" onclick="showPage('restaurant'); return false;" data-i18n="hero.cta2">Il Ristorante</a>
+            <a href="#" class="btn-primary" onclick="showPage('restaurant'); return false;" data-i18n="hero.cta2">Il Ristorante</a>
+            <a href="#" class="btn-secondary" onclick="showPage('private'); return false;" data-i18n="home.private.cta">Organizza il tuo evento →</a>
           </div>
         </div>
       </div>
@@ -1757,7 +1767,7 @@
     <!-- PRIVATE EVENTS CTA -->
     <section id="home-private-cta" style="padding:5rem 0; background:var(--ink); color:var(--offwhite); border-top:1.5px solid rgba(248,242,236,0.1);">
       <div class="section-wrap">
-        <div style="display:grid; grid-template-columns:1fr auto; gap:4rem; align-items:center;">
+        <div style="display:grid; grid-template-columns:1fr 480px; gap:4rem; align-items:center;">
           <div>
             <div class="section-label" style="color:var(--ochre);" data-i18n="home.private.label">Eventi Privati</div>
             <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2.8rem,6vw,5.5rem); text-transform:uppercase; line-height:0.88; margin:0.6rem 0 1.2rem;" data-i18n="home.private.h2">Il tuo<br><em style="color:var(--red);">evento</em><br>al FAB</h2>
@@ -1778,10 +1788,8 @@
             </div>
             <a href="#" class="btn-primary" onclick="showPage('private'); return false;" style="background:var(--green); border-color:var(--green); color:var(--offwhite); display:inline-block; width:fit-content;" data-i18n="home.private.cta">Organizza il tuo evento →</a>
           </div>
-          <div style="display:flex; flex-direction:column; gap:0.8rem; align-self:start; padding-top:1rem;">
-            <div style="width:260px; aspect-ratio:3/4; overflow:hidden; border:1.5px solid rgba(248,242,236,0.12);">
-              <img src="img/gallery-chefs-table-live.jpg" alt="Evento privato al Chef's Table di Rimessa FAB" style="width:100%; height:100%; object-fit:cover; opacity:0.85;">
-            </div>
+          <div style="overflow:hidden; border:1.5px solid rgba(248,242,236,0.12); aspect-ratio:3/2;">
+            <img src="img/gallery-chefs-table-live.jpg" alt="Serata di evento privato a Rimessa FAB, ospiti al bancone con cucina aperta" style="width:100%; height:100%; object-fit:cover; object-position:center center; opacity:0.92; display:block;">
           </div>
         </div>
       </div>
@@ -2272,7 +2280,7 @@
           </svg>
         </div>
         <div style="margin-top: 1px; background: var(--beige); border: 1.5px solid var(--ink); border-top: none; padding: 1.2rem 1.5rem; font-size: 0.8rem; opacity: 0.6; font-family: 'Hanken Grotesk';" data-i18n="contacts.parking">
-          Parcheggio disponibile nelle vicinanze · Metro Linea B — Circo Massimo
+          Parcheggio disponibile nelle vicinanze
         </div>
       </div>
     </div>
@@ -2611,7 +2619,6 @@
           <ul>
             <li><a href="#" onclick="showPage('home'); return false;" data-i18n="footer.home">Home</a></li>
             <li><a href="#" onclick="showPage('restaurant'); return false;" data-i18n="footer.restaurant">Ristorante</a></li>
-            <li><a href="#" onclick="showPage('events'); return false;" data-i18n="footer.calendar">Calendario</a></li>
             <li><a href="#" onclick="showPage('contacts'); return false;" data-i18n="footer.where">Contatti</a></li>
             <li><a href="#" onclick="showPage('gallery'); return false;" data-i18n="footer.gallery">Galleria</a></li>
             <li><a href="#" onclick="showPage('private'); return false;" data-i18n="footer.private">Eventi Privati</a></li>
@@ -2692,7 +2699,7 @@
         'contacts.label':'Dove siamo','contacts.h1':'Vieni<br>a <em>trovarci</em>',
         'contacts.address.label':'Indirizzo','contacts.booking.label':'Prenotazioni','contacts.hours.label':'Orari ristorante','contacts.social.label':'Social',
         'contacts.ecosystem.label':'Ecosistema Roscioli','contacts.ecosystem.text':'FAB nasce da Rimessa Roscioli — stessa cura, format diverso.',
-        'contacts.parking':'Parcheggio disponibile nelle vicinanze · Metro Linea B — Circo Massimo',
+        'contacts.parking':'Parcheggio disponibile nelle vicinanze',
         'footer.brand':'Food, Arts & Books. Uno spazio culturale e gastronomico a Roma, nato da Rimessa Roscioli con una sua identità propria.',
         'footer.nav':'Navigazione','footer.contacts':'Contatti','footer.address':'Indirizzo',
         'footer.home':'Home','footer.restaurant':'Ristorante','footer.calendar':'Calendario','footer.where':'Contatti','footer.gallery':'Galleria','footer.privacy':'Privacy Policy',
@@ -2773,8 +2780,8 @@
         'events.h1':'Calen<br><em>dar</em><br>2026','events.sub':'Food, Arts & Books. Something new every week. Concerts, talks, special dinners and literary events.',
         'contacts.label':'Find us','contacts.h1':'Come<br><em>find us</em>',
         'contacts.address.label':'Address','contacts.booking.label':'Reservations','contacts.hours.label':'Restaurant hours','contacts.social.label':'Social',
-        'contacts.ecosystem.label':'The Roscioli family','contacts.ecosystem.text':'FAB was born from Rimessa Roscioli — the same care, a different intention.',
-        'contacts.parking':'Parking available nearby · Metro Line B — Circo Massimo',
+        'contacts.ecosystem.label':'The Roscioli family','contacts.ecosystem.text':'FAB was born from Rimessa Roscioli — the same care, a different format.',
+        'contacts.parking':'Parking available nearby',
         'footer.brand':'Food, Arts & Books. A cultural and gastronomic space in Rome, born from Rimessa Roscioli with its own distinct identity.',
         'footer.nav':'Navigation','footer.contacts':'Contact','footer.address':'Address',
         'footer.home':'Home','footer.restaurant':'Restaurant','footer.calendar':'Calendar','footer.where':'Contact','footer.gallery':'Gallery','footer.privacy':'Privacy Policy',
@@ -2817,7 +2824,7 @@
 
     const FAQS_EN = [
       { q: "Is reservation required?",             a: "Yes, especially for the Chef's Dinner which has only 14 covers. For À la Carte we still recommend booking, especially on weekends." },
-      { q: "Can you choose your seating time?",   a: "For the Chef's Dinner, seatings are at 7pm and 9pm. For À la Carte, reservations are available every 30 minutes from 6pm onward." },
+      { q: "Can I choose the seating time?",      a: "For the Chef's Dinner, seatings are at 7pm and 9pm. For À la Carte, reservations are available every 30 minutes from 6pm onward." },
       { q: "Is wine included in the Chef's Dinner?", a: "Yes, the €95 price includes seven courses with wine pairing selected by the sommelier." },
       { q: "Are there vegetarian options?",       a: "Yes. Please let us know when booking, and we'll adapt the menu with the same level of care." },
       { q: "Is a deposit required?",              a: "For the Chef's Dinner, we require a 50% deposit upon booking. The remaining balance will be paid at the restaurant." },
