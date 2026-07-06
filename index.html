@@ -1488,11 +1488,9 @@
       .page-hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
       .events-hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
 
-      /* ResDiary booking widget — mobile tab layout */
-      .book-tabs { display: flex !important; }
-      .book-grid { grid-template-columns: 1fr !important; }
-      .book-panel { display: none; }
-      .book-panel.active { display: block; }
+      /* Booking rows — mobile stack */
+      .book-row { grid-template-columns: 1fr !important; }
+      .book-row a.btn-primary, .book-row a.btn-secondary { width: 100%; text-align: center; box-sizing: border-box; margin-top: 1.25rem; }
     }
 
     /* ── ANIMATIONS ── */
@@ -1712,7 +1710,7 @@
         <span class="lang-flag" id="langFlag">🇺🇸</span>
         <span class="lang-code" id="langCode">EN</span>
       </button>
-      <a href="#" onclick="bookNow(); return false;" class="btn-prenota" data-i18n="nav.book">Prenota</a>
+      <a href="https://www.sevenrooms.com/app/reservations/rimessafab/create/search/" target="_blank" rel="noopener" class="btn-prenota" data-i18n="nav.book">Prenota</a>
       <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
@@ -2016,7 +2014,7 @@
               <div class="stat-value" style="color: var(--ochre)">€95</div>
             </div>
           </div>
-          <a href="#" onclick="bookNow('chefs'); return false;" class="btn-primary" style="background: var(--offwhite); color: var(--ink); border-color: var(--offwhite);" data-i18n="dining.chefs.cta">Prenota Chef's Dinner</a>
+          <a href="https://www.sevenrooms.com/app/reservations/rimessafab/create/search/" target="_blank" rel="noopener" class="btn-primary" style="background: var(--offwhite); color: var(--ink); border-color: var(--offwhite);" data-i18n="dining.chefs.cta">Prenota Chef's Dinner</a>
         </div>
 
         <div class="dining-card">
@@ -2033,7 +2031,7 @@
               <div class="stat-value" data-i18n="dining.alacarte.stat.booking.val">consigliata</div>
             </div>
           </div>
-          <a href="#" onclick="bookNow('alacarte'); return false;" class="btn-secondary" style="display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
+          <a href="https://www.sevenrooms.com/app/reservations/rimessafab/create/search/" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
         </div>
       </div>
 
@@ -2047,27 +2045,32 @@
         <a href="https://l.ead.me/bgJB62" target="_blank" rel="noopener" class="btn-primary" data-i18n="menu.cta">Vedi il menu →</a>
       </div>
 
-      <!-- ResDiary Booking Widget -->
+      <!-- SevenRooms Booking -->
       <div id="book" style="margin: 0 0 4rem;">
         <div style="background: var(--ink); color: var(--offwhite); padding: 1.2rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
           <span style="font-family: 'Barlow Condensed'; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;" data-i18n="book.title">Prenota un tavolo</span>
-          <span style="font-family: 'Hanken Grotesk'; font-size: 0.72rem; opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase;">Powered by ResDiary</span>
+          <span style="font-family: 'Hanken Grotesk'; font-size: 0.72rem; opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase;">Powered by SevenRooms</span>
         </div>
-        <!-- Tab switcher (mobile only) -->
-        <div class="book-tabs" style="display:none; background:var(--ink); border-bottom:1px solid rgba(255,255,255,0.08);">
-          <button class="book-tab active" onclick="switchBookTab('chefs')" style="flex:1; padding:0.8rem; font-family:'Barlow Condensed'; font-weight:700; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.08em; background:transparent; border:none; color:var(--ochre); cursor:pointer; border-bottom:2px solid var(--ochre);">Chef's Dinner</button>
-          <button class="book-tab" onclick="switchBookTab('alacarte')" style="flex:1; padding:0.8rem; font-family:'Barlow Condensed'; font-weight:700; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.08em; background:transparent; border:none; color:rgba(255,255,255,0.4); cursor:pointer; border-bottom:2px solid transparent;">À la Carte</button>
-        </div>
-        <div class="book-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--ink); border:1.5px solid var(--ink); border-top:none;">
-          <div class="book-panel active" id="book-chefs" style="background:var(--offwhite); padding:2rem;">
-            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ochre); margin-bottom:0.75rem;" data-i18n="dining.chefs.type">Il percorso del Fab</div>
-            <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.6rem; text-transform:uppercase; margin-bottom:1.5rem;">Chef's Dinner</div>
-            <iframe src="https://booking.resdiary.com/widget/Standard/RimessaRoscioli/60582" style="width:100%; height:480px; border:none;" title="Prenota Chef's Dinner" loading="lazy"></iframe>
+        <div style="border: 1.5px solid var(--ink); border-top: none;">
+          <!-- Chef's Dinner -->
+          <div class="book-row" style="display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:center; padding:2rem 2.5rem; background:var(--offwhite); border-bottom:1px solid rgba(17,17,17,0.1);">
+            <div>
+              <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ochre); margin-bottom:0.4rem;" data-i18n="dining.chefs.type">Il percorso del Fab</div>
+              <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:0.65rem;">Chef's Dinner</div>
+              <div style="font-family:'Hanken Grotesk'; font-size:0.8rem; color:var(--ink); opacity:0.55;" data-i18n="book.chefs.facts">Mer–Dom · Turni 19:00 e 21:00 · 14 coperti · €95 p.p.</div>
+              <div style="font-family:'Hanken Grotesk'; font-size:0.72rem; color:var(--ink); opacity:0.35; margin-top:0.35rem;" data-i18n="book.chefs.note">Acconto 50% richiesto alla prenotazione.</div>
+            </div>
+            <a href="https://www.sevenrooms.com/app/reservations/rimessafab/create/search/" target="_blank" rel="noopener" class="btn-primary" style="white-space:nowrap; background:var(--ink); color:var(--offwhite); border-color:var(--ink);" data-i18n="dining.chefs.cta">Prenota Chef's Dinner</a>
           </div>
-          <div class="book-panel" id="book-alacarte" style="background:var(--beige); padding:2rem;">
-            <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--green); margin-bottom:0.75rem;" data-i18n="dining.alacarte.type">I nostri piatti</div>
-            <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.6rem; text-transform:uppercase; margin-bottom:1.5rem;">À la Carte</div>
-            <iframe src="https://booking.resdiary.com/widget/Standard/RimessaRoscioli/65720" style="width:100%; height:480px; border:none;" title="Prenota À la Carte" loading="lazy"></iframe>
+          <!-- À la Carte -->
+          <div class="book-row" style="display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:center; padding:2rem 2.5rem; background:var(--beige);">
+            <div>
+              <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--green); margin-bottom:0.4rem;" data-i18n="dining.alacarte.type">I nostri piatti</div>
+              <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:0.65rem;">À la Carte</div>
+              <div style="font-family:'Hanken Grotesk'; font-size:0.8rem; color:var(--ink); opacity:0.55;" data-i18n="book.alacarte.facts">Mer–Dom · Dalle 18:00 · Ogni 30 min · Prenotazione consigliata</div>
+              <div style="font-family:'Hanken Grotesk'; font-size:0.72rem; color:var(--ink); opacity:0.35; margin-top:0.35rem;" data-i18n="book.alacarte.note">Specialmente nel fine settimana.</div>
+            </div>
+            <a href="https://www.sevenrooms.com/app/reservations/rimessafab/create/search/" target="_blank" rel="noopener" class="btn-secondary" style="white-space:nowrap; display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
           </div>
         </div>
       </div>
@@ -2387,12 +2390,12 @@
           <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">2. Dati trattati e finalità</h2>
           <p><strong>Newsletter:</strong> raccogliamo l'indirizzo email degli utenti che si iscrivono volontariamente alla nostra newsletter. I dati vengono utilizzati esclusivamente per l'invio di comunicazioni relative agli eventi e alle attività di Rimessa FAB. Base giuridica: consenso dell'interessato (art. 6, par. 1, lett. a GDPR).</p>
           <p><strong>Dati di navigazione (Analytics):</strong> il sito utilizza Google Analytics 4 per raccogliere dati aggregati e anonimi sull'utilizzo del sito (pagine visitate, durata sessione, provenienza geografica). I dati sono trattati in forma aggregata e non consentono l'identificazione del singolo utente. Base giuridica: legittimo interesse (art. 6, par. 1, lett. f GDPR). Informativa Google Analytics: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:var(--green);">policies.google.com/privacy</a>.</p>
-          <p><strong>Prenotazioni:</strong> i dati inseriti nei form di prenotazione (gestiti da ResDiary) sono trattati dal provider secondo la propria informativa privacy. Rimessa FAB riceve i dati strettamente necessari alla gestione della prenotazione.</p>
+          <p><strong>Prenotazioni:</strong> i dati inseriti nei form di prenotazione (gestiti da SevenRooms) sono trattati dal provider secondo la propria informativa privacy. Rimessa FAB riceve i dati strettamente necessari alla gestione della prenotazione.</p>
 
           <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">3. Terze parti</h2>
           <p><strong>Mailchimp</strong> (The Rocket Science Group LLC, USA): gestione della lista newsletter. I dati sono trasferiti negli USA sulla base delle Standard Contractual Clauses. Informativa: <a href="https://mailchimp.com/legal/privacy/" target="_blank" rel="noopener" style="color:var(--green);">mailchimp.com/legal/privacy</a>.</p>
           <p><strong>Google LLC</strong>: Analytics e tag manager. I dati vengono trasferiti negli USA sulla base delle Standard Contractual Clauses. IP anonimizzato attivo.</p>
-          <p><strong>ResDiary</strong>: gestione prenotazioni. Informativa: <a href="https://www.resdiary.com/privacy-policy" target="_blank" rel="noopener" style="color:var(--green);">resdiary.com/privacy-policy</a>.</p>
+          <p><strong>SevenRooms</strong>: gestione prenotazioni. Informativa: <a href="https://sevenrooms.com/privacy-policy/" target="_blank" rel="noopener" style="color:var(--green);">sevenrooms.com/privacy-policy</a>.</p>
           <p><strong>Elfsight</strong>: feed Instagram integrato nella pagina Galleria. Informativa: <a href="https://elfsight.com/privacy-policy/" target="_blank" rel="noopener" style="color:var(--green);">elfsight.com/privacy-policy</a>.</p>
 
           <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; text-transform:uppercase; margin:2rem 0 0.5rem; letter-spacing:0.04em;">4. Conservazione dei dati</h2>
@@ -2696,7 +2699,7 @@
         'dining.chefs.cta':'Prenota Chef\'s Dinner',
         'dining.alacarte.type':'I nostri piatti','dining.alacarte.desc':'Dal tardo pomeriggio, fino a sera. Perfetto per un aperitivo lungo, o una cena costruita piatto dopo piatto.',
         'dining.alacarte.stat.orario':'Apertura','dining.alacarte.stat.booking':'Prenotazione','dining.alacarte.stat.booking.val':'consigliata','dining.alacarte.cta':'Prenota À la Carte',
-        'book.title':'Prenota un tavolo','faq.title':'Domande frequenti',
+        'book.title':'Prenota un tavolo','book.chefs.facts':'Mer–Dom · Turni 19:00 e 21:00 · 14 coperti · €95 p.p.','book.chefs.note':'Acconto 50% richiesto alla prenotazione.','book.alacarte.facts':'Mer–Dom · Dalle 18:00 · Ogni 30 min · Prenotazione consigliata','book.alacarte.note':'Specialmente nel fine settimana.','faq.title':'Domande frequenti',
         'events.h1':'Calen<br><em>dario</em><br>2026','events.sub':'Food, Arts & Books. Ogni settimana qualcosa di nuovo. Concerti, talk, cene speciali e presentazioni letterarie.',
         'contacts.label':'Dove siamo','contacts.h1':'Vieni<br>a <em>trovarci</em>',
         'contacts.address.label':'Indirizzo','contacts.booking.label':'Prenotazioni','contacts.hours.label':'Orari ristorante','contacts.social.label':'Social',
@@ -2778,7 +2781,7 @@
         'dining.chefs.cta':'Book Chef\'s Dinner',
         'dining.alacarte.type':'Our menu','dining.alacarte.desc':'From late afternoon into the evening. Perfect for a long aperitivo or a full dinner from our seasonal menu.',
         'dining.alacarte.stat.orario':'Opening','dining.alacarte.stat.booking':'Reservation','dining.alacarte.stat.booking.val':'recommended','dining.alacarte.cta':'Book À la Carte',
-        'book.title':'Reserve a table','faq.title':'FAQ',
+        'book.title':'Reserve a table','book.chefs.facts':'Wed–Sun · Seatings 7pm and 9pm · 14 covers · €95 p.p.','book.chefs.note':'50% deposit required at booking.','book.alacarte.facts':'Wed–Sun · From 6pm · Every 30 min · Reservation recommended','book.alacarte.note':'Especially on weekends.','faq.title':'FAQ',
         'events.h1':'Calen<br><em>dar</em><br>2026','events.sub':'Food, Arts & Books. Something new every week. Concerts, talks, special dinners and literary events.',
         'contacts.label':'Find us','contacts.h1':'Come<br><em>find us</em>',
         'contacts.address.label':'Address','contacts.booking.label':'Reservations','contacts.hours.label':'Restaurant hours','contacts.social.label':'Social',
@@ -2895,25 +2898,6 @@
     });
 
     // ── BOOKING TAB SWITCHER (mobile) ─────────────
-    function switchBookTab(which) {
-      document.querySelectorAll('.book-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.book-tab').forEach(b => {
-        b.style.color = 'rgba(255,255,255,0.4)';
-        b.style.borderBottomColor = 'transparent';
-      });
-      const panel = document.getElementById('book-' + which);
-      if (panel) panel.classList.add('active');
-      const tabs = document.querySelectorAll('.book-tab');
-      const idx = which === 'chefs' ? 0 : 1;
-      if (tabs[idx]) {
-        tabs[idx].style.color = which === 'chefs' ? 'var(--ochre)' : 'var(--green)';
-        tabs[idx].style.borderBottomColor = which === 'chefs' ? 'var(--ochre)' : 'var(--green)';
-      }
-    }
-    // Init: on mobile show first panel by default
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.innerWidth <= 768) switchBookTab('chefs');
-    });
 
     // ── DATA ──────────────────────────────────────
     const EVENTS = [
@@ -3221,14 +3205,6 @@
     }
 
     // ── BOOK NOW ─────────────────────────────────
-    function bookNow(panel) {
-      showPage('restaurant');
-      requestAnimationFrame(() => {
-        const bookEl = document.getElementById('book');
-        if (bookEl) bookEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (panel) switchBookTab(panel);
-      });
-    }
 
     // ── LIGHTBOX ─────────────────────────────────
     const galleryImages = [
