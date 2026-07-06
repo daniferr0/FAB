@@ -1488,9 +1488,9 @@
       .page-hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
       .events-hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
 
-      /* Booking rows — mobile stack */
-      .book-row { grid-template-columns: 1fr !important; }
-      .book-row a.btn-primary, .book-row a.btn-secondary { width: 100%; text-align: center; box-sizing: border-box; margin-top: 1.25rem; }
+      /* Booking columns — mobile stack */
+      .book-cols { grid-template-columns: 1fr !important; }
+      .book-cols > div:first-child { border-right: none !important; border-bottom: 1px solid rgba(17,17,17,0.1); }
     }
 
     /* ── ANIMATIONS ── */
@@ -2052,26 +2052,38 @@
           <span style="font-family: 'Hanken Grotesk'; font-size: 0.72rem; opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase;">Powered by SevenRooms</span>
         </div>
         <div style="border: 1.5px solid var(--ink); border-top: none;">
-          <!-- Chef's Dinner -->
-          <div class="book-row" style="display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:center; padding:2rem 2.5rem; background:var(--offwhite); border-bottom:1px solid rgba(17,17,17,0.1);">
-            <div>
-              <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ochre); margin-bottom:0.4rem;" data-i18n="dining.chefs.type">Il percorso del Fab</div>
-              <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:0.65rem;">Chef's Dinner</div>
-              <div style="font-family:'Hanken Grotesk'; font-size:0.8rem; color:var(--ink); opacity:0.55;" data-i18n="book.chefs.facts">Mer–Dom · Turni 19:00 e 21:00 · 14 coperti · €95 p.p.</div>
-              <div style="font-family:'Hanken Grotesk'; font-size:0.72rem; color:var(--ink); opacity:0.35; margin-top:0.35rem;" data-i18n="book.chefs.note">Acconto 50% richiesto alla prenotazione.</div>
+          <!-- Two columns: Chef's Dinner | À la Carte -->
+          <div class="book-cols" style="display:grid; grid-template-columns:1fr 1fr;">
+            <!-- Chef's Dinner -->
+            <div style="padding:2rem 2.5rem; background:var(--offwhite); border-right:1px solid rgba(17,17,17,0.12);">
+              <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ochre); margin-bottom:0.5rem;" data-i18n="dining.chefs.type">Il percorso del Fab</div>
+              <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:1rem;">Chef's Dinner</div>
+              <div style="display:flex; flex-direction:column; gap:0.25rem; font-family:'Hanken Grotesk'; font-size:0.8rem; color:var(--ink); opacity:0.6; margin-bottom:0.6rem;">
+                <span data-i18n="book.chefs.days">Mer – Dom</span>
+                <span data-i18n="book.chefs.times">Turni: 19:00 e 21:00</span>
+                <span data-i18n="book.chefs.covers">14 coperti · €95 p.p.</span>
+              </div>
+              <div style="font-family:'Hanken Grotesk'; font-size:0.72rem; color:var(--ink); opacity:0.35;" data-i18n="book.chefs.note">Acconto 50% richiesto alla prenotazione.</div>
             </div>
-            <a href="https://www.sevenrooms.com/app/reservations/rimessafab/create/search/" target="_blank" rel="noopener" class="btn-primary" style="white-space:nowrap; background:var(--ink); color:var(--offwhite); border-color:var(--ink);" data-i18n="dining.chefs.cta">Prenota Chef's Dinner</a>
-          </div>
-          <!-- À la Carte -->
-          <div class="book-row" style="display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:center; padding:2rem 2.5rem; background:var(--beige);">
-            <div>
-              <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--green); margin-bottom:0.4rem;" data-i18n="dining.alacarte.type">I nostri piatti</div>
-              <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:0.65rem;">À la Carte</div>
-              <div style="font-family:'Hanken Grotesk'; font-size:0.8rem; color:var(--ink); opacity:0.55;" data-i18n="book.alacarte.facts">Mer–Dom · Dalle 18:00 · Ogni 30 min · Prenotazione consigliata</div>
-              <div style="font-family:'Hanken Grotesk'; font-size:0.72rem; color:var(--ink); opacity:0.35; margin-top:0.35rem;" data-i18n="book.alacarte.note">Specialmente nel fine settimana.</div>
+            <!-- À la Carte -->
+            <div style="padding:2rem 2.5rem; background:var(--beige);">
+              <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--green); margin-bottom:0.5rem;" data-i18n="dining.alacarte.type">I nostri piatti</div>
+              <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:1rem;">À la Carte</div>
+              <div style="display:flex; flex-direction:column; gap:0.25rem; font-family:'Hanken Grotesk'; font-size:0.8rem; color:var(--ink); opacity:0.6; margin-bottom:0.6rem;">
+                <span data-i18n="book.alacarte.days">Mer – Dom</span>
+                <span data-i18n="book.alacarte.times">Dalle 18:00 · ogni 30 min</span>
+                <span data-i18n="book.alacarte.recco">Prenotazione consigliata</span>
+              </div>
+              <div style="font-family:'Hanken Grotesk'; font-size:0.72rem; color:var(--ink); opacity:0.35;" data-i18n="book.alacarte.note">Specialmente nel fine settimana.</div>
             </div>
-            <a href="https://www.sevenrooms.com/app/reservations/rimessafab/create/search/" target="_blank" rel="noopener" class="btn-secondary" style="white-space:nowrap; display:inline-block;" data-i18n="dining.alacarte.cta">Prenota À la Carte</a>
           </div>
+          <!-- Esperienze — nota sottile -->
+          <div style="padding:0.85rem 2.5rem; background:var(--offwhite); border-top:1px solid rgba(17,17,17,0.08); display:flex; align-items:baseline; gap:0.6rem; flex-wrap:wrap;">
+            <span style="font-family:'Hanken Grotesk'; font-size:0.62rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink); opacity:0.35; white-space:nowrap;" data-i18n="book.exp.label">Disponibili anche</span>
+            <span style="font-family:'Hanken Grotesk'; font-size:0.78rem; color:var(--ink); opacity:0.45;" data-i18n="book.exp.list">Roscioli Food Tour · Cooking Class · Roman Lunch</span>
+          </div>
+          <!-- Unico CTA -->
+          <a href="https://www.sevenrooms.com/app/reservations/rimessafab/create/search/" target="_blank" rel="noopener" style="display:block; padding:1.15rem 2.5rem; background:var(--green); color:var(--offwhite); font-family:'Barlow Condensed'; font-weight:800; font-size:1.05rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; text-align:center; transition:background 0.2s;" onmouseover="this.style.background='#165e37'" onmouseout="this.style.background='var(--green)'" data-i18n="book.cta">Prenota qui →</a>
         </div>
       </div>
 
@@ -2699,7 +2711,7 @@
         'dining.chefs.cta':'Prenota Chef\'s Dinner',
         'dining.alacarte.type':'I nostri piatti','dining.alacarte.desc':'Dal tardo pomeriggio, fino a sera. Perfetto per un aperitivo lungo, o una cena costruita piatto dopo piatto.',
         'dining.alacarte.stat.orario':'Apertura','dining.alacarte.stat.booking':'Prenotazione','dining.alacarte.stat.booking.val':'consigliata','dining.alacarte.cta':'Prenota À la Carte',
-        'book.title':'Prenota un tavolo','book.chefs.facts':'Mer–Dom · Turni 19:00 e 21:00 · 14 coperti · €95 p.p.','book.chefs.note':'Acconto 50% richiesto alla prenotazione.','book.alacarte.facts':'Mer–Dom · Dalle 18:00 · Ogni 30 min · Prenotazione consigliata','book.alacarte.note':'Specialmente nel fine settimana.','faq.title':'Domande frequenti',
+        'book.title':'Prenota un tavolo','book.chefs.days':'Mer – Dom','book.chefs.times':'Turni: 19:00 e 21:00','book.chefs.covers':'14 coperti · €95 p.p.','book.chefs.note':'Acconto 50% richiesto alla prenotazione.','book.alacarte.days':'Mer – Dom','book.alacarte.times':'Dalle 18:00 · ogni 30 min','book.alacarte.recco':'Prenotazione consigliata','book.alacarte.note':'Specialmente nel fine settimana.','book.exp.label':'Disponibili anche','book.exp.list':'Roscioli Food Tour · Cooking Class · Roman Lunch','book.cta':'Prenota qui →','faq.title':'Domande frequenti',
         'events.h1':'Calen<br><em>dario</em><br>2026','events.sub':'Food, Arts & Books. Ogni settimana qualcosa di nuovo. Concerti, talk, cene speciali e presentazioni letterarie.',
         'contacts.label':'Dove siamo','contacts.h1':'Vieni<br>a <em>trovarci</em>',
         'contacts.address.label':'Indirizzo','contacts.booking.label':'Prenotazioni','contacts.hours.label':'Orari ristorante','contacts.social.label':'Social',
@@ -2781,7 +2793,7 @@
         'dining.chefs.cta':'Book Chef\'s Dinner',
         'dining.alacarte.type':'Our menu','dining.alacarte.desc':'From late afternoon into the evening. Perfect for a long aperitivo or a full dinner from our seasonal menu.',
         'dining.alacarte.stat.orario':'Opening','dining.alacarte.stat.booking':'Reservation','dining.alacarte.stat.booking.val':'recommended','dining.alacarte.cta':'Book À la Carte',
-        'book.title':'Reserve a table','book.chefs.facts':'Wed–Sun · Seatings 7pm and 9pm · 14 covers · €95 p.p.','book.chefs.note':'50% deposit required at booking.','book.alacarte.facts':'Wed–Sun · From 6pm · Every 30 min · Reservation recommended','book.alacarte.note':'Especially on weekends.','faq.title':'FAQ',
+        'book.title':'Reserve a table','book.chefs.days':'Wed – Sun','book.chefs.times':'Seatings: 7pm and 9pm','book.chefs.covers':'14 covers · €95 p.p.','book.chefs.note':'50% deposit required at booking.','book.alacarte.days':'Wed – Sun','book.alacarte.times':'From 6pm · every 30 min','book.alacarte.recco':'Reservation recommended','book.alacarte.note':'Especially on weekends.','book.exp.label':'Also available','book.exp.list':'Roscioli Food Tour · Cooking Class · Roman Lunch','book.cta':'Book now →','faq.title':'FAQ',
         'events.h1':'Calen<br><em>dar</em><br>2026','events.sub':'Food, Arts & Books. Something new every week. Concerts, talks, special dinners and literary events.',
         'contacts.label':'Find us','contacts.h1':'Come<br><em>find us</em>',
         'contacts.address.label':'Address','contacts.booking.label':'Reservations','contacts.hours.label':'Restaurant hours','contacts.social.label':'Social',
