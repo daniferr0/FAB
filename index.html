@@ -226,6 +226,7 @@
       --red:      #B33A2B;
       --ochre:    #D89A22;
       --ink:      #111111;
+      --banner-h: 0px;
     }
 
     * { box-sizing: border-box; }
@@ -235,6 +236,7 @@
     body {
       background-color: var(--offwhite);
       color: var(--ink);
+      padding-top: var(--banner-h, 0px);
       font-family: 'Hanken Grotesk', sans-serif;
       font-size: 16px;
       line-height: 1.6;
@@ -265,10 +267,45 @@
       letter-spacing: -0.01em;
     }
 
+    /* ── SUMMER HOLIDAY BANNER ── */
+    #holidayBanner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 950;
+      display: none;
+      background: var(--green);
+      color: var(--offwhite);
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.35;
+      text-align: center;
+      padding: 0.6rem 2.8rem;
+      border-bottom: 1.5px solid var(--ink);
+    }
+    #holidayBanner strong { font-weight: 700; }
+    .holiday-banner-close {
+      position: absolute;
+      top: 50%; right: 0.85rem;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--offwhite);
+      font-size: 1.05rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0.3rem;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+    .holiday-banner-close:hover { opacity: 1; }
+    @media (max-width: 640px) {
+      #holidayBanner { font-size: 0.8rem; padding: 0.55rem 2.4rem; }
+    }
+
     /* ── NAVIGATION ── */
     #nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: var(--banner-h, 0px); left: 0; right: 0;
       z-index: 900;
       background: var(--offwhite);
       border-bottom: 1.5px solid var(--ink);
@@ -1459,7 +1496,7 @@
         display: flex;
         flex-direction: column;
         position: fixed;
-        top: 60px; left: 0; right: 0;
+        top: calc(60px + var(--banner-h, 0px)); left: 0; right: 0;
         background: var(--offwhite);
         border-bottom: 1.5px solid var(--ink);
         padding: 1.5rem 2rem;
@@ -1685,6 +1722,12 @@
 </head>
 <body>
 
+  <!-- SUMMER HOLIDAY BANNER -->
+  <div id="holidayBanner" role="status">
+    <span data-i18n="banner.holiday">☀️ Il FAB è in vacanza dal <strong>27 luglio al 20 agosto</strong>. Riapriamo il 21 agosto — a presto!</span>
+    <button class="holiday-banner-close" aria-label="Chiudi avviso" onclick="dismissHolidayBanner()">✕</button>
+  </div>
+
   <!-- COOKIE CONSENT BANNER (GDPR / Garante IT) -->
   <div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:var(--ink); color:var(--offwhite); padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; border-top:2px solid var(--ochre);">
     <p style="margin:0; opacity:0.85; max-width:680px;">Utilizziamo Google Analytics per misurare il traffico in forma anonima. <a href="#" onclick="showPage('privacy');hideCookieBanner();return false;" style="color:var(--ochre); text-decoration:underline;">Privacy Policy</a></p>
@@ -1852,11 +1895,11 @@
         <p class="manifesto-body gsap-scale" data-i18n="manifesto.body">
           Un posto dove la cucina,<br>
           la musica, i libri<br>
-          e la <em>conversazione</em><br>
+          e il <em>dialogo</em><br>
           coesistono naturalmente.
         </p>
         <p class="manifesto-sub gsap-fade" data-i18n="manifesto.sub">
-          FAB è la propaggine naturale di Rimessa Roscioli, ma con un suo linguaggio, un suo ritmo e una sua logica di pubblico. Più porosa, più site-specific, più orientata agli eventi e aperta a musica, libri, talk e formati inattesi.
+          FAB è un'estensione naturale di Rimessa Roscioli, ma con un linguaggio e un ritmo proprio. È un luogo più fluido, più aperto a eventi, musica, libri, talk e formati inattesi.
         </p>
       </div>
     </section>
@@ -1985,7 +2028,7 @@
 
     <div class="page-hero" style="background: var(--beige);">
       <div class="section-label" data-i18n="resto.page.label">Il Ristorante</div>
-      <h1 data-i18n="resto.page.h1">Come<br>funziona<br><em>mangiare</em><br>al FAB</h1>
+      <h1 data-i18n="resto.page.h1">Mangiare<br>al <em>FAB</em></h1>
       <p class="page-hero-sub" data-i18n="resto.page.sub">Due format, un indirizzo. Lo Chef's Dinner è un percorso guidato attraverso le nostre idee e tecniche di cucina. La carta ti lascia libero di scegliere.</p>
     </div>
 
@@ -2674,6 +2717,7 @@
 
     const TRANSLATIONS = {
       it: {
+        'banner.holiday':'☀️ Il FAB è in vacanza dal <strong>27 luglio al 20 agosto</strong>. Riapriamo il 21 agosto — a presto!',
         'nav.restaurant':'Ristorante','nav.calendar':'Calendario','nav.where':'Dove siamo','nav.gallery':'Galleria','nav.book':'Prenota',
         'hero.tagline':'Uno spazio culturale e gastronomico nato da Rimessa Roscioli.<br>Vieni per una cena, un concerto, una presentazione,<br>o un bicchiere di vino.',
         'hero.cta1':'Scopri il programma','hero.cta2':'Il Ristorante',
@@ -2692,8 +2736,8 @@
         'detail.posti':'Posti','detail.turni':'Turni','detail.portate':'Portate + vino','detail.orario':'Orario',
         'detail.seats.val':'14 coperti','detail.booking':'Prenotazione','detail.booking.val':'consigliata',
         'manifesto.kicker':'Manifesto',
-        'manifesto.body':'Un posto dove la cucina,<br>la musica, i libri<br>e la <em>conversazione</em><br>coesistono naturalmente.',
-        'manifesto.sub':'FAB è la propaggine naturale di Rimessa Roscioli, ma con un suo linguaggio, un suo ritmo e una sua logica di pubblico. Più porosa, più site-specific, più orientata agli eventi e aperta a musica, libri, talk e formati inattesi.',
+        'manifesto.body':'Un posto dove la cucina,<br>la musica, i libri<br>e il <em>dialogo</em><br>coesistono naturalmente.',
+        'manifesto.sub':'FAB è un\'estensione naturale di Rimessa Roscioli, ma con un linguaggio e un ritmo proprio. È un luogo più fluido, più aperto a eventi, musica, libri, talk e formati inattesi.',
         'cats.label':'Esplora per area','cats.title':'Le tre anime di FAB',
         'cats.food.desc':'Chef\'s dinner, degustazioni, cene a quattro mani, eventi con produttori e vignaioli. Per noi la cucina è un atto culturale.',
         'cats.arts.desc':'Concerti di jazz e musica sperimentale, performance canore, jam session.',
@@ -2704,7 +2748,7 @@
         'press.label':'Dicono di noi','press.read':'Leggi l\'articolo →',
         'menu.label':'Menu','menu.title':'À la Carte','menu.desc':'Stagionale, in continuo aggiornamento.','menu.cta':'Vedi il menu →',
         'nl.title':'Resta nel giro','nl.sub':'Nuovi eventi ogni settimana. Niente spam, solo quello che succede davvero.','nl.placeholder':'La tua email','nl.button':'Iscriviti','nl.whatsapp':'Aggiornamenti WhatsApp',
-        'resto.page.label':'Il Ristorante','resto.page.h1':'Come<br>funziona<br><em>mangiare</em><br>al FAB',
+        'resto.page.label':'Il Ristorante','resto.page.h1':'Mangiare<br>al <em>FAB</em>',
         'resto.page.sub':'Due format, un indirizzo. Lo Chef\'s Dinner è un percorso guidato attraverso le nostre idee e tecniche di cucina. La carta ti lascia libero di scegliere.',
         'dining.chefs.type':'Il percorso del Fab','dining.chefs.desc':'Quattordici coperti, sette portate, con abbinamento vino incluso. Un percorso immersivo costruito dallo chef ogni sera: ingredienti stagionali, tecnica, racconto.',
         'dining.chefs.stat.seats':'Posti disponibili','dining.chefs.stat.portate':'Portate','dining.chefs.stat.turns':'Turni serali','dining.chefs.stat.person':'A persona',
@@ -2756,6 +2800,7 @@
         'private.faq.label':'Domande frequenti',
       },
       en: {
+        'banner.holiday':'☀️ FAB is on holiday from <strong>27 July to 20 August</strong>. We reopen on 21 August — see you soon!',
         'nav.restaurant':'Restaurant','nav.calendar':'Calendar','nav.where':'Find us','nav.gallery':'Gallery','nav.book':'Book',
         'hero.tagline':'A cultural and gastronomic space born from Rimessa Roscioli.<br>Come for a dinner, a concert, a book talk,<br>or a glass of wine.',
         'hero.cta1':'Explore the programme','hero.cta2':'The Restaurant',
@@ -2775,7 +2820,7 @@
         'detail.seats.val':'14 covers','detail.booking':'Reservation','detail.booking.val':'recommended',
         'manifesto.kicker':'Manifesto',
         'manifesto.body':'A place where food,<br>music, books<br>and <em>dialogue</em><br>coexist naturally.',
-        'manifesto.sub':'FAB is a natural extension of Rimessa Roscioli, but with its own language, rhythm, and audience. More fluid, site-specific, event-driven, and open to music, books, talks and unexpected formats.',
+        'manifesto.sub':'FAB is a natural extension of Rimessa Roscioli, but with its own language and rhythm. A more fluid space, more open to events, music, books, talks and unexpected formats.',
         'cats.label':'Explore by area','cats.title':'The three souls of FAB',
         'cats.food.desc':'Chef\'s dinner, tasting, events with artisans and winemakers. For us, food is also a cultural act.',
         'cats.arts.desc':'Jazz concert and experimental music, live performances and jam sessions.',
@@ -2786,7 +2831,7 @@
         'press.label':'Press','press.read':'Read the article →',
         'menu.label':'Menu','menu.title':'À la Carte','menu.desc':'Seasonal, constantly updated.','menu.cta':'View the menu →',
         'nl.title':'Stay in the loop','nl.sub':'New events every week. No spam, just what\'s really happening.','nl.placeholder':'Your email','nl.button':'Subscribe','nl.whatsapp':'WhatsApp updates',
-        'resto.page.label':'The Restaurant','resto.page.h1':'How to<br>dine<br><em>at FAB</em>',
+        'resto.page.label':'The Restaurant','resto.page.h1':'Dining<br>at <em>FAB</em>',
         'resto.page.sub':'Two formats, one address. The Chef\'s Dinner is a guided journey through our ideas and cooking approach. The à la carte menu leaves you free to choose.',
         'dining.chefs.type':'Fab\'s journey','dining.chefs.desc':'Fourteen covers, seven courses, wine pairing included. An immersive journey shaped by the chef each evening through seasonal ingredients, technique, and storytelling.',
         'dining.chefs.stat.seats':'Available seats','dining.chefs.stat.portate':'Courses','dining.chefs.stat.turns':'Evening seatings','dining.chefs.stat.person':'Per person',
@@ -2883,9 +2928,37 @@
         if (p.classList.contains('all')) { p.classList.add('active'); p.innerHTML = t('filter.all'); }
         else p.classList.remove('active');
       });
+      // Text length differs per language → recompute banner offset
+      syncBannerHeight();
     }
 
     function toggleLanguage() { setLanguage(LANG === 'it' ? 'en' : 'it'); }
+
+    // ── SUMMER HOLIDAY BANNER ─────────────────────
+    // Auto-expires after 20 Aug 2026. On dismiss it hides for 24h, then
+    // reappears on every page load until the vacation is over.
+    const HOLIDAY_SNOOZE_MS = 24 * 60 * 60 * 1000; // 24 ore
+    function syncBannerHeight() {
+      const b = document.getElementById('holidayBanner');
+      const h = (b && b.style.display === 'block') ? b.offsetHeight : 0;
+      document.documentElement.style.setProperty('--banner-h', h + 'px');
+    }
+    function dismissHolidayBanner() {
+      const b = document.getElementById('holidayBanner');
+      if (b) b.style.display = 'none';
+      document.documentElement.style.setProperty('--banner-h', '0px');
+      try { localStorage.setItem('fab-holiday-dismissed', Date.now()); } catch (e) {}
+    }
+    function initHolidayBanner() {
+      const b = document.getElementById('holidayBanner');
+      if (!b) return;
+      if (new Date() >= new Date('2026-08-21T00:00:00')) return;   // vacanza finita
+      const dismissedAt = parseInt(localStorage.getItem('fab-holiday-dismissed'), 10);
+      if (dismissedAt && (Date.now() - dismissedAt) < HOLIDAY_SNOOZE_MS) return; // chiuso da meno di 24h
+      b.style.display = 'block';
+      syncBannerHeight();
+      window.addEventListener('resize', syncBannerHeight);
+    }
 
     // ── COOKIE CONSENT ────────────────────────────
     function setCookieConsent(accepted) {
@@ -2900,6 +2973,7 @@
       if (b) b.style.display = 'none';
     }
     window.addEventListener('DOMContentLoaded', () => {
+      initHolidayBanner();
       const consent = localStorage.getItem('fab-cookie-consent');
       if (!consent) {
         const b = document.getElementById('cookieBanner');
