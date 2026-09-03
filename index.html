@@ -123,7 +123,7 @@
         "@type": "OpeningHoursSpecification",
         "name": "Chef's Dinner",
         "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "19:00",
+        "opens": "18:00",
         "closes": "23:00"
       }
     ],
@@ -170,7 +170,7 @@
         "name": "Si può scegliere il turno per lo Chef's Dinner?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Per lo Chef's Dinner i turni sono alle 19:00 e alle 21:00. Per la carta gli ingressi sono ogni 30 minuti dalle 18:00."
+          "text": "Per lo Chef's Dinner i turni sono alle 18:00 e alle 21:00. Per la carta gli ingressi sono ogni 30 minuti dalle 18:00."
         }
       },
       {
@@ -1370,6 +1370,22 @@
       opacity: 0.6;
     }
 
+    .event-row-date .daterange {
+      display: block;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .event-series {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.35rem;
+    }
+
     /* ─── CONTACTS PAGE ─── */
     #page-contacts {
       padding-top: 60px;
@@ -1519,8 +1535,14 @@
       .contacts-inner { grid-template-columns: 1fr; gap: 3rem; }
       .events-hero-inner { flex-direction: column; }
       .events-hero-sub { text-align: left; }
-      .event-row { grid-template-columns: 80px 1fr; }
-      .event-row-right { display: none; }
+      .event-row { grid-template-columns: 80px 1fr; column-gap: 1rem; row-gap: 0.6rem; }
+      .event-row-right {
+        grid-column: 2;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.9rem;
+      }
 
       .page-hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
       .events-hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
@@ -1745,6 +1767,7 @@
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#" onclick="showPage('restaurant'); return false;" data-page="restaurant" data-i18n="nav.restaurant">Ristorante</a></li>
+        <li><a href="#" onclick="showPage('events'); return false;" data-page="events" data-i18n="nav.calendar">Calendario</a></li>
         <li><a href="#" onclick="showPage('contacts'); return false;" data-page="contacts" data-i18n="nav.where">Dove siamo</a></li>
         <li><a href="#" onclick="showPage('gallery'); return false;" data-page="gallery" data-i18n="nav.gallery">Galleria</a></li>
         <li><a href="#" onclick="showPage('private'); return false;" data-page="private" data-i18n="nav.private">Eventi</a></li>
@@ -1852,7 +1875,7 @@
             <div class="resto-card gsap-fade">
               <div class="resto-card-label" data-i18n="card.chefs.label">Il percorso del Fab</div>
               <h3>Chef's Dinner</h3>
-              <p data-i18n="card.chefs.desc">Quattordici coperti, sette portate con abbinamento vino incluso. Un percorso costruito dallo chef, tra ingredienti, racconti e tecniche di cucina diverse. Due turni: 19:00 e 21:00.</p>
+              <p data-i18n="card.chefs.desc">Quattordici coperti, sette portate con abbinamento vino incluso. Un percorso costruito dallo chef, tra ingredienti, racconti e tecniche di cucina diverse. Due turni: 18:00 e 21:00.</p>
               <div class="resto-detail">
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.posti">Posti</span>
@@ -1860,7 +1883,7 @@
                 </div>
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.turni">Turni</span>
-                  <span class="detail-value">19:00 · 21:00</span>
+                  <span class="detail-value">18:00 · 21:00</span>
                 </div>
                 <div class="detail-item">
                   <span class="detail-label" data-i18n="detail.portate">Portate + vino</span>
@@ -2050,7 +2073,7 @@
             </div>
             <div>
               <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.turns">Turni serali</div>
-              <div class="stat-value" style="color: var(--offwhite)">19:00 · 21:00</div>
+              <div class="stat-value" style="color: var(--offwhite)">18:00 · 21:00</div>
             </div>
             <div>
               <div class="stat-label" style="color: rgba(255,255,255,0.4)" data-i18n="dining.chefs.stat.person">A persona</div>
@@ -2103,7 +2126,7 @@
               <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:1rem;">Chef's Dinner</div>
               <div style="display:flex; flex-direction:column; gap:0.25rem; font-family:'Hanken Grotesk'; font-size:0.8rem; color:var(--ink); opacity:0.6; margin-bottom:0.6rem;">
                 <span data-i18n="book.chefs.days">Mer – Dom</span>
-                <span data-i18n="book.chefs.times">Turni: 19:00 e 21:00</span>
+                <span data-i18n="book.chefs.times">Turni: 18:00 e 21:00</span>
                 <span data-i18n="book.chefs.covers">14 coperti · €95 p.p.</span>
               </div>
               <div style="font-family:'Hanken Grotesk'; font-size:0.72rem; color:var(--ink); opacity:0.35;" data-i18n="book.chefs.note">Acconto 50% richiesto alla prenotazione.</div>
@@ -2169,7 +2192,14 @@
     <div class="events-hero">
       <div class="events-hero-inner">
         <h1 data-i18n="events.h1">Calen<br><em>dario</em><br>2026</h1>
-        <p class="events-hero-sub" data-i18n="events.sub">Food, Arts & Books. Ogni settimana qualcosa di nuovo. Concerti, talk, cene speciali e presentazioni letterarie.</p>
+        <p class="events-hero-sub" data-i18n="events.sub">Food, Arts & Books. La programmazione riparte: cene speciali, concerti, talk e presentazioni letterarie.</p>
+      </div>
+    </div>
+
+    <div style="max-width:1400px; margin:0 auto; padding:2.25rem 2rem 0;">
+      <div style="border-top:1px solid rgba(17,17,17,0.12); padding-top:1.75rem;">
+        <div style="font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--red); margin-bottom:0.55rem;" data-i18n="events.series.kicker">Arrivano gli Americani</div>
+        <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.95rem; line-height:1.55; max-width:640px; opacity:0.75; margin:0;" data-i18n="events.series.desc">Una serie di ristoranti americani in residency da FAB. Tutte le date sono prenotabili su SevenRooms.</p>
       </div>
     </div>
 
@@ -2213,7 +2243,7 @@
         <div class="contact-block">
           <div class="contact-block-label" data-i18n="contacts.hours.label">Orari ristorante</div>
           <div class="contact-block-value" style="font-size: 1rem; font-family: 'Hanken Grotesk'; font-weight: 400; text-transform: none;">
-            <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">Chef's Dinner</strong> — 19:00, 21:00<br>
+            <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">Chef's Dinner</strong> — 18:00, 21:00<br>
             <strong style="font-family: 'Barlow Condensed'; font-size: 1.1rem;">À la Carte</strong> — 18:00–22:00
           </div>
         </div>
@@ -2731,7 +2761,7 @@
         'resto.label':'Il Ristorante','resto.h2':'Cucina<br>Libera<br>a Roma',
         'resto.desc':'Due esperienze diverse allo stesso tavolo. Lo Chef\'s Dinner, un format raccolto e immersivo con sette portate e abbinamento vino. La cena alla carta, a partire dal tardo pomeriggio fino a sera, per chi vuole assaggiare un solo piatto o provare tutto.',
         'resto.cta':'Scopri il ristorante',
-        'card.chefs.label':'Il percorso del Fab','card.chefs.desc':'Quattordici coperti, sette portate con abbinamento vino incluso. Un percorso costruito dallo chef, tra ingredienti, racconti e tecniche di cucina diverse. Due turni: 19:00 e 21:00.',
+        'card.chefs.label':'Il percorso del Fab','card.chefs.desc':'Quattordici coperti, sette portate con abbinamento vino incluso. Un percorso costruito dallo chef, tra ingredienti, racconti e tecniche di cucina diverse. Due turni: 18:00 e 21:00.',
         'card.alacarte.label':'I nostri piatti','card.alacarte.desc':'Dal tardo pomeriggio, fino a sera. Perfetto per un aperitivo lungo o una cena conviviale.',
         'detail.posti':'Posti','detail.turni':'Turni','detail.portate':'Portate + vino','detail.orario':'Orario',
         'detail.seats.val':'14 coperti','detail.booking':'Prenotazione','detail.booking.val':'consigliata',
@@ -2755,8 +2785,9 @@
         'dining.chefs.cta':'Prenota Chef\'s Dinner',
         'dining.alacarte.type':'I nostri piatti','dining.alacarte.desc':'Dal tardo pomeriggio, fino a sera. Perfetto per un aperitivo lungo, o una cena costruita piatto dopo piatto.',
         'dining.alacarte.stat.orario':'Apertura','dining.alacarte.stat.booking':'Prenotazione','dining.alacarte.stat.booking.val':'consigliata','dining.alacarte.cta':'Prenota À la Carte',
-        'book.title':'Prenota un tavolo','book.chefs.days':'Mer – Dom','book.chefs.times':'Turni: 19:00 e 21:00','book.chefs.covers':'14 coperti · €95 p.p.','book.chefs.note':'Acconto 50% richiesto alla prenotazione.','book.alacarte.days':'Mer – Dom','book.alacarte.times':'Dalle 18:00 · ogni 30 min','book.alacarte.recco':'Prenotazione consigliata','book.alacarte.note':'Specialmente nel fine settimana.','book.exp.label':'Disponibili anche','book.exp.list':'Roscioli Food Tour · Cooking Class · Roman Lunch','book.cta':'Prenota qui →','faq.title':'Domande frequenti',
-        'events.h1':'Calen<br><em>dario</em><br>2026','events.sub':'Food, Arts & Books. Ogni settimana qualcosa di nuovo. Concerti, talk, cene speciali e presentazioni letterarie.',
+        'book.title':'Prenota un tavolo','book.chefs.days':'Mer – Dom','book.chefs.times':'Turni: 18:00 e 21:00','book.chefs.covers':'14 coperti · €95 p.p.','book.chefs.note':'Acconto 50% richiesto alla prenotazione.','book.alacarte.days':'Mer – Dom','book.alacarte.times':'Dalle 18:00 · ogni 30 min','book.alacarte.recco':'Prenotazione consigliata','book.alacarte.note':'Specialmente nel fine settimana.','book.exp.label':'Disponibili anche','book.exp.list':'Roscioli Food Tour · Cooking Class · Roman Lunch','book.cta':'Prenota qui →','faq.title':'Domande frequenti',
+        'events.h1':'Calen<br><em>dario</em><br>2026','events.sub':'Food, Arts & Books. La programmazione riparte: cene speciali, concerti, talk e presentazioni letterarie.',
+        'events.series.kicker':'Arrivano gli Americani','events.series.desc':'Una serie di ristoranti americani in residency da FAB. Tutte le date sono prenotabili su SevenRooms.',
         'contacts.label':'Dove siamo','contacts.h1':'Vieni<br>a <em>trovarci</em>',
         'contacts.address.label':'Indirizzo','contacts.booking.label':'Prenotazioni','contacts.hours.label':'Orari ristorante','contacts.social.label':'Social',
         'contacts.ecosystem.label':'Ecosistema Roscioli','contacts.ecosystem.text':'FAB nasce da Rimessa Roscioli — stessa cura, format diverso.',
@@ -2814,7 +2845,7 @@
         'resto.label':'The Restaurant','resto.h2':'Food and<br><em>Culture</em><br>in Rome',
         'resto.desc':'Two different ways to experience FAB. The Chef\'s Dinner is a seven-course tasting menu with wine pairing, served in an intimate and immersive setting. The à la carte dinner is available from late afternoon onward, whether you feel like stopping for a bite or staying for the full menu.',
         'resto.cta':'Discover the restaurant',
-        'card.chefs.label':'Fab\'s journey','card.chefs.desc':'Fourteen covers, seven courses with wine pairing. An immersive journey shaped every night by the chef, between seasonal ingredients, different techniques and storytelling. Two seatings: 7pm and 9pm.',
+        'card.chefs.label':'Fab\'s journey','card.chefs.desc':'Fourteen covers, seven courses with wine pairing. An immersive journey shaped every night by the chef, between seasonal ingredients, different techniques and storytelling. Two seatings: 6pm and 9pm.',
         'card.alacarte.label':'Our menu','card.alacarte.desc':'From late afternoon into the evening. Perfect for a long aperitivo or a full dinner from our seasonal menu.',
         'detail.posti':'Seats','detail.turni':'Seatings','detail.portate':'Courses + wine','detail.orario':'Hours',
         'detail.seats.val':'14 covers','detail.booking':'Reservation','detail.booking.val':'recommended',
@@ -2838,8 +2869,9 @@
         'dining.chefs.cta':'Book Chef\'s Dinner',
         'dining.alacarte.type':'Our menu','dining.alacarte.desc':'From late afternoon into the evening. Perfect for a long aperitivo or a full dinner from our seasonal menu.',
         'dining.alacarte.stat.orario':'Opening','dining.alacarte.stat.booking':'Reservation','dining.alacarte.stat.booking.val':'recommended','dining.alacarte.cta':'Book À la Carte',
-        'book.title':'Reserve a table','book.chefs.days':'Wed – Sun','book.chefs.times':'Seatings: 7pm and 9pm','book.chefs.covers':'14 covers · €95 p.p.','book.chefs.note':'50% deposit required at booking.','book.alacarte.days':'Wed – Sun','book.alacarte.times':'From 6pm · every 30 min','book.alacarte.recco':'Reservation recommended','book.alacarte.note':'Especially on weekends.','book.exp.label':'Also available','book.exp.list':'Roscioli Food Tour · Cooking Class · Roman Lunch','book.cta':'Book now →','faq.title':'FAQ',
-        'events.h1':'Calen<br><em>dar</em><br>2026','events.sub':'Food, Arts & Books. Something new every week. Concerts, talks, special dinners and literary events.',
+        'book.title':'Reserve a table','book.chefs.days':'Wed – Sun','book.chefs.times':'Seatings: 6pm and 9pm','book.chefs.covers':'14 covers · €95 p.p.','book.chefs.note':'50% deposit required at booking.','book.alacarte.days':'Wed – Sun','book.alacarte.times':'From 6pm · every 30 min','book.alacarte.recco':'Reservation recommended','book.alacarte.note':'Especially on weekends.','book.exp.label':'Also available','book.exp.list':'Roscioli Food Tour · Cooking Class · Roman Lunch','book.cta':'Book now →','faq.title':'FAQ',
+        'events.h1':'Calen<br><em>dar</em><br>2026','events.sub':'Food, Arts & Books. The programme is back: special dinners, concerts, talks and literary events.',
+        'events.series.kicker':'The Americans Are Coming','events.series.desc':'A series of American restaurants in residency at FAB. Every date is bookable on SevenRooms.',
         'contacts.label':'Find us','contacts.h1':'Come<br><em>find us</em>',
         'contacts.address.label':'Address','contacts.booking.label':'Reservations','contacts.hours.label':'Restaurant hours','contacts.social.label':'Social',
         'contacts.ecosystem.label':'The Roscioli family','contacts.ecosystem.text':'FAB was born from Rimessa Roscioli — the same care, a different format.',
@@ -2886,7 +2918,7 @@
 
     const FAQS_EN = [
       { q: "Is reservation required?",             a: "Yes, especially for the Chef's Dinner which has only 14 covers. For À la Carte we still recommend booking, especially on weekends." },
-      { q: "Can I choose the seating time?",      a: "For the Chef's Dinner, seatings are at 7pm and 9pm. For À la Carte, reservations are available every 30 minutes from 6pm onward." },
+      { q: "Can I choose the seating time?",      a: "For the Chef's Dinner, seatings are at 6pm and 9pm. For À la Carte, reservations are available every 30 minutes from 6pm onward." },
       { q: "Is wine included in the Chef's Dinner?", a: "Yes, the €95 price includes seven courses with wine pairing selected by the sommelier." },
       { q: "Are there vegetarian options?",       a: "Yes. Please let us know when booking, and we'll adapt the menu with the same level of care." },
       { q: "Is a deposit required?",              a: "For the Chef's Dinner, we require a 50% deposit upon booking. The remaining balance will be paid at the restaurant." },
@@ -2986,35 +3018,18 @@
     // ── BOOKING TAB SWITCHER (mobile) ─────────────
 
     // ── DATA ──────────────────────────────────────
+    const SEVENROOMS_URL = "https://www.sevenrooms.com/app/reservations/rimessafab/create/search/";
+
     const EVENTS = [
-      { date: "3 Apr",    day: "3",   month: "Apr", title: "Perle ai Pochi",                               subtitle: "Duo al buio",                                          cats: ["books","performance"], time: null },
-      { date: "11 Apr",   day: "11",  month: "Apr", title: "Musica e diritti civili",                      subtitle: "Danilo Blaiotta",                                       cats: ["books","talk"],        time: "18:00" },
-      { date: "11 Apr",   day: "11",  month: "Apr", title: "Devil's Kitchen Music Club",                   subtitle: "Domenico Sanna / Francesco Fratini duo",                cats: ["arts","music"],        time: "22:30" },
-      { date: "12–13 Apr",day: "12",  month: "Apr", title: "Osterie del Mondo — Four Horsemen",            subtitle: "Il più famoso bistrot di NY a Roma",                    cats: ["food"],                time: "20:30" },
-      { date: "15 Apr",   day: "15",  month: "Apr", title: "Osterie d'Italia",                             subtitle: "Bistrot Quarticciolo + Leo Fulcro",                     cats: ["food","arts"],         time: null,   featured: true },
-      { date: "16 Apr",   day: "16",  month: "Apr", title: "La cucina italiana non esiste",                subtitle: "Podcast live con Alberto Grandi e Tommaso Melilli",     cats: ["books","food"],        time: null },
-      { date: "17 Apr",   day: "17",  month: "Apr", title: "In-Compresi / Perle ai Pochi",                 subtitle: "Italian Real Book con Francesca Faro",                  cats: ["books"],               time: null },
-      { date: "18 Apr",   day: "18",  month: "Apr", title: "Roberto Gatto Hammond 4et",                   subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
-      { date: "19 Apr",   day: "19",  month: "Apr", title: "Una vita",                                     subtitle: "Monologo di Fabio Cicchiello",                          cats: ["books"],               time: null },
-      { date: "21 Apr",   day: "21",  month: "Apr", title: "Pacina — Verticale",                           subtitle: null,                                                    cats: ["food","wine"],         time: "19:00" },
-      { date: "23 Apr",   day: "23",  month: "Apr", title: "Perle ai Pochi",                               subtitle: "Grandi Numeri dei Cor Veleno",                          cats: ["books"],               time: null },
-      { date: "25 Apr",   day: "25",  month: "Apr", title: "Traindeville",                                 subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
-      { date: "26 Apr",   day: "26",  month: "Apr", title: "Canone Mensile / Walseriana",                  subtitle: "Christian Raimo / Tommaso Ragno, Alberto Astorri, Lucia Re", cats: ["books","arts"],   time: null },
-      { date: "2 Mag",    day: "2",   month: "Mag", title: "Martina Castaldo Trio",                        subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
-      { date: "8 Mag",    day: "8",   month: "Mag", title: "Bottarga e Malvasia di Bosa",                  subtitle: "Con Tiziana Bacci e Cantina Columbu",                   cats: ["food"],                time: null },
-      { date: "9 Mag",    day: "9",   month: "Mag", title: "Musica e diritti civili ep.2",                 subtitle: "Achille Succi + Danilo Blaiotta",                       cats: ["books","arts"],        time: "18:00 / 22:30" },
-      { date: "10 Mag",   day: "10",  month: "Mag", title: "Pizza la domenica / Riccardo Staglianò",       subtitle: null,                                                    cats: ["food","books"],        time: "12:30 / 16:00 / 18:00" },
-      { date: "15 Mag",   day: "15",  month: "Mag", title: "Perle ai Pochi",                               subtitle: "Weird Instruments con Federico Pascucci",               cats: ["books"],               time: null },
-      { date: "16 Mag",   day: "16",  month: "Mag", title: "Gegè Munari 'The Legend' 5et",                 subtitle: null,                                                    cats: ["arts","music"],        time: "22:30" },
-      { date: "17 Mag",   day: "17",  month: "Mag", title: "Forno Brisa / Amore in senso porno",           subtitle: null,                                                    cats: ["food","books"],        time: "12:30 / 18:00" },
-      { date: "23 Mag",   day: "23",  month: "Mag", title: "Scrivere di vino e paesaggio",                 subtitle: "Edoardo Liberati 'Synthetics' Trio",                    cats: ["books","arts"],        time: "12:00 / 22:30" },
-      { date: "24 Mag",   day: "24",  month: "Mag", title: "Storie di paesaggio",                          subtitle: null,                                                    cats: ["books"],               time: "18:00" },
-      { date: "27 Mag",   day: "27",  month: "Mag", title: "Cantina di Neoneli",                           subtitle: null,                                                    cats: ["food"],                time: "20:30" },
-      { date: "4 Giu",    day: "4",   month: "Giu", title: "Osterie del mondo",                            subtitle: "Da Brooklyn a NY",                                      cats: ["food"],                time: null },
+      // ── Arrivano gli Americani — ristoranti USA in residency da FAB ──
+      { date: "13–14 Set",      day: "13", month: "Set", title: "Le Veau d'Or",    subtitle: null, cats: ["food"], time: null, series: "Arrivano gli Americani", bookUrl: "https://sevn.ly/xvtZ2eNC" },
+      { date: "24–25 Set",      day: "24", month: "Set", title: "Acre Resort",     subtitle: null, cats: ["food"], time: null, series: "Arrivano gli Americani" },
+      { date: "28 Set & 3 Ott", day: "28", month: "Set", title: "Hyper Trattoria", subtitle: null, cats: ["food"], time: null, series: "Arrivano gli Americani" },
+      { date: "5–6 Dic",        day: "5",  month: "Dic", title: "Semma",           subtitle: null, cats: ["food"], time: null, series: "Arrivano gli Americani" },
     ];
 
     const FAQS = [
-      { q: "Si può scegliere il turno?",          a: "Per lo Chef's Dinner i turni sono alle 19:00 e alle 21:00. Per la carta gli ingressi sono ogni 30 minuti dalle 18:00." },
+      { q: "Si può scegliere il turno?",          a: "Per lo Chef's Dinner i turni sono alle 18:00 e alle 21:00. Per la carta gli ingressi sono ogni 30 minuti dalle 18:00." },
       { q: "Per lo Chef's Dinner, il vino è incluso?", a: "Sì, il prezzo di €95 include sette portate con un abbinamento vino selezionato dal sommelier." },
       { q: "Ci sono opzioni vegetariane?",        a: "Sì, ma si prega di comunicarlo al momento della prenotazione. Il menù verrà adattato con lo stesso livello di cura dedicato agli altri piatti." },
       { q: "È richiesto un acconto per lo Chef's Dinner?", a: "Per lo Chef's Dinner richiediamo il 50% di acconto al momento della prenotazione. Il saldo verrà pagato al ristorante." },
@@ -3044,13 +3059,18 @@
     }
 
     function eventRowHTML(ev, isPastItem) {
+      const isRange = /[–—\-&]/.test(ev.date);
+      const dateCell = isRange
+        ? `<span class="daterange">${ev.date}</span>`
+        : `<span class="day">${ev.day}</span>\n            ${ev.month}`;
+      const bookHref = ev.bookUrl || SEVENROOMS_URL;
       return `
         <div class="event-row" data-cats="${ev.cats.join(' ')}"${isPastItem ? ' style="opacity:0.6;"' : ''}>
           <div class="event-row-date">
-            <span class="day">${ev.day}</span>
-            ${ev.month}
+            ${dateCell}
           </div>
           <div class="event-row-info">
+            ${ev.series ? `<div class="event-series">${ev.series}</div>` : ''}
             <div class="event-row-title">${ev.title}</div>
             ${ev.subtitle ? `<div class="event-row-sub">${ev.subtitle}</div>` : ''}
             <div style="display:flex;gap:0.4rem;margin-top:0.4rem;">${ev.cats.map(catBadge).join('')}</div>
@@ -3059,7 +3079,7 @@
             ${ev.time ? `<div class="event-row-time">${ev.time}</div>` : ''}
             ${isPastItem
               ? `<span style="font-size:0.68rem;padding:0.5rem 1rem;color:var(--ink);opacity:0.35;font-family:'Hanken Grotesk';font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">${t('btn.done')}</span>`
-              : `<a href="mailto:info@rimessa-fab.com?subject=Prenotazione: ${encodeURIComponent(ev.title)}" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">${t('btn.book')}</a>`
+              : `<a href="${bookHref}" target="_blank" rel="noopener" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">${t('btn.book')}</a>`
             }
           </div>
         </div>`;
@@ -3240,8 +3260,7 @@
 
     function openEvent(title) {
       const ev = EVENTS.find(e => e.title === title);
-      if (!ev) return;
-      alert(`${ev.title}\n${ev.date}${ev.time ? ' — ' + ev.time : ''}\n\nPer prenotare: info@rimessa-fab.com`);
+      window.open((ev && ev.bookUrl) || SEVENROOMS_URL, '_blank', 'noopener');
     }
 
     // ── NEWSLETTER / MAILCHIMP ───────────────────
