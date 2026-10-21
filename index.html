@@ -338,6 +338,33 @@
       #eventPopup .ep-img { max-height: 120px; object-fit: cover; object-position: center; }
     }
 
+    /* ── BOOKING MODAL ── */
+    #bookModal {
+      position: fixed; inset: 0; z-index: 9500;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(17,17,17,0.55); padding: 1rem;
+    }
+    #bookModal.show { display: flex; }
+    #bookModal .bm-card {
+      position: relative; width: min(420px, 100%);
+      background: var(--offwhite); color: var(--ink);
+      border: 1.5px solid var(--ink);
+      padding: 2rem 1.6rem 1.6rem;
+      font-family: 'Hanken Grotesk', sans-serif;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+    #bookModal .bm-close { position: absolute; top: 0.6rem; right: 0.6rem; width: 2rem; height: 2rem; border: none; border-radius: 50%; background: transparent; color: var(--ink); font-size: 1.1rem; cursor: pointer; }
+    #bookModal .bm-kicker { font-weight: 700; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
+    #bookModal .bm-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2rem; line-height: 0.95; text-transform: uppercase; margin-bottom: 0.4rem; }
+    #bookModal .bm-meta { font-size: 0.92rem; opacity: 0.75; margin-bottom: 1.3rem; }
+    #bookModal .bm-btn { display: block; text-align: center; padding: 0.95rem 1rem; margin-top: 0.7rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, color 0.2s; }
+    #bookModal .bm-mail { background: var(--green); color: var(--offwhite); border: 1.5px solid var(--green); }
+    #bookModal .bm-mail:hover { background: #165e37; }
+    #bookModal .bm-wa { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+    #bookModal .bm-wa:hover { background: var(--ink); color: var(--offwhite); }
+    #bookModal .bm-fallback { margin: 1.1rem 0 0; font-size: 0.74rem; line-height: 1.5; opacity: 0.7; text-align: center; }
+    #bookModal .bm-fallback a { color: var(--green); font-weight: 600; }
+
     /* ── NAVIGATION ── */
     #nav {
       position: fixed;
@@ -708,7 +735,7 @@
     .event-cat.wine  { background: var(--ochre); color: #fff; opacity: 0.8; }
     .event-cat.talk  { background: #555; color: #fff; }
     .event-cat.performance { background: var(--ink); color: #fff; }
-    .event-cat.music { background: var(--red); color: #fff; }
+    .event-cat.music { background: #1F4E6B; color: #fff; }
 
     .event-title {
       font-family: 'Barlow Condensed', sans-serif;
@@ -1786,6 +1813,19 @@
     <button class="holiday-banner-close" aria-label="Chiudi avviso" onclick="dismissHolidayBanner()">✕</button>
   </div>
 
+  <!-- BOOKING MODAL (Prenota → email / WhatsApp) -->
+  <div id="bookModal" role="dialog" aria-modal="true" aria-hidden="true" onclick="if(event.target===this) closeBooking()">
+    <div class="bm-card">
+      <button class="bm-close" aria-label="Chiudi" onclick="closeBooking()">✕</button>
+      <div class="bm-kicker" id="bmKicker"></div>
+      <div class="bm-title" id="bmTitle"></div>
+      <div class="bm-meta" id="bmMeta"></div>
+      <a class="bm-btn bm-mail" id="bmMail" href="#" onclick="closeBookingSoon()" data-i18n="book.modal.mail">Scrivici un'email</a>
+      <a class="bm-btn bm-wa" id="bmWa" href="#" target="_blank" rel="noopener" onclick="closeBookingSoon()" data-i18n="book.modal.wa">Contattaci su WhatsApp</a>
+      <p class="bm-fallback"><span data-i18n="book.modal.fallback">L'email non si apre? Scrivi a</span> <b>booking@rimessaroscioli.com</b> · <a id="bmGmail" href="#" target="_blank" rel="noopener">Gmail</a></p>
+    </div>
+  </div>
+
   <!-- EVENT POPUP (home) -->
   <div id="eventPopup" role="dialog" aria-label="Hamburger America · George Motz" aria-hidden="true">
     <button class="ep-close" aria-label="Chiudi" onclick="dismissEventPopup()">✕</button>
@@ -2241,13 +2281,6 @@
       <div class="events-hero-inner">
         <h1 data-i18n="events.h1">Calen<br><em>dario</em><br>2026</h1>
         <p class="events-hero-sub" data-i18n="events.sub">Food, Arts & Books. La programmazione riparte: cene speciali, concerti, talk e presentazioni letterarie.</p>
-      </div>
-    </div>
-
-    <div style="max-width:1400px; margin:0 auto; padding:2.25rem 2rem 0;">
-      <div style="border-top:1px solid rgba(17,17,17,0.12); padding-top:1.75rem;">
-        <div style="font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--red); margin-bottom:0.55rem;" data-i18n="events.series.kicker">Arrivano gli Americani</div>
-        <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.95rem; line-height:1.55; max-width:640px; opacity:0.75; margin:0;" data-i18n="events.series.desc">Una serie di ristoranti americani in residency da FAB. Tutte le date sono prenotabili su SevenRooms.</p>
       </div>
     </div>
 
@@ -2797,6 +2830,9 @@
       it: {
         'motz.popup.kicker':'16–17 ottobre','motz.popup.title':'Hamburger America<br>a Roma','motz.popup.text':'George Motz, il re dello smash burger di New York, ospite da FAB. Ven 16: cena a quattro mani con musica live. Sab 17: smash burger alla carta, pranzo e cena.','motz.popup.cta':'Prenota →',
         'motz.ev.sub':'Ven 16 cena a quattro mani · Sab 17 smash burger alla carta',
+        'adda.ev.sub':'Da New York · cucina indiana',
+        'book.modal.mail':'Scrivici un\'email','book.modal.wa':'Contattaci su WhatsApp','book.modal.kicker':'Prenota','book.modal.fallback':'L\'email non si apre? Scrivi a','wa.body':'Buongiorno, vorrei prenotare per il seguente evento:\n{event}\n\nNumero di persone:\nNome e cognome:',
+        'mail.subject':'Prenotazione','mail.body':'Buongiorno,\n\nvorrei prenotare per il seguente evento:\n{event}\n\nNumero di persone:\nNome:\nCognome:\nEmail:\nTelefono:\n\nGrazie!',
         'banner.holiday':'☀️ Il FAB è in vacanza dal <strong>27 luglio al 20 agosto</strong>. Riapriamo il 21 agosto — a presto!',
         'nav.restaurant':'Ristorante','nav.calendar':'Calendario','nav.where':'Dove siamo','nav.gallery':'Galleria','nav.book':'Prenota',
         'hero.tagline':'Uno spazio culturale e gastronomico nato da Rimessa Roscioli.<br>Vieni per una cena, un concerto, una presentazione,<br>o un bicchiere di vino.',
@@ -2806,7 +2842,7 @@
         'home.private.sub':'Dalla cena privata all\'evento culturale con musica live. Affittiamo lo spazio per serate esclusive — anche nei nostri giorni di chiusura, tutti i giorni della settimana.',
         'home.private.stat1':'Ospiti','home.private.stat2':'Risposta garantita','home.private.stat3':'Giorni su sette',
         'home.private.cta':'Organizza il tuo evento →',
-        'cal.label':'Prossimi eventi','cal.title':'Calendario<br>Aprile–Maggio','cal.range':'APR — MAG 2026','cal.viewall':'Vedi tutto il calendario →',
+        'cal.label':'Prossimi eventi','cal.title':'Calendario<br>Novembre–Dicembre','cal.range':'NOV — DIC 2026','cal.viewall':'Vedi tutto il calendario →',
         'filter.all':'Tutti','filter.label':'Filtra:',
         'resto.label':'Il Ristorante','resto.h2':'Cucina<br>Libera<br>a Roma',
         'resto.desc':'Due esperienze diverse allo stesso tavolo. Lo Chef\'s Dinner, un format raccolto e immersivo con sette portate e abbinamento vino. La cena alla carta, a partire dal tardo pomeriggio fino a sera, per chi vuole assaggiare un solo piatto o provare tutto.',
@@ -2837,7 +2873,6 @@
         'dining.alacarte.stat.orario':'Apertura','dining.alacarte.stat.booking':'Prenotazione','dining.alacarte.stat.booking.val':'consigliata','dining.alacarte.cta':'Prenota À la Carte',
         'book.title':'Prenota un tavolo','book.chefs.days':'Mer – Dom','book.chefs.times':'Turni: 18:00 e 21:00','book.chefs.covers':'14 coperti · €95 p.p.','book.chefs.note':'Acconto 50% richiesto alla prenotazione.','book.alacarte.days':'Mer – Dom','book.alacarte.times':'Dalle 18:00 · ogni 30 min','book.alacarte.recco':'Prenotazione consigliata','book.alacarte.note':'Specialmente nel fine settimana.','book.exp.label':'Disponibili anche','book.exp.list':'Roscioli Food Tour · Cooking Class · Roman Lunch','book.cta':'Prenota qui →','faq.title':'Domande frequenti',
         'events.h1':'Calen<br><em>dario</em><br>2026','events.sub':'Food, Arts & Books. La programmazione riparte: cene speciali, concerti, talk e presentazioni letterarie.',
-        'events.series.kicker':'Arrivano gli Americani','events.series.desc':'Una serie di ristoranti americani in residency da FAB. Tutte le date sono prenotabili su SevenRooms.',
         'contacts.label':'Dove siamo','contacts.h1':'Vieni<br>a <em>trovarci</em>',
         'contacts.address.label':'Indirizzo','contacts.booking.label':'Prenotazioni','contacts.hours.label':'Orari ristorante','contacts.social.label':'Social',
         'contacts.ecosystem.label':'Ecosistema Roscioli','contacts.ecosystem.text':'FAB nasce da Rimessa Roscioli — stessa cura, format diverso.',
@@ -2883,6 +2918,9 @@
       en: {
         'motz.popup.kicker':'October 16–17','motz.popup.title':'Hamburger America<br>comes to Rome','motz.popup.text':'George Motz, New York\'s smash burger king, is our guest at FAB. Fri 16: four-hands dinner with live music. Sat 17: smash burgers à la carte, lunch and dinner.','motz.popup.cta':'Book →',
         'motz.ev.sub':'Fri 16 four-hands dinner · Sat 17 smash burgers à la carte',
+        'adda.ev.sub':'From New York · Indian cuisine',
+        'book.modal.mail':'Send us an email','book.modal.wa':'Contact us on WhatsApp','book.modal.kicker':'Book','book.modal.fallback':'Email not opening? Write to','wa.body':'Hello, I would like to book the following event:\n{event}\n\nNumber of guests:\nFull name:',
+        'mail.subject':'Booking','mail.body':'Hello,\n\nI would like to book the following event:\n{event}\n\nNumber of guests:\nFirst name:\nLast name:\nEmail:\nPhone:\n\nThank you!',
         'banner.holiday':'☀️ FAB is on holiday from <strong>27 July to 20 August</strong>. We reopen on 21 August — see you soon!',
         'nav.restaurant':'Restaurant','nav.calendar':'Calendar','nav.where':'Find us','nav.gallery':'Gallery','nav.book':'Book',
         'hero.tagline':'A cultural and gastronomic space born from Rimessa Roscioli.<br>Come for a dinner, a concert, a book talk,<br>or a glass of wine.',
@@ -2892,7 +2930,7 @@
         'home.private.sub':'From a private dinner to a cultural evening with live music. We open the space for exclusive nights — including our regular closing days, seven days a week.',
         'home.private.stat1':'Guests','home.private.stat2':'Guaranteed reply','home.private.stat3':'Days a week',
         'home.private.cta':'Plan your event →',
-        'cal.label':'Upcoming events','cal.title':'Calendar<br>April–May','cal.range':'APR — MAY 2026','cal.viewall':'View full calendar →',
+        'cal.label':'Upcoming events','cal.title':'Calendar<br>November–December','cal.range':'NOV — DEC 2026','cal.viewall':'View full calendar →',
         'filter.all':'All','filter.label':'Filter:',
         'resto.label':'The Restaurant','resto.h2':'Food and<br><em>Culture</em><br>in Rome',
         'resto.desc':'Two different ways to experience FAB. The Chef\'s Dinner is a seven-course tasting menu with wine pairing, served in an intimate and immersive setting. The à la carte dinner is available from late afternoon onward, whether you feel like stopping for a bite or staying for the full menu.',
@@ -2923,7 +2961,6 @@
         'dining.alacarte.stat.orario':'Opening','dining.alacarte.stat.booking':'Reservation','dining.alacarte.stat.booking.val':'recommended','dining.alacarte.cta':'Book À la Carte',
         'book.title':'Reserve a table','book.chefs.days':'Wed – Sun','book.chefs.times':'Seatings: 6pm and 9pm','book.chefs.covers':'14 covers · €95 p.p.','book.chefs.note':'50% deposit required at booking.','book.alacarte.days':'Wed – Sun','book.alacarte.times':'From 6pm · every 30 min','book.alacarte.recco':'Reservation recommended','book.alacarte.note':'Especially on weekends.','book.exp.label':'Also available','book.exp.list':'Roscioli Food Tour · Cooking Class · Roman Lunch','book.cta':'Book now →','faq.title':'FAQ',
         'events.h1':'Calen<br><em>dar</em><br>2026','events.sub':'Food, Arts & Books. The programme is back: special dinners, concerts, talks and literary events.',
-        'events.series.kicker':'The Americans Are Coming','events.series.desc':'A series of American restaurants in residency at FAB. Every date is bookable on SevenRooms.',
         'contacts.label':'Find us','contacts.h1':'Come<br><em>find us</em>',
         'contacts.address.label':'Address','contacts.booking.label':'Reservations','contacts.hours.label':'Restaurant hours','contacts.social.label':'Social',
         'contacts.ecosystem.label':'The Roscioli family','contacts.ecosystem.text':'FAB was born from Rimessa Roscioli — the same care, a different format.',
@@ -3081,6 +3118,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       initHolidayBanner();
       initEventPopup();
+      { const rp = pageFromPath(); if (rp) showPage(rp, { replace: true }); }
       const consent = localStorage.getItem('fab-cookie-consent');
       if (!consent) {
         const b = document.getElementById('cookieBanner');
@@ -3096,12 +3134,20 @@
     const SEVENROOMS_URL = "https://www.sevenrooms.com/app/reservations/rimessafab/create/search/";
 
     const EVENTS = [
+      // ── Hamburger America · George Motz (16–17 Ott 2026): concluso, nascosto in automatico ──
+      { date: "16–17 Ott",      day: "16", month: "Ott", title: "Hamburger America · George Motz", subtitleKey: "motz.ev.sub", cats: ["food"], time: null, series: "Arrivano gli Americani", endDate: "2026-10-17" },
+
+      // ── Blue Fridays — sei serate di musica, un venerdì dopo l'altro (22:30) ──
+      { date: "13 Nov", day: "13", month: "Nov", title: "Simone Alessandrini",                subtitle: "“Storytellers” — Inaugurazione", cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+      { date: "20 Nov", day: "20", month: "Nov", title: "Mark Hanna Band",                    subtitle: null,                              cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+      { date: "27 Nov", day: "27", month: "Nov", title: "DOS — Duo Onirico Sonoro",           subtitle: null,                              cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+      { date: "4 Dic",  day: "4",  month: "Dic", title: "Ascanio Celestini & Danilo Blaiotta", subtitle: "“Poveri cristi”",                cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+
       // ── Arrivano gli Americani — ristoranti USA in residency da FAB ──
-      { date: "13–14 Set",      day: "13", month: "Set", title: "Le Veau d'Or",    subtitle: null, cats: ["food"], time: null, series: "Arrivano gli Americani", bookUrl: "https://sevn.ly/xvtZ2eNC" },
-      { date: "24–25 Set",      day: "24", month: "Set", title: "Acre Resort",     subtitle: null, cats: ["food"], time: null, series: "Arrivano gli Americani" },
-      { date: "28 Set & 3 Ott", day: "28", month: "Set", title: "Hyper Trattoria", subtitle: null, cats: ["food"], time: null, series: "Arrivano gli Americani" },
-      { date: "16–17 Ott",      day: "16", month: "Ott", title: "Hamburger America · George Motz", subtitleKey: "motz.ev.sub", cats: ["food"], time: null, series: "Arrivano gli Americani", bookUrl: "https://sevn.ly/xlLZBy7C", endDate: "2026-10-17" },
-      { date: "5–6 Dic",        day: "5",  month: "Dic", title: "Semma",          subtitle: null, cats: ["food"], time: null, series: "Arrivano gli Americani" },
+      { date: "6–7 Dic", day: "6", month: "Dic", title: "Adda", subtitleKey: "adda.ev.sub", cats: ["food"], time: null, series: "Arrivano gli Americani", endDate: "2026-12-07" },
+
+      { date: "11 Dic", day: "11", month: "Dic", title: "Gabriel Marciano & Roberto Tarenzi",  subtitle: null,                              cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+      { date: "18 Dic", day: "18", month: "Dic", title: "Claudio Filippini",                  subtitle: "“Meets the Rhythmic Section”",    cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
     ];
 
     const FAQS = [
@@ -3129,6 +3175,46 @@
     function isUpcoming(ev) { return eventDate(ev) >= TODAY; }
     function isPast(ev)     { return eventDate(ev) <  TODAY; }
 
+    // ── BOOKING: email precompilata ───────────────
+    const BOOKING_TO = 'booking@rimessaroscioli.com';
+    const BOOKING_CC = 'info@rimessa-fab.com';
+    function bookingHref(ev) {
+      const label = ev.date + ' · ' + ev.title + (ev.time ? ' · ' + ev.time : '');
+      const subject = t('mail.subject') + ' ' + ev.date + ' · ' + ev.title;
+      const body = t('mail.body').replace('{event}', label);
+      return 'mailto:' + BOOKING_TO + '?cc=' + BOOKING_CC +
+             '&subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
+    const BOOKING_WA = '393493525981';
+    function eventLabel(ev) { return ev.date + ' · ' + ev.title + (ev.time ? ' · ' + ev.time : ''); }
+    function whatsappHref(ev) {
+      return 'https://wa.me/' + BOOKING_WA + '?text=' + encodeURIComponent(t('wa.body').replace('{event}', eventLabel(ev)));
+    }
+    function gmailHref(ev) {
+      const subject = t('mail.subject') + ' ' + ev.date + ' · ' + ev.title;
+      const body = t('mail.body').replace('{event}', eventLabel(ev));
+      return 'https://mail.google.com/mail/?view=cm&fs=1&to=' + BOOKING_TO + '&cc=' + BOOKING_CC +
+             '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+    function openBooking(i) {
+      const ev = EVENTS[i];
+      if (!ev) return;
+      document.getElementById('bmKicker').textContent = t('book.modal.kicker');
+      document.getElementById('bmTitle').textContent = ev.title;
+      document.getElementById('bmMeta').textContent = ev.date + (ev.time ? ' · ' + ev.time : '');
+      document.getElementById('bmMail').href = bookingHref(ev);
+      document.getElementById('bmWa').href = whatsappHref(ev);
+      document.getElementById('bmGmail').href = gmailHref(ev);
+      const m = document.getElementById('bookModal');
+      m.classList.add('show'); m.setAttribute('aria-hidden', 'false');
+    }
+    function closeBooking() {
+      const m = document.getElementById('bookModal');
+      m.classList.remove('show'); m.setAttribute('aria-hidden', 'true');
+    }
+    function closeBookingSoon() { setTimeout(closeBooking, 300); }
+
     // ── RENDER ────────────────────────────────────
 
     function catBadge(cat) {
@@ -3140,7 +3226,6 @@
       const dateCell = isRange
         ? `<span class="daterange">${ev.date}</span>`
         : `<span class="day">${ev.day}</span>\n            ${ev.month}`;
-      const bookHref = ev.bookUrl || SEVENROOMS_URL;
       return `
         <div class="event-row" data-cats="${ev.cats.join(' ')}"${isPastItem ? ' style="opacity:0.6;"' : ''}>
           <div class="event-row-date">
@@ -3156,7 +3241,7 @@
             ${ev.time ? `<div class="event-row-time">${ev.time}</div>` : ''}
             ${isPastItem
               ? `<span style="font-size:0.68rem;padding:0.5rem 1rem;color:var(--ink);opacity:0.35;font-family:'Hanken Grotesk';font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">${t('btn.done')}</span>`
-              : `<a href="${bookHref}" target="_blank" rel="noopener" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">${t('btn.book')}</a>`
+              : `<a href="#" onclick="openBooking(${EVENTS.indexOf(ev)}); return false;" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">${t('btn.book')}</a>`
             }
           </div>
         </div>`;
@@ -3293,7 +3378,38 @@
 
     // ── NAVIGATION ───────────────────────────────
 
-    function showPage(page) {
+    // ── ROUTING: URL propri per Ristorante / Calendario / Eventi ──
+    const HOME_TITLE = document.title;
+    const ROUTES = {
+      restaurant: { path: '/ristorante', title: 'Ristorante · Rimessa FAB Roma' },
+      events:     { path: '/calendario', title: 'Calendario eventi · Rimessa FAB Roma' },
+      private:    { path: '/eventi',     title: 'Eventi privati · Rimessa FAB Roma' }
+    };
+    function pageFromPath() {
+      const p = location.pathname.replace(/\/+$/, '');
+      return Object.keys(ROUTES).find(k => ROUTES[k].path === p) || null;
+    }
+    function syncUrl(page, mode) {
+      const r = ROUTES[page];
+      const path = r ? r.path : '/';
+      document.title = r ? r.title : HOME_TITLE;
+      const canon = document.querySelector('link[rel="canonical"]');
+      const url = 'https://rimessa-fab.com' + (r ? r.path : '/');
+      if (canon) canon.href = url;
+      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(l => { l.href = url; });
+      const og = document.querySelector('meta[property="og:url"]');
+      if (og) og.content = url;
+      if (mode === 'none' || location.protocol === 'file:') return;
+      try {
+        const cur = history.state && history.state.page;
+        if (mode === 'replace' || location.pathname !== path || cur !== page) history[mode === 'replace' ? 'replaceState' : 'pushState']({ page }, '', path);
+      } catch (e) {}
+    }
+    window.addEventListener('popstate', (e) => showPage((e.state && e.state.page) || pageFromPath() || 'home', { fromHistory: true }));
+
+    function showPage(page, opts) {
+      opts = opts || {};
+      syncUrl(page, opts.fromHistory ? 'none' : (opts.replace ? 'replace' : 'push'));
       document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
       document.getElementById('page-' + page).classList.add('active');
       document.querySelectorAll('.nav-links a').forEach(a => {
@@ -3338,7 +3454,7 @@
 
     function openEvent(title) {
       const ev = EVENTS.find(e => e.title === title);
-      window.open((ev && ev.bookUrl) || SEVENROOMS_URL, '_blank', 'noopener');
+      if (ev) openBooking(EVENTS.indexOf(ev)); else window.open(SEVENROOMS_URL, '_blank', 'noopener');
     }
 
     // ── NEWSLETTER / MAILCHIMP ───────────────────
@@ -3433,7 +3549,7 @@
     document.addEventListener('keydown', (e) => {
       const lb = document.getElementById('lightbox');
       if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') { closeLightbox(); closeBooking(); }
       if (e.key === 'ArrowLeft')  moveLightbox(-1);
       if (e.key === 'ArrowRight') moveLightbox(1);
     });
