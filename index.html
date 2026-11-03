@@ -357,6 +357,8 @@
     #bookModal .bm-kicker { font-weight: 700; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
     #bookModal .bm-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2rem; line-height: 0.95; text-transform: uppercase; margin-bottom: 0.4rem; }
     #bookModal .bm-meta { font-size: 0.92rem; opacity: 0.75; margin-bottom: 1.3rem; }
+    #bookModal .bm-details { font-size: 0.86rem; line-height: 1.55; opacity: 0.85; margin: 0 0 1.2rem; }
+    #bookModal .bm-card { max-height: calc(100vh - 2rem); overflow-y: auto; }
     #bookModal .bm-btn { display: block; text-align: center; padding: 0.95rem 1rem; margin-top: 0.7rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, color 0.2s; }
     #bookModal .bm-mail { background: var(--green); color: var(--offwhite); border: 1.5px solid var(--green); }
     #bookModal .bm-mail:hover { background: #165e37; }
@@ -732,7 +734,7 @@
     .event-cat.food  { background: var(--ochre); color: #fff; }
     .event-cat.arts  { background: var(--red);   color: #fff; }
     .event-cat.books { background: var(--green); color: #fff; }
-    .event-cat.wine  { background: var(--ochre); color: #fff; opacity: 0.8; }
+    .event-cat.wine  { background: #F3C6D0; color: #7A2236; }
     .event-cat.talk  { background: #555; color: #fff; }
     .event-cat.performance { background: var(--ink); color: #fff; }
     .event-cat.music { background: #1F4E6B; color: #fff; }
@@ -1820,6 +1822,7 @@
       <div class="bm-kicker" id="bmKicker"></div>
       <div class="bm-title" id="bmTitle"></div>
       <div class="bm-meta" id="bmMeta"></div>
+      <p class="bm-details" id="bmDetails" style="display:none"></p>
       <a class="bm-btn bm-mail" id="bmMail" href="#" onclick="closeBookingSoon()" data-i18n="book.modal.mail">Scrivici un'email</a>
       <a class="bm-btn bm-wa" id="bmWa" href="#" target="_blank" rel="noopener" onclick="closeBookingSoon()" data-i18n="book.modal.wa">Contattaci su WhatsApp</a>
       <p class="bm-fallback"><span data-i18n="book.modal.fallback">L'email non si apre? Scrivi a</span> <b>booking@rimessaroscioli.com</b> · <a id="bmGmail" href="#" target="_blank" rel="noopener">Gmail</a></p>
@@ -2831,6 +2834,8 @@
         'motz.popup.kicker':'16–17 ottobre','motz.popup.title':'Hamburger America<br>a Roma','motz.popup.text':'George Motz, il re dello smash burger di New York, ospite da FAB. Ven 16: cena a quattro mani con musica live. Sab 17: smash burger alla carta, pranzo e cena.','motz.popup.cta':'Prenota →',
         'motz.ev.sub':'Ven 16 cena a quattro mani · Sab 17 smash burger alla carta',
         'adda.ev.sub':'Da New York · cucina indiana',
+        'concori.ev.series':'Cena con il vignaiolo','concori.ev.sub':'4 portate e 4 vini con Gabriele Da Prato',
+        'concori.ev.details':'Lunedì 16 novembre ore 20, Rimessa FAB ospita Podere Còncori per una serata dedicata all\'incontro diretto con il vignaiolo e alla scoperta dei suoi vini.<br><br>Quattro portate accompagnate da quattro vini selezionati, con Gabriele Da Prato tra i tavoli a raccontare il territorio, le scelte produttive e le storie dietro ogni bottiglia. In degustazione anche vecchie annate.<br><br>Non una degustazione frontale, ma un momento di condivisione.<br><br><b>60 € tutto incluso</b>',
         'book.modal.mail':'Scrivici un\'email','book.modal.wa':'Contattaci su WhatsApp','book.modal.kicker':'Prenota','book.modal.fallback':'L\'email non si apre? Scrivi a','wa.body':'Buongiorno, vorrei prenotare per il seguente evento:\n{event}\n\nNumero di persone:\nNome e cognome:',
         'mail.subject':'Prenotazione','mail.body':'Buongiorno,\n\nvorrei prenotare per il seguente evento:\n{event}\n\nNumero di persone:\nNome:\nCognome:\nEmail:\nTelefono:\n\nGrazie!',
         'banner.holiday':'☀️ Il FAB è in vacanza dal <strong>27 luglio al 20 agosto</strong>. Riapriamo il 21 agosto — a presto!',
@@ -2919,6 +2924,8 @@
         'motz.popup.kicker':'October 16–17','motz.popup.title':'Hamburger America<br>comes to Rome','motz.popup.text':'George Motz, New York\'s smash burger king, is our guest at FAB. Fri 16: four-hands dinner with live music. Sat 17: smash burgers à la carte, lunch and dinner.','motz.popup.cta':'Book →',
         'motz.ev.sub':'Fri 16 four-hands dinner · Sat 17 smash burgers à la carte',
         'adda.ev.sub':'From New York · Indian cuisine',
+        'concori.ev.series':'Dinner with the winemaker','concori.ev.sub':'4 courses and 4 wines with Gabriele Da Prato',
+        'concori.ev.details':'Monday 16 November at 8pm, Rimessa FAB hosts Podere Còncori for an evening devoted to meeting the winemaker and discovering his wines.<br><br>Four courses paired with four selected wines, with Gabriele Da Prato at the tables telling the story of the land, his winemaking choices and the stories behind each bottle. Older vintages will also be poured.<br><br>Not a formal tasting, but a moment of sharing.<br><br><b>€60 all inclusive</b>',
         'book.modal.mail':'Send us an email','book.modal.wa':'Contact us on WhatsApp','book.modal.kicker':'Book','book.modal.fallback':'Email not opening? Write to','wa.body':'Hello, I would like to book the following event:\n{event}\n\nNumber of guests:\nFull name:',
         'mail.subject':'Booking','mail.body':'Hello,\n\nI would like to book the following event:\n{event}\n\nNumber of guests:\nFirst name:\nLast name:\nEmail:\nPhone:\n\nThank you!',
         'banner.holiday':'☀️ FAB is on holiday from <strong>27 July to 20 August</strong>. We reopen on 21 August — see you soon!',
@@ -3139,6 +3146,7 @@
 
       // ── Blue Fridays — sei serate di musica, un venerdì dopo l'altro (22:30) ──
       { date: "13 Nov", day: "13", month: "Nov", title: "Simone Alessandrini",                subtitle: "“Storytellers” — Inaugurazione", cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+      { date: "16 Nov", day: "16", month: "Nov", title: "Podere Còncori", subtitleKey: "concori.ev.sub", detailsKey: "concori.ev.details", cats: ["food", "wine"], time: "20:00", seriesKey: "concori.ev.series", bookUrl: "https://sevn.ly/xekCE7Uj" },
       { date: "20 Nov", day: "20", month: "Nov", title: "Mark Hanna Band",                    subtitle: null,                              cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
       { date: "27 Nov", day: "27", month: "Nov", title: "DOS — Duo Onirico Sonoro",           subtitle: null,                              cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
       { date: "4 Dic",  day: "4",  month: "Dic", title: "Ascanio Celestini & Danilo Blaiotta", subtitle: "“Poveri cristi”",                cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
@@ -3203,9 +3211,23 @@
       document.getElementById('bmKicker').textContent = t('book.modal.kicker');
       document.getElementById('bmTitle').textContent = ev.title;
       document.getElementById('bmMeta').textContent = ev.date + (ev.time ? ' · ' + ev.time : '');
-      document.getElementById('bmMail').href = bookingHref(ev);
-      document.getElementById('bmWa').href = whatsappHref(ev);
-      document.getElementById('bmGmail').href = gmailHref(ev);
+      const det = document.getElementById('bmDetails');
+      det.style.display = ev.detailsKey ? '' : 'none';
+      det.innerHTML = ev.detailsKey ? t(ev.detailsKey) : '';
+      const mail = document.getElementById('bmMail'), wa = document.getElementById('bmWa');
+      const fb = document.querySelector('#bookModal .bm-fallback');
+      if (ev.bookUrl) {
+        // link di prenotazione diretto (SevenRooms)
+        mail.href = ev.bookUrl; mail.target = '_blank'; mail.rel = 'noopener';
+        mail.removeAttribute('data-i18n'); mail.textContent = t('btn.book');
+        wa.style.display = 'none'; fb.style.display = 'none';
+      } else {
+        mail.href = bookingHref(ev); mail.removeAttribute('target');
+        mail.setAttribute('data-i18n', 'book.modal.mail'); mail.innerHTML = t('book.modal.mail');
+        wa.style.display = ''; fb.style.display = '';
+        wa.href = whatsappHref(ev);
+        document.getElementById('bmGmail').href = gmailHref(ev);
+      }
       const m = document.getElementById('bookModal');
       m.classList.add('show'); m.setAttribute('aria-hidden', 'false');
     }
@@ -3232,7 +3254,7 @@
             ${dateCell}
           </div>
           <div class="event-row-info">
-            ${ev.series ? `<div class="event-series">${ev.series}</div>` : ''}
+            ${(ev.seriesKey || ev.series) ? `<div class="event-series">${ev.seriesKey ? t(ev.seriesKey) : ev.series}</div>` : ''}
             <div class="event-row-title">${ev.title}</div>
             ${(ev.subtitleKey || ev.subtitle) ? `<div class="event-row-sub">${ev.subtitleKey ? t(ev.subtitleKey) : ev.subtitle}</div>` : ''}
             <div style="display:flex;gap:0.4rem;margin-top:0.4rem;">${ev.cats.map(catBadge).join('')}</div>
