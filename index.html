@@ -738,6 +738,7 @@
     .event-cat.talk  { background: #555; color: #fff; }
     .event-cat.performance { background: var(--ink); color: #fff; }
     .event-cat.music { background: #1F4E6B; color: #fff; }
+    .event-cat.special { background: #111; color: var(--ochre); box-shadow: inset 0 0 0 1px var(--ochre); }
 
     .event-title {
       font-family: 'Barlow Condensed', sans-serif;
@@ -1349,6 +1350,15 @@
 
     .events-hero h1 em { color: var(--ochre); font-style: italic; }
 
+    /* Hero Calendario: duotone blu (Blue Fridays) → seppia (Saturday Fever) */
+    #page-events .events-hero {
+      background:
+        linear-gradient(90deg, rgba(17,17,17,0.78) 0%, rgba(17,17,17,0.40) 50%, rgba(17,17,17,0.72) 100%),
+        url('img/calendario-hero.jpg') center / cover no-repeat,
+        var(--ink);
+    }
+    #page-events .events-hero-sub { opacity: 0.88; text-shadow: 0 1px 12px rgba(17,17,17,0.6); }
+
     .events-hero-sub {
       font-size: 0.9rem;
       opacity: 0.6;
@@ -1450,6 +1460,14 @@
       color: var(--red);
       margin-bottom: 0.35rem;
     }
+
+    /* Rassegne musicali: Blue Fridays (blu) · Saturday Fever (ocra) — riga colorata */
+    .event-row.ser-bf { background: #C6DBE8; box-shadow: inset 6px 0 0 #1F4E6B; padding-left: 1.5rem; padding-right: 1.25rem; }
+    .event-row.ser-sf { background: rgba(216,154,34,0.24); box-shadow: inset 6px 0 0 var(--ochre); padding-left: 1.5rem; padding-right: 1.25rem; }
+    .event-row.ser-bf .event-series { color: #1F4E6B; }
+    .event-row.ser-sf .event-series { color: #8F5E00; }
+    .event-row.ser-bf:hover { background: #AECBDD; padding-left: 1.5rem; padding-right: 1.25rem; margin: 0; }
+    .event-row.ser-sf:hover { background: rgba(216,154,34,0.38); padding-left: 1.5rem; padding-right: 1.25rem; margin: 0; }
 
     /* ─── CONTACTS PAGE ─── */
     #page-contacts {
@@ -1598,7 +1616,9 @@
       .nl-form { max-width: 100%; width: 100%; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .contacts-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .events-hero-inner { flex-direction: column; }
+      .events-hero-inner { flex-direction: column; align-items: flex-start; }
+      #page-events .events-hero { padding: 2.5rem 1.25rem; }
+      #page-events .events-hero-sub { max-width: none; }
       .events-hero-sub { text-align: left; }
       .event-row { grid-template-columns: 80px 1fr; column-gap: 1rem; row-gap: 0.6rem; }
       .event-row-right {
@@ -2836,6 +2856,17 @@
         'adda.ev.sub':'Da New York · cucina indiana',
         'concori.ev.series':'Cena con il vignaiolo','concori.ev.sub':'4 portate e 4 vini con Gabriele Da Prato',
         'concori.ev.details':'Lunedì 16 novembre ore 20, Rimessa FAB ospita Podere Còncori per una serata dedicata all\'incontro diretto con il vignaiolo e alla scoperta dei suoi vini.<br><br>Quattro portate accompagnate da quattro vini selezionati, con Gabriele Da Prato tra i tavoli a raccontare il territorio, le scelte produttive e le storie dietro ogni bottiglia. In degustazione anche vecchie annate.<br><br>Non una degustazione frontale, ma un momento di condivisione.<br><br><b>60 € tutto incluso</b>',
+        'mus.note':'Per esserci basta la vostra presenza: è richiesta una prima consumazione. Per assicurarvi un tavolo, prenotate. Abbonamento a tutti e 9 i concerti (consumazione inclusa): 90 €.',
+        'bf1.d':'Apre la rassegna una delle formazioni più influenti del jazz italiano: sei musicisti e tre fiati in prima linea per un viaggio narrativo nei tre concept album <i>Storytellers</i>, <i>Mania Hotel</i> e <i>Circe</i>. Si passa da New Orleans alle fanfare popolari, tra rock, musica colta del primo Novecento e Tom Waits. Il suono oscilla tra acustico ed elettrico, tra momenti acidi e atmosfere malinconiche ed evocative.<br><br><b>Line-up:</b> Simone Alessandrini (sax alto e soprano), Antonello Sorrentino (tromba e flicorno), Federico Pascucci (sax tenore, clarinetto turco), Giacomo Ancillotto (chitarra), Riccardo Gola (contrabbasso, basso elettrico, synth bass), Riccardo Gambatesa (batteria, percussioni).',
+        'bf2.d':'Oltre trent\'anni di blues/rock guidati da Mark Hanna, bluesman nato a Buffalo e a Roma dal 1990. Ha suonato con Mick Taylor e Jeff Healey ed è stato direttore musicale di <i>Webnotte</i> di Assante e Castaldo. Una serata di blues vero, suonato da chi lo vive da sempre.',
+        'bf3.d':'Annalisa De Feo (piano, voce, synth, harmonium indiano) e Livia De Romanis (violoncello, voce, synth) suonano un pop cameristico che mescola classica, jazz, suggestioni balcaniche ed elettronica, tra loop vocali e lingue inventate. Un live immersivo che arriva fino all\'ultimo album, <i>Floating</i>.',
+        'bf4.d':'Il maestro del teatro di narrazione porta in scena <i>Poveri cristi</i>, il suo ultimo lavoro, con il pianoforte di Danilo Blaiotta, direttore artistico della rassegna. Parola e musica si intrecciano in una serata unica.',
+        'bf5.d':'<b>Produzione originale FAB.</b> Un duo sax alto e pianoforte che unisce due generazioni del jazz italiano. Marciano, classe 1998, ha esordito da leader con Parco della Musica Records. Tarenzi ha alle spalle anni a New York, la selezione al Thelonious Monk Competition e il pianoforte nella colonna sonora de <i>La grande bellezza</i>.',
+        'bf6.d':'<b>Produzione originale FAB.</b> Filippini è uno dei pianisti jazz europei più importanti della sua generazione: ha suonato con Wynton Marsalis e per anni nella band di Mario Biondi. Qui è in trio con due giovani tra i migliori della loro generazione: Giulio Scianatico al contrabbasso e Cesare Mangiocavallo alla batteria.',
+        'sf1.d':'Parte Saturday Fever, la micro rassegna jam e informale a cura dei Lost IQ: una jam di black music tra funk, soul, R\'n\'B e gospel, nel segno di Stevie Wonder, Marvin Gaye, Erykah Badu e Jill Scott. Apre con un set il Funk Collective, poi il palco passa ai musicisti in sala.<br><br><b>Funk Collective:</b> Cecilia Fava (voce), Emiliano Pari (tastiere), Michele Beneforti (chitarra), Giuseppe Vitale (basso), Matteo Morini (batteria).',
+        'sf2.d':'Musica dal vivo e comicità con i Lost IQ (Francesco Faro, Giuseppe Vitale, Giuseppe Salime), il flautista e performer Marco Severa e la stand-up comedian Marta Petrini. Poi il palco è aperto a chi vuole esibirsi, su prenotazione.',
+        'sf3.d':'L\'ultimo Saturday Fever prima di Capodanno vede i Lost IQ (Francesco Faro, Giuseppe Vitale, Giuseppe Salime) con le voci di Maia Citoni e Alessandra Chieli. Il primo set è pop e funk, poi la serata diventa un live karaoke aperto ai cantanti in sala.',
+        'nye.d':'Si festeggia il nuovo anno dalle 20:00 con cena e brindisi di mezzanotte. Vocal jam al FAB con Francesca Faro e i Lost IQ, e DJ set di Pratik in Rimessa.<br><br><b>Menù e prezzo in arrivo.</b>',
         'book.modal.mail':'Scrivici un\'email','book.modal.wa':'Contattaci su WhatsApp','book.modal.kicker':'Prenota','book.modal.fallback':'L\'email non si apre? Scrivi a','wa.body':'Buongiorno, vorrei prenotare per il seguente evento:\n{event}\n\nNumero di persone:\nNome e cognome:',
         'mail.subject':'Prenotazione','mail.body':'Buongiorno,\n\nvorrei prenotare per il seguente evento:\n{event}\n\nNumero di persone:\nNome:\nCognome:\nEmail:\nTelefono:\n\nGrazie!',
         'banner.holiday':'☀️ Il FAB è in vacanza dal <strong>27 luglio al 20 agosto</strong>. Riapriamo il 21 agosto — a presto!',
@@ -2926,6 +2957,17 @@
         'adda.ev.sub':'From New York · Indian cuisine',
         'concori.ev.series':'Dinner with the winemaker','concori.ev.sub':'4 courses and 4 wines with Gabriele Da Prato',
         'concori.ev.details':'Monday 16 November at 8pm, Rimessa FAB hosts Podere Còncori for an evening devoted to meeting the winemaker and discovering his wines.<br><br>Four courses paired with four selected wines, with Gabriele Da Prato at the tables telling the story of the land, his winemaking choices and the stories behind each bottle. Older vintages will also be poured.<br><br>Not a formal tasting, but a moment of sharing.<br><br><b>€60 all inclusive</b>',
+        'mus.note':'Your presence is all we ask: a first drink is required. Book to secure a table. Pass for all 9 concerts (drink included): €90.',
+        'bf1.d':'The series opens with one of the most influential bands in Italian jazz: six musicians and three horns up front, on a narrative journey through the three concept albums <i>Storytellers</i>, <i>Mania Hotel</i> and <i>Circe</i>. From New Orleans to village brass bands, via rock, early-20th-century classical music and Tom Waits. The sound swings between acoustic and electric, acid moments and wistful, evocative atmospheres.<br><br><b>Line-up:</b> Simone Alessandrini (alto and soprano sax), Antonello Sorrentino (trumpet, flugelhorn), Federico Pascucci (tenor sax, Turkish clarinet), Giacomo Ancillotto (guitar), Riccardo Gola (double bass, electric bass, synth bass), Riccardo Gambatesa (drums, percussion).',
+        'bf2.d':'Over thirty years of blues/rock led by Mark Hanna, a bluesman born in Buffalo and based in Rome since 1990. He has played with Mick Taylor and Jeff Healey and was musical director of <i>Webnotte</i> with Assante and Castaldo. A night of real blues, played by someone who has always lived it.',
+        'bf3.d':'Annalisa De Feo (piano, vocals, synth, Indian harmonium) and Livia De Romanis (cello, vocals, synth) play chamber pop blending classical, jazz, Balkan hints and electronics, with vocal loops and invented languages. An immersive live set drawing on their latest album, <i>Floating</i>.',
+        'bf4.d':'The master of Italian narrative theatre performs <i>Poveri cristi</i>, his latest work, with the piano of Danilo Blaiotta, the series\' artistic director. Words and music intertwine in a one-off evening.',
+        'bf5.d':'<b>A FAB original production.</b> A duo for alto sax and piano bringing together two generations of Italian jazz. Marciano, born in 1998, made his debut as a leader with Parco della Musica Records. Tarenzi spent years in New York, was selected for the Thelonious Monk Competition and plays piano on the soundtrack of <i>La grande bellezza</i>.',
+        'bf6.d':'<b>A FAB original production.</b> Filippini is one of the most important European jazz pianists of his generation: he has played with Wynton Marsalis and for years in Mario Biondi\'s band. Here he leads a trio with two of the best young players around: Giulio Scianatico on double bass and Cesare Mangiocavallo on drums.',
+        'sf1.d':'Saturday Fever, the informal jam mini-series hosted by Lost IQ, kicks off with a black music jam through funk, soul, R\'n\'B and gospel, in the spirit of Stevie Wonder, Marvin Gaye, Erykah Badu and Jill Scott. Funk Collective opens with a set, then the stage passes to the musicians in the room.<br><br><b>Funk Collective:</b> Cecilia Fava (vocals), Emiliano Pari (keys), Michele Beneforti (guitar), Giuseppe Vitale (bass), Matteo Morini (drums).',
+        'sf2.d':'Live music and comedy with Lost IQ (Francesco Faro, Giuseppe Vitale, Giuseppe Salime), flautist and performer Marco Severa and stand-up comedian Marta Petrini. Then the stage is open to anyone who wants to perform, by reservation.',
+        'sf3.d':'The last Saturday Fever before New Year\'s Eve: Lost IQ (Francesco Faro, Giuseppe Vitale, Giuseppe Salime) with the voices of Maia Citoni and Alessandra Chieli. The first set is pop and funk, then the night turns into a live karaoke open to singers in the room.',
+        'nye.d':'We ring in the new year from 8pm with dinner and a midnight toast. Vocal jam at FAB with Francesca Faro and Lost IQ, and a DJ set by Pratik in Rimessa.<br><br><b>Menu and price coming soon.</b>',
         'book.modal.mail':'Send us an email','book.modal.wa':'Contact us on WhatsApp','book.modal.kicker':'Book','book.modal.fallback':'Email not opening? Write to','wa.body':'Hello, I would like to book the following event:\n{event}\n\nNumber of guests:\nFull name:',
         'mail.subject':'Booking','mail.body':'Hello,\n\nI would like to book the following event:\n{event}\n\nNumber of guests:\nFirst name:\nLast name:\nEmail:\nPhone:\n\nThank you!',
         'banner.holiday':'☀️ FAB is on holiday from <strong>27 July to 20 August</strong>. We reopen on 21 August — see you soon!',
@@ -3144,18 +3186,22 @@
       // ── Hamburger America · George Motz (16–17 Ott 2026): concluso, nascosto in automatico ──
       { date: "16–17 Ott",      day: "16", month: "Ott", title: "Hamburger America · George Motz", subtitleKey: "motz.ev.sub", cats: ["food"], time: null, series: "Arrivano gli Americani", endDate: "2026-10-17" },
 
-      // ── Blue Fridays — sei serate di musica, un venerdì dopo l'altro (22:30) ──
-      { date: "13 Nov", day: "13", month: "Nov", title: "Simone Alessandrini",                subtitle: "“Storytellers” — Inaugurazione", cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+      // ── Blue Fridays (cls "bf", venerdì 22:30) + Saturday Fever (cls "sf", sabato) — a cura di Danilo Blaiotta / Lost IQ ──
+      { date: "13 Nov", day: "13", month: "Nov", title: "Simone Alessandrini",                 subtitle: "“Storytellers” — Inaugurazione",        cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf1.d" },
       { date: "16 Nov", day: "16", month: "Nov", title: "Podere Còncori", subtitleKey: "concori.ev.sub", detailsKey: "concori.ev.details", cats: ["food", "wine"], time: "20:00", seriesKey: "concori.ev.series", bookUrl: "https://sevn.ly/xekCE7Uj" },
-      { date: "20 Nov", day: "20", month: "Nov", title: "Mark Hanna Band",                    subtitle: null,                              cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
-      { date: "27 Nov", day: "27", month: "Nov", title: "DOS — Duo Onirico Sonoro",           subtitle: null,                              cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
-      { date: "4 Dic",  day: "4",  month: "Dic", title: "Ascanio Celestini & Danilo Blaiotta", subtitle: "“Poveri cristi”",                cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+      { date: "20 Nov", day: "20", month: "Nov", title: "Mark Hanna Band",                     subtitle: "Blues/rock",                             cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf2.d" },
+      { date: "21 Nov", day: "21", month: "Nov", title: "Pop-funk jam",                        subtitle: "Opening act: Funk Collective",           cats: ["arts", "music"], time: "22:30", series: "Saturday Fever", cls: "sf", detailsKey: "sf1.d" },
+      { date: "27 Nov", day: "27", month: "Nov", title: "DOS — Duo Onirico Sonoro",            subtitle: "Pop cameristico",                        cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf3.d" },
+      { date: "4 Dic",  day: "4",  month: "Dic", title: "Ascanio Celestini & Danilo Blaiotta", subtitle: "“Poveri cristi”",                        cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf4.d" },
 
       // ── Arrivano gli Americani — ristoranti USA in residency da FAB ──
       { date: "6–7 Dic", day: "6", month: "Dic", title: "Adda", subtitleKey: "adda.ev.sub", cats: ["food"], time: null, series: "Arrivano gli Americani", endDate: "2026-12-07" },
 
-      { date: "11 Dic", day: "11", month: "Dic", title: "Gabriel Marciano & Roberto Tarenzi",  subtitle: null,                              cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
-      { date: "18 Dic", day: "18", month: "Dic", title: "Claudio Filippini",                  subtitle: "“Meets the Rhythmic Section”",    cats: ["arts", "music"], time: "22:30", series: "Blue Fridays" },
+      { date: "11 Dic", day: "11", month: "Dic", title: "Gabriel Marciano & Roberto Tarenzi",  subtitle: "Produzione originale FAB",               cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf5.d" },
+      { date: "12 Dic", day: "12", month: "Dic", title: "Stand Up Comedy Lab",                 subtitle: "Lost IQ · Marta Petrini · Marco Severa", cats: ["arts", "music"], time: "22:30", series: "Saturday Fever", cls: "sf", detailsKey: "sf2.d" },
+      { date: "18 Dic", day: "18", month: "Dic", title: "Claudio Filippini",                   subtitle: "“Meets the Rhythmic Section”",           cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf6.d" },
+      { date: "19 Dic", day: "19", month: "Dic", title: "Vocal Jam",                           subtitle: "Lost IQ · Maia Citoni · Alessandra Chieli", cats: ["arts", "music"], time: "22:30", series: "Saturday Fever", cls: "sf", detailsKey: "sf3.d" },
+      { date: "31 Dic", day: "31", month: "Dic", title: "NYE Total Party!",                    subtitle: "Cena e brindisi di mezzanotte · Vocal jam con Francesca Faro e i Lost IQ · DJ set Pratik", cats: ["food", "music", "special"], time: "20:00", series: "Capodanno", detailsKey: "nye.d" },
     ];
 
     const FAQS = [
@@ -3213,7 +3259,7 @@
       document.getElementById('bmMeta').textContent = ev.date + (ev.time ? ' · ' + ev.time : '');
       const det = document.getElementById('bmDetails');
       det.style.display = ev.detailsKey ? '' : 'none';
-      det.innerHTML = ev.detailsKey ? t(ev.detailsKey) : '';
+      det.innerHTML = ev.detailsKey ? t(ev.detailsKey) + (ev.cls ? '<br><br><span style="opacity:.75;font-size:.8rem">' + t('mus.note') + '</span>' : '') : '';
       const mail = document.getElementById('bmMail'), wa = document.getElementById('bmWa');
       const fb = document.querySelector('#bookModal .bm-fallback');
       if (ev.bookUrl) {
@@ -3249,7 +3295,7 @@
         ? `<span class="daterange">${ev.date}</span>`
         : `<span class="day">${ev.day}</span>\n            ${ev.month}`;
       return `
-        <div class="event-row" data-cats="${ev.cats.join(' ')}"${isPastItem ? ' style="opacity:0.6;"' : ''}>
+        <div class="event-row${ev.cls ? ' ser-' + ev.cls : ''}" data-cats="${ev.cats.join(' ')}"${isPastItem ? ' style="opacity:0.6;"' : ''}>
           <div class="event-row-date">
             ${dateCell}
           </div>
