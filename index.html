@@ -335,7 +335,6 @@
     }
     @media (max-width: 640px) {
       #eventPopup { right: 1rem; left: 1rem; width: auto; }
-      #eventPopup .ep-img { max-height: 120px; object-fit: cover; object-position: center; }
     }
 
     /* ── BOOKING MODAL ── */
@@ -1850,14 +1849,12 @@
   </div>
 
   <!-- EVENT POPUP (home) -->
-  <div id="eventPopup" role="dialog" aria-label="Hamburger America · George Motz" aria-hidden="true">
+  <div id="eventPopup" role="dialog" aria-label="Total Party di Capodanno" aria-hidden="true">
     <button class="ep-close" aria-label="Chiudi" onclick="dismissEventPopup()">✕</button>
-    <img class="ep-img" src="img/motz-banner.jpg" alt="George Motz's Hamburger America a Rimessa FAB" width="1000" height="445">
     <div class="ep-body">
-      <div class="ep-kicker" data-i18n="motz.popup.kicker">16–17 ottobre</div>
-      <div class="ep-title" data-i18n="motz.popup.title">Hamburger America<br>a Roma</div>
-      <p class="ep-text" data-i18n="motz.popup.text">George Motz, il re dello smash burger di New York, ospite da FAB. Ven 16: cena a quattro mani con musica live. Sab 17: smash burger alla carta, pranzo e cena.</p>
-      <a class="ep-cta" href="https://sevn.ly/xlLZBy7C" target="_blank" rel="noopener" onclick="dismissEventPopup()" data-i18n="motz.popup.cta">Prenota →</a>
+      <div class="ep-kicker" data-i18n="nye.popup.kicker">31 dicembre</div>
+      <div class="ep-title" data-i18n="nye.popup.title">Total Party<br>di Capodanno</div>
+      <a class="ep-cta" href="https://sevn.ly/xTP8AjjJ" target="_blank" rel="noopener" onclick="dismissEventPopup()" data-i18n="nye.popup.cta">Prenota →</a>
     </div>
   </div>
 
@@ -2851,7 +2848,7 @@
 
     const TRANSLATIONS = {
       it: {
-        'motz.popup.kicker':'16–17 ottobre','motz.popup.title':'Hamburger America<br>a Roma','motz.popup.text':'George Motz, il re dello smash burger di New York, ospite da FAB. Ven 16: cena a quattro mani con musica live. Sab 17: smash burger alla carta, pranzo e cena.','motz.popup.cta':'Prenota →',
+        'nye.popup.kicker':'31 dicembre','nye.popup.title':'Total Party<br>di Capodanno','nye.popup.cta':'Prenota →',
         'motz.ev.sub':'Ven 16 cena a quattro mani · Sab 17 smash burger alla carta',
         'adda.ev.sub':'Da New York · cucina indiana',
         'concori.ev.series':'Cena con il vignaiolo','concori.ev.sub':'4 portate e 4 vini con Gabriele Da Prato',
@@ -2916,7 +2913,7 @@
         'footer.brand':'Food, Arts & Books. Uno spazio culturale e gastronomico a Roma, nato da Rimessa Roscioli con una sua identità propria.',
         'footer.nav':'Navigazione','footer.contacts':'Contatti','footer.address':'Indirizzo',
         'footer.home':'Home','footer.restaurant':'Ristorante','footer.calendar':'Calendario','footer.where':'Contatti','footer.gallery':'Galleria','footer.privacy':'Privacy Policy',
-        'btn.book':'Prenota →','btn.done':'Concluso','no.events':'Nessun evento in programma.',
+        'btn.book':'Prenota →','btn.soldout':'Sold out','btn.done':'Concluso','no.events':'Nessun evento in programma.',
         'nav.private':'Eventi','footer.private':'Eventi Privati',
         'private.h1':'Il tuo<br><em>evento</em><br>al FAB',
         'private.sub':'Dalla cena privata all\'evento culturale. Affittiamo lo spazio per serate esclusive, tutti i giorni.',
@@ -2952,7 +2949,7 @@
         'private.faq.label':'Domande frequenti',
       },
       en: {
-        'motz.popup.kicker':'October 16–17','motz.popup.title':'Hamburger America<br>comes to Rome','motz.popup.text':'George Motz, New York\'s smash burger king, is our guest at FAB. Fri 16: four-hands dinner with live music. Sat 17: smash burgers à la carte, lunch and dinner.','motz.popup.cta':'Book →',
+        'nye.popup.kicker':'December 31','nye.popup.title':'Total Party<br>New Year\'s Eve','nye.popup.cta':'Book →',
         'motz.ev.sub':'Fri 16 four-hands dinner · Sat 17 smash burgers à la carte',
         'adda.ev.sub':'From New York · Indian cuisine',
         'concori.ev.series':'Dinner with the winemaker','concori.ev.sub':'4 courses and 4 wines with Gabriele Da Prato',
@@ -3017,7 +3014,7 @@
         'footer.brand':'Food, Arts & Books. A cultural and gastronomic space in Rome, born from Rimessa Roscioli with its own distinct identity.',
         'footer.nav':'Navigation','footer.contacts':'Contact','footer.address':'Address',
         'footer.home':'Home','footer.restaurant':'Restaurant','footer.calendar':'Calendar','footer.where':'Contact','footer.gallery':'Gallery','footer.privacy':'Privacy Policy',
-        'btn.book':'Book →','btn.done':'Past','no.events':'No upcoming events.',
+        'btn.book':'Book →','btn.soldout':'Sold out','btn.done':'Past','no.events':'No upcoming events.',
         'nav.private':'Events','footer.private':'Private Events',
         'private.h1':'Your<br><em>event</em><br>at FAB',
         'private.sub':'From private dinners to cultural events. The space is available for exclusive evenings, including on our regular closing days.',
@@ -3130,17 +3127,17 @@
       window.addEventListener('resize', syncBannerHeight);
     }
 
-    // ── EVENT POPUP (Hamburger America · George Motz) ──
+    // ── EVENT POPUP (Total Party di Capodanno) ──
     function dismissEventPopup() {
       const p = document.getElementById('eventPopup');
       if (p) { p.classList.remove('show'); p.setAttribute('aria-hidden', 'true'); }
-      try { sessionStorage.setItem('fab-motz-popup', '1'); } catch (e) {}
+      try { sessionStorage.setItem('fab-nye-popup', '1'); } catch (e) {}
     }
     function initEventPopup() {
       const p = document.getElementById('eventPopup');
       if (!p) return;
-      if (new Date() > new Date('2026-10-17T23:59:59')) return;   // evento concluso
-      try { if (sessionStorage.getItem('fab-motz-popup')) return; } catch (e) {}
+      if (new Date() > new Date('2026-12-31T23:59:59')) return;   // evento concluso
+      try { if (sessionStorage.getItem('fab-nye-popup')) return; } catch (e) {}
       setTimeout(() => {
         const home = document.getElementById('page-home');
         if (!home || !home.classList.contains('active')) return;
@@ -3189,7 +3186,7 @@
       // ── Blue Fridays (cls "bf", venerdì 22:30) + Saturday Fever (cls "sf", sabato) — a cura di Danilo Blaiotta / Lost IQ ──
       { date: "13 Nov", day: "13", month: "Nov", title: "Simone Alessandrini",                 subtitle: "“Storytellers” — Inaugurazione",        cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf1.d" },
       { date: "16 Nov", day: "16", month: "Nov", title: "Podere Còncori", subtitleKey: "concori.ev.sub", detailsKey: "concori.ev.details", cats: ["food", "wine"], time: "20:00", seriesKey: "concori.ev.series", bookUrl: "https://sevn.ly/xekCE7Uj" },
-      { date: "20 Nov", day: "20", month: "Nov", title: "Mark Hanna Band",                     subtitle: "Blues/rock",                             cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf2.d" },
+      { date: "20 Nov", day: "20", month: "Nov", title: "Mark Hanna Band",                     subtitle: "Blues/rock",                             cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf2.d", soldOut: true },
       { date: "21 Nov", day: "21", month: "Nov", title: "Pop-funk jam",                        subtitle: "Opening act: Funk Collective",           cats: ["arts", "music"], time: "22:30", series: "Saturday Fever", cls: "sf", detailsKey: "sf1.d" },
       { date: "27 Nov", day: "27", month: "Nov", title: "DOS — Duo Onirico Sonoro",            subtitle: "Pop cameristico",                        cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf3.d" },
       { date: "4 Dic",  day: "4",  month: "Dic", title: "Ascanio Celestini & Danilo Blaiotta", subtitle: "“Poveri cristi”",                        cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf4.d" },
@@ -3201,7 +3198,7 @@
       { date: "12 Dic", day: "12", month: "Dic", title: "Stand Up Comedy Lab",                 subtitle: "Lost IQ · Marta Petrini · Marco Severa", cats: ["arts", "music"], time: "22:30", series: "Saturday Fever", cls: "sf", detailsKey: "sf2.d" },
       { date: "18 Dic", day: "18", month: "Dic", title: "Claudio Filippini",                   subtitle: "“Meets the Rhythmic Section”",           cats: ["arts", "music"], time: "22:30", series: "Blue Fridays", cls: "bf", detailsKey: "bf6.d" },
       { date: "19 Dic", day: "19", month: "Dic", title: "Vocal Jam",                           subtitle: "Lost IQ · Maia Citoni · Alessandra Chieli", cats: ["arts", "music"], time: "22:30", series: "Saturday Fever", cls: "sf", detailsKey: "sf3.d" },
-      { date: "31 Dic", day: "31", month: "Dic", title: "NYE Total Party!",                    subtitle: "Cena e brindisi di mezzanotte · Vocal jam con Francesca Faro e i Lost IQ · DJ set Pratik", cats: ["food", "music", "special"], time: "20:00", series: "Capodanno", detailsKey: "nye.d" },
+      { date: "31 Dic", day: "31", month: "Dic", title: "NYE Total Party!",                    subtitle: "Cena e brindisi di mezzanotte · Vocal jam con Francesca Faro e i Lost IQ · DJ set Pratik", cats: ["food", "music", "special"], time: "20:00", series: "Capodanno", detailsKey: "nye.d", bookUrl: "https://sevn.ly/xTP8AjjJ" },
     ];
 
     const FAQS = [
@@ -3262,12 +3259,17 @@
       det.innerHTML = ev.detailsKey ? t(ev.detailsKey) + (ev.cls ? '<br><br><span style="opacity:.75;font-size:.8rem">' + t('mus.note') + '</span>' : '') : '';
       const mail = document.getElementById('bmMail'), wa = document.getElementById('bmWa');
       const fb = document.querySelector('#bookModal .bm-fallback');
-      if (ev.bookUrl) {
+      if (ev.soldOut) {
+        mail.style.display = 'none'; wa.style.display = 'none'; fb.style.display = 'none';
+        document.getElementById('bmMeta').textContent += ' · ' + t('btn.soldout');
+      } else if (ev.bookUrl) {
+        mail.style.display = '';
         // link di prenotazione diretto (SevenRooms)
         mail.href = ev.bookUrl; mail.target = '_blank'; mail.rel = 'noopener';
         mail.removeAttribute('data-i18n'); mail.textContent = t('btn.book');
         wa.style.display = 'none'; fb.style.display = 'none';
       } else {
+        mail.style.display = '';
         mail.href = bookingHref(ev); mail.removeAttribute('target');
         mail.setAttribute('data-i18n', 'book.modal.mail'); mail.innerHTML = t('book.modal.mail');
         wa.style.display = ''; fb.style.display = '';
@@ -3307,7 +3309,9 @@
           </div>
           <div class="event-row-right">
             ${ev.time ? `<div class="event-row-time">${ev.time}</div>` : ''}
-            ${isPastItem
+            ${ev.soldOut
+              ? `<span style="font-size:0.68rem;padding:0.5rem 1rem;color:var(--red);font-family:'Hanken Grotesk';font-weight:700;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;">${t('btn.soldout')}</span>`
+              : isPastItem
               ? `<span style="font-size:0.68rem;padding:0.5rem 1rem;color:var(--ink);opacity:0.35;font-family:'Hanken Grotesk';font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">${t('btn.done')}</span>`
               : `<a href="#" onclick="openBooking(${EVENTS.indexOf(ev)}); return false;" class="btn-secondary" style="font-size:0.68rem;padding:0.5rem 1rem;white-space:nowrap;">${t('btn.book')}</a>`
             }
@@ -3338,7 +3342,7 @@
           </div>
           <div class="event-title">${ev.title}</div>
           ${(ev.subtitleKey || ev.subtitle) ? `<div class="event-subtitle">${ev.subtitleKey ? t(ev.subtitleKey) : ev.subtitle}</div>` : ''}
-          <div class="event-card-cta">Prenota →</div>
+          <div class="event-card-cta">${ev.soldOut ? t('btn.soldout') : 'Prenota →'}</div>
         </div>
       `).join('');
     }
